@@ -1,0 +1,62 @@
+/* Google Font — Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+/* app/globals.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.footer-link {
+  color: #64748B;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.footer-link:hover {
+  color: white;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Global resets only */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #F8FAFC;
+  color: #0F172A;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Template preview wrapper — used in builder page */
+.template-preview-wrapper {
+  transform-origin: top left;
+  overflow: hidden;
+}
+
+/* PDF page exact size — used in template components */
+.a4-page {
+  width: 794px;
+  height: 1123px;
+  background: #ffffff;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Dot separator — used in template headers */
+.dot-separator::after {
+  content: "·";
+  margin: 0 8px;
+  color: #6366F1;
+  font-weight: 700;
+}
+
+.dot-separator:last-child::after {
+  content: "";
+  margin: 0;
+}
