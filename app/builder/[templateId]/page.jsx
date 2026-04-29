@@ -103,16 +103,29 @@ export default function BuilderPage() {
                 credentials: "include",
                 body: JSON.stringify({ templateId: activeTemplateId, data }),
             })
-            if (!res.ok) throw new Error("Failed")
+
+            console.log("Status:", res.status)
+
+            if (!res.ok) {
+                const errText = await res.text()
+                console.error("Backend error:", errText)
+                throw new Error("PDF failed")
+            }
+
             const blob = await res.blob()
+
+            console.log("Blob size:", blob.size)
+
             const url = URL.createObjectURL(blob)
             const a = document.createElement("a")
             a.href = url
             a.download = `${data.personal.name || "resume"}-zenvoy.pdf`
             a.click()
             URL.revokeObjectURL(url)
-        } catch {
-            alert("PDF generation failed. Make sure backend is running.")
+
+        } catch (err) {
+            console.error(err)
+            alert("PDF generation failed")
         } finally {
             setDownloading(false)
         }
