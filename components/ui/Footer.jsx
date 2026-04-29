@@ -1,13 +1,14 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { FaInstagram, FaLinkedin, FaXTwitter } from "react-icons/fa6"
 
 export default function Footer() {
     return (
         <footer className="relative bg-[#0F172A] border-t border-[#1E293B] overflow-hidden">
 
-            {/* 🔥 Glow */}
+            {/* Glow Effect */}
             <div className="absolute top-[-60px] left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#6366F1] opacity-[0.05] blur-[120px] rounded-full" />
 
             <div className="relative max-w-6xl mx-auto px-6 py-14">
@@ -17,19 +18,29 @@ export default function Footer() {
 
                     {/* Brand */}
                     <div className="col-span-2 md:col-span-1">
-                        <span className="text-xl font-bold">
-                            <span className="text-[#6366F1]">Z</span>
-                            <span className="text-white">envoy</span>
-                        </span>
+
+                        {/* ✅ LOGO */}
+                        <Link href="/" className="flex items-center gap-2">
+                            <Image
+                                src="/logo.png"
+                                alt="Zapiya Logo"
+                                width={40}
+                                height={40}
+                                priority
+                            />
+                            <span className="text-white text-xl font-bold tracking-tight">
+                                Zapiya
+                            </span>
+                        </Link>
 
                         <p className="text-[#64748B] text-sm mt-3 leading-relaxed">
-                            Build job-winning resumes in minutes. Designed for students, built for results.
+                            Build job-winning resumes in minutes. AI-powered, ATS-friendly, and designed to make you stand out.
                         </p>
 
                         {/* Social */}
                         <div className="flex gap-3 mt-5">
                             <a
-                                href="https://instagram.com/zenvoy.in"
+                                href="https://instagram.com/zapiya"
                                 target="_blank"
                                 rel="noreferrer"
                                 className="w-9 h-9 rounded-xl bg-[#1E293B] border border-[#334155] flex items-center justify-center text-[#64748B] hover:text-white hover:border-[#6366F1] transition"
@@ -38,7 +49,7 @@ export default function Footer() {
                             </a>
 
                             <a
-                                href="https://linkedin.com/company/zenvoy"
+                                href="https://linkedin.com/company/zapiya"
                                 target="_blank"
                                 rel="noreferrer"
                                 className="w-9 h-9 rounded-xl bg-[#1E293B] border border-[#334155] flex items-center justify-center text-[#64748B] hover:text-white hover:border-[#6366F1] transition"
@@ -47,7 +58,7 @@ export default function Footer() {
                             </a>
 
                             <a
-                                href="https://twitter.com/zenvoy"
+                                href="https://twitter.com/zapiya"
                                 target="_blank"
                                 rel="noreferrer"
                                 className="w-9 h-9 rounded-xl bg-[#1E293B] border border-[#334155] flex items-center justify-center text-[#64748B] hover:text-white hover:border-[#6366F1] transition"
@@ -67,7 +78,7 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    {/* Templates */}
+                    {/* Segments */}
                     <div>
                         <p className="text-white text-sm font-semibold mb-4">Segments</p>
                         <div className="flex flex-col gap-3">
@@ -93,11 +104,11 @@ export default function Footer() {
                 <div className="border-t border-[#1E293B] pt-6 flex flex-col md:flex-row items-center justify-between gap-3">
 
                     <p className="text-[#475569] text-xs">
-                        © 2026 Zenvoy. Built for Indian students 🇮🇳
+                        © 2026 Zapiya. All rights reserved.
                     </p>
 
                     <p className="text-[#475569] text-xs">
-                        No watermark • Free For One Month  • Built with ❤️
+                        Build Smart • Stand Out 🚀
                     </p>
 
                 </div>

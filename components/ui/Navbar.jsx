@@ -1,5 +1,5 @@
 "use client"
-
+import Image from "next/image"
 import Link from "next/link"
 import { useAuth } from "@/lib/AuthContext"
 import { useRouter } from "next/navigation"
@@ -59,9 +59,17 @@ export default function Navbar() {
             <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
 
                 {/* Logo */}
-                <Link href="/" className="text-xl font-bold tracking-tight">
-                    <span className="text-[#6366F1]">Z</span>
-                    <span className="text-white">envoy</span>
+                <Link href="/" className="flex items-center gap-2">
+                    <Image
+                        src="/logo.png"
+                        alt="Zapiya Logo"
+                        width={40}
+                        height={40}
+                        className="object-contain"
+                    />
+                    <span className="text-white text-xl font-bold tracking-tight">
+                        Zapiya
+                    </span>
                 </Link>
 
                 {/* Desktop Nav */}
