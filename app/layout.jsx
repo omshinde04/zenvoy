@@ -6,7 +6,9 @@ import LayoutShell from "@/components/LayoutShell"
 // ✅ SEO METADATA
 export const metadata = {
   metadataBase: new URL("https://zapiya.com"),
-
+  verification: {
+    google: "google4fd98efd21827253",
+  },
   title: {
     default: "Zapiya – Build Smart Resumes",
     template: "%s | Zapiya",
