@@ -28,7 +28,7 @@ export default function RegisterPage() {
         const data = await register(form.name, form.email, form.password)
 
         if (data.success) {
-            router.push("/templates")
+            router.push("/login")
         } else {
             setError(data.message)
         }
