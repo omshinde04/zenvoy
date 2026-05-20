@@ -63,24 +63,25 @@ export default function TemplatesPage() {
                         >
                             <Link href={`/builder/${t.id}`}>
                                 <div className="group bg-[#1E293B] border border-[#334155] hover:border-[#6366F1] rounded-2xl overflow-hidden transition-all cursor-pointer">
-
                                     {/* Preview */}
                                     <div
-                                        className="h-52 flex items-center justify-center relative overflow-hidden"
-                                        style={{ backgroundColor: t.accentColor + "10" }}
+                                        className="h-72 relative overflow-hidden flex items-center justify-center p-4 bg-[#0F172A]"
                                     >
-                                        <div className="w-28 h-36 bg-white rounded shadow-lg flex flex-col gap-1.5 p-3 opacity-90">
-                                            <div
-                                                className="h-2.5 rounded"
-                                                style={{ backgroundColor: t.accentColor, width: "60%" }}
-                                            />
-                                            <div className="h-1.5 bg-gray-200 rounded w-full mt-1" />
-                                            <div className="h-1.5 bg-gray-200 rounded w-4/5" />
-                                            <div className="h-1.5 bg-gray-200 rounded w-full mt-1" />
-                                            <div className="h-1.5 bg-gray-200 rounded w-3/5" />
-                                            <div className="h-1.5 bg-gray-200 rounded w-full mt-1" />
-                                            <div className="h-1.5 bg-gray-200 rounded w-4/5" />
-                                        </div>
+
+                                        <img
+                                            src={`/templates/${t.preview}`}
+                                            alt={t.name}
+                                            className="
+            max-h-full
+            w-auto
+            object-contain
+            transition-transform
+            duration-300
+            group-hover:scale-105
+            rounded-lg
+            shadow-2xl
+        "
+                                        />
 
                                         {t.popular && (
                                             <span className="absolute top-3 right-3 bg-[#6366F1] text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
@@ -88,7 +89,6 @@ export default function TemplatesPage() {
                                             </span>
                                         )}
                                     </div>
-
                                     {/* Info */}
                                     <div className="p-5">
                                         <div className="flex items-center justify-between mb-1">
