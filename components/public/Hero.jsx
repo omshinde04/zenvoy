@@ -29,7 +29,7 @@ export default function Hero() {
                     className="inline-flex items-center gap-2 bg-[#1E293B]/80 backdrop-blur border border-[#334155] text-[#94A3B8] text-xs px-5 py-2 rounded-full mb-8"
                 >
                     <HiSparkles className="text-[#6366F1]" />
-                    Built for Indian students • 100% Free
+                    100% Free Forever • Zero Paywalls • No Signup Needed
                 </motion.div>
 
                 {/* 🔥 Heading */}
@@ -39,9 +39,9 @@ export default function Hero() {
                     transition={{ duration: 0.6 }}
                     className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight"
                 >
-                    Build resumes that{" "}
+                    The 100% Free ATS Resume Builder That{" "}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] to-[#4F46E5]">
-                        get shortlisted.
+                        Gets You Shortlisted.
                     </span>
                 </motion.h1>
 
@@ -52,8 +52,8 @@ export default function Hero() {
                     transition={{ delay: 0.2 }}
                     className="mt-6 text-[#94A3B8] text-base sm:text-lg max-w-2xl mx-auto"
                 >
-                    AI-powered resume builder for Tech, MBA & Design students.
-                    Create clean, ATS-friendly resumes in minutes — no signup needed.
+                    Engineered for Software Engineers, Developers & Students.
+                    Create recruiter-approved, ATS-compliant resumes with Harvard-standard layout and instant vector PDF export — zero watermarks, zero cost.
                 </motion.p>
 
                 {/* 🔥 CTA Buttons */}

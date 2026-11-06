@@ -5,7 +5,7 @@ export const metadata = {
     description:
         "Read the terms and conditions for using Zapiya. Understand your rights, responsibilities, and platform usage policies.",
     alternates: {
-        canonical: "https://zapiya.com/terms",
+        canonical: "https://www.zapiya.com/terms",
     },
 }
 

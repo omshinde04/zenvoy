@@ -5,7 +5,7 @@ export const metadata = {
     description:
         "Learn how Zapiya collects, uses, and protects your data. We respect your privacy and ensure your information is secure.",
     alternates: {
-        canonical: "https://zapiya.com/privacy",
+        canonical: "https://www.zapiya.com/privacy",
     },
 }
 

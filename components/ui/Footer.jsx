@@ -34,7 +34,7 @@ export default function Footer() {
                         </Link>
 
                         <p className="text-[#64748B] text-sm mt-3 leading-relaxed">
-                            Build job-winning resumes in minutes. AI-powered, ATS-friendly, and designed to make you stand out.
+                            100% free ATS resume builder for developers, engineers, and students. Zero paywalls, no signup, no watermarks.
                         </p>
 
                         {/* Social */}
@@ -88,12 +88,12 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    {/* Company */}
+                    {/* Company & Support */}
                     <div>
-                        <p className="text-white text-sm font-semibold mb-4">Company</p>
+                        <p className="text-white text-sm font-semibold mb-4">Support & Legal</p>
                         <div className="flex flex-col gap-3">
-                            <Link href="/contact" className="footer-link">Contact</Link>
-                            <Link href="/support" className="footer-link">Support</Link>
+                            <Link href="/#faq" className="footer-link">FAQ</Link>
+                            <a href="mailto:support@zapiya.com" className="footer-link">Contact Support</a>
                             <Link href="/privacy" className="footer-link">Privacy Policy</Link>
                             <Link href="/terms" className="footer-link">Terms of Use</Link>
                         </div>

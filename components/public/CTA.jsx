@@ -91,8 +91,8 @@ export default function CTA() {
                 </Link>
 
                 {/* Trust */}
-                <p className="mt-6 text-xs text-[#64748B]">
-                    Free • No login required • Instant download
+                <p className="mt-6 text-xs text-[#94A3B8]">
+                    100% Free Forever • Zero Paywalls • No Signup Required • Instant Vector PDF
                 </p>
 
             </div>

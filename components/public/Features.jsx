@@ -6,23 +6,23 @@ import { FaFilePdf, FaEye, FaBolt, FaLayerGroup } from "react-icons/fa"
 const features = [
     {
         icon: <FaLayerGroup />,
-        title: "20+ Premium Templates",
-        desc: "Built for Tech, MBA & Design. Clean, ATS-friendly and recruiter-approved.",
+        title: "Harvard & Tech ATS Formats",
+        desc: "Single-column ATS-compliant layouts strictly designed to pass recruitment filters at top tech companies.",
     },
     {
         icon: <FaFilePdf />,
-        title: "Free PDF Download",
-        desc: "Export high-quality resumes with zero watermark.",
+        title: "100% Free Vector PDF",
+        desc: "Export crisp, selectable-text vector PDFs with zero watermarks and zero paywall traps.",
     },
     {
         icon: <FaEye />,
-        title: "Live Preview",
-        desc: "See changes instantly. What you see = final PDF.",
+        title: "Live Real-Time Preview",
+        desc: "What you see is exactly what prints. Universal Times New Roman typography standard.",
     },
     {
         icon: <FaBolt />,
-        title: "Instant Start",
-        desc: "No signup required. Start building your resume instantly.",
+        title: "Instant Start, Zero Signup",
+        desc: "No accounts, no credit cards, no email spam. 100% client-side privacy on your device.",
     },
 ]
 
