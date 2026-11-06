@@ -1,4 +1,5 @@
 # https://www.zapiya.com/ads.txt
 # Google AdSense Publisher Verification for Zapiya
-# Replace pub-XXXXXXXXXXXXXXXX with your approved Google AdSense publisher ID when issued
-google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+google.com, pub-7778964423995383, DIRECT, f08c47fec0942fa0
+
+

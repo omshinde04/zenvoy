@@ -8,7 +8,7 @@ export async function GET() {
   const pubId =
     process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID ||
     process.env.ADSENSE_PUB_ID ||
-    "pub-XXXXXXXXXXXXXXXX";
+    "pub-7778964423995383";
 
   const cleanPubId = pubId.replace(/^ca-/, "");
 
@@ -25,3 +25,4 @@ google.com, ${cleanPubId}, DIRECT, f08c47fec0942fa0
     },
   });
 }
+
