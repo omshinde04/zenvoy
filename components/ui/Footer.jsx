@@ -97,6 +97,8 @@ export default function Footer() {
                             <Link href="/contact" className="footer-link">Contact & Support</Link>
                             <Link href="/privacy" className="footer-link">Privacy Policy</Link>
                             <Link href="/terms" className="footer-link">Terms of Service</Link>
+                            <Link href="/cookies" className="footer-link">Cookie Policy</Link>
+                            <Link href="/disclaimer" className="footer-link">Disclaimer</Link>
                             <a href="mailto:support@zapiya.com" className="footer-link text-indigo-600">support@zapiya.com</a>
                         </div>
                     </div>

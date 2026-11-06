@@ -19,9 +19,54 @@ export const metadata = {
   },
 }
 
+const guidesJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://www.zapiya.com/guides#collection",
+      "name": "ATS Resume Guides & Developer Career Advice Hub",
+      "url": "https://www.zapiya.com/guides",
+      "description": "Expert technical guides on creating ATS-compliant resumes, Harvard single-column layouts, action verbs for developers, and recruiter screening benchmarks.",
+      "mainEntity": {
+        "@type": "ItemList",
+        "itemListElement": guides.map((g, idx) => ({
+          "@type": "ListItem",
+          "position": idx + 1,
+          "name": g.title,
+          "url": `https://www.zapiya.com/guides/${g.slug}`,
+          "description": g.summary,
+        })),
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.zapiya.com/guides#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.zapiya.com",
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://www.zapiya.com/guides",
+        },
+      ],
+    },
+  ],
+}
+
 export default function GuidesPage() {
   return (
     <div className="min-h-screen bg-slate-50/60 py-16 px-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(guidesJsonLd) }}
+      />
       <div className="max-w-5xl mx-auto">
         
         {/* Header */}

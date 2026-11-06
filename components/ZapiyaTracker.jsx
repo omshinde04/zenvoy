@@ -18,3 +18,4 @@ export default function ZapiyaTracker() {
 
     return null;
 }
+

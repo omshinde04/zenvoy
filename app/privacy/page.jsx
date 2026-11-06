@@ -56,10 +56,10 @@ export default function PrivacyPage() {
 
                     <section className="pt-4 border-t border-slate-100">
                         <h2 className="text-lg sm:text-xl font-bold text-slate-900 font-comfortaa mb-2">
-                            3. Google DoubleClick DART Cookie & Third-Party Advertising
+                            3. Google AdSense, DoubleClick DART Cookie & Advertising Partners
                         </h2>
                         <p>
-                            Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to www.zapiya.com and other sites on the internet.
+                            Google is one of our primary third-party vendors. Google uses cookies, including the DoubleClick DART cookie and Google AdSense technologies, to serve personalized and non-personalized advertisements to visitors based on their visit to www.zapiya.com and other websites across the Internet.
                         </p>
                         <p className="mt-2">
                             Visitors may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy at the following URL: <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noreferrer" className="text-indigo-600 hover:underline">https://policies.google.com/technologies/ads</a>.

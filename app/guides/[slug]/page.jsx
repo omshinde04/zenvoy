@@ -2,6 +2,7 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { guides } from "@/lib/guidesData"
+import AdSlot from "@/components/ads/AdSlot"
 
 export async function generateStaticParams() {
   return guides.map((g) => ({
@@ -43,6 +44,67 @@ export default async function GuideDetailPage({ params }) {
 
   if (!guide) {
     notFound()
+  }
+
+  const canonicalUrl = `https://www.zapiya.com/guides/${slug}`
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TechArticle",
+        "@id": `${canonicalUrl}#article`,
+        "isPartOf": {
+          "@type": "WebPage",
+          "@id": canonicalUrl,
+        },
+        "headline": guide.title,
+        "description": guide.summary,
+        "inLanguage": "en-US",
+        "mainEntityOfPage": canonicalUrl,
+        "datePublished": "2026-11-01T00:00:00.000Z",
+        "dateModified": "2026-11-06T00:00:00.000Z",
+        "author": {
+          "@type": "Organization",
+          "name": guide.author || "Zapiya Career Research Team",
+          "url": "https://www.zapiya.com",
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Zapiya",
+          "url": "https://www.zapiya.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.zapiya.com/logo.png",
+          },
+        },
+        "image": "https://www.zapiya.com/logo.png",
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${canonicalUrl}#breadcrumb`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.zapiya.com",
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Career Guides",
+            "item": "https://www.zapiya.com/guides",
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": guide.title,
+            "item": canonicalUrl,
+          },
+        ],
+      },
+    ],
   }
 
   // Simple clean markdown parser for headings and lists
@@ -117,6 +179,10 @@ export default async function GuideDetailPage({ params }) {
 
   return (
     <article className="min-h-screen bg-slate-50/50 py-16 px-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <div className="max-w-3xl mx-auto">
 
         {/* Breadcrumb */}
@@ -172,8 +238,16 @@ export default async function GuideDetailPage({ params }) {
           </div>
         </div>
 
+        {/* Contextual Policy-Compliant AdSense Slot */}
+        <AdSlot
+          slot="8204918234"
+          format="auto"
+          responsive="true"
+          className="my-8"
+        />
+
         {/* Footer Navigation */}
-        <div className="mt-12 flex justify-between items-center text-sm font-semibold">
+        <div className="mt-8 flex justify-between items-center text-sm font-semibold">
           <Link href="/guides" className="text-indigo-600 hover:text-indigo-700">
             ← Back to all guides
           </Link>

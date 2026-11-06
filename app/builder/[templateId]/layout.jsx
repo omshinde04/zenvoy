@@ -51,7 +51,73 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default function BuilderLayout({ children }) {
-  return <>{children}</>
+export default async function BuilderLayout({ children, params }) {
+  const { templateId } = await params
+  const meta = TEMPLATE_TITLES[templateId] || {
+    title: "Classic ATS Resume Builder",
+    desc: "100% Free ATS Resume Builder",
+  }
+
+  const canonicalUrl = `https://www.zapiya.com/builder/${templateId || "classic-ats"}`
+
+  const builderJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "@id": `${canonicalUrl}#app`,
+        "name": meta.title,
+        "url": canonicalUrl,
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "All",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+        },
+        "featureList": [
+          "100% Free Vector PDF Export",
+          "Zero Watermarks",
+          "No Signup Required",
+          "ATS Single-Column Format",
+          "Local Browser Auto-Save",
+        ],
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${canonicalUrl}#breadcrumb`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.zapiya.com",
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Templates",
+            "item": "https://www.zapiya.com/templates",
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": meta.title,
+            "item": canonicalUrl,
+          },
+        ],
+      },
+    ],
+  }
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(builderJsonLd) }}
+      />
+      {children}
+    </>
+  )
 }
 
