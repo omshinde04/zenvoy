@@ -1012,10 +1012,10 @@ export default function BuilderForm({
                     }}
                 >
                     <span>{downloading ? "⏳" : "⬇"}</span>
-                    <span>{downloading ? "Generating PDF..." : "Download PDF — Free"}</span>
+                    <span>{downloading ? "Generating 1-Click PDF..." : "1-Click Download PDF — Free"}</span>
                 </button>
                 <p style={{ textAlign: "center", fontSize: "11px", color: C.textMuted, marginTop: "6px", fontWeight: "500", margin: "6px 0 0 0" }}>
-                    Zero watermark · 100% Vector ATS PDF
+                    Instant 1-Click Download · Zero Watermark · ATS Ready
                 </p>
             </div>
         </div>

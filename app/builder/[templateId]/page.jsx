@@ -11,6 +11,7 @@ import ClassicATS from "@/components/templates/tech/ClassicATS"
 import TechMinimal from "@/components/templates/tech/TechMinimal"
 import TechTwoColumn from "@/components/templates/tech/TechTwoColumn"
 import TechBoldHeader from "@/components/templates/tech/TechBoldHeader"
+import { generateAndDownloadPdf } from "@/lib/pdf-generator"
 
 const TEMPLATE_MAP = {
     "classic-ats": ClassicATS,
@@ -51,6 +52,7 @@ export default function BuilderPage() {
     const [activeSection, setActiveSection] = useState("personal")
     const [activeTemplateId, setActiveTemplateId] = useState(templateId || "tech-minimal")
     const [downloading, setDownloading] = useState(false)
+    const [downloadToast, setDownloadToast] = useState(null)
     const [zoom, setZoom] = useState(0.72)
     const [isSaved, setIsSaved] = useState(true)
     const [isMobile, setIsMobile] = useState(false)
@@ -122,9 +124,10 @@ export default function BuilderPage() {
     }, [data, templateId])
 
     // =========================================================
-    // IN-BROWSER VECTOR PDF DOWNLOAD
+    // IN-BROWSER 1-CLICK INSTANT VECTOR PDF DOWNLOAD
     // =========================================================
-    const handleDownload = () => {
+    const handleDownload = async () => {
+        if (downloading) return
         setDownloading(true)
         trackZapiyaEvent("download", {
             templateId: templateId || "classic-ats",
@@ -136,15 +139,28 @@ export default function BuilderPage() {
             .replace(/[^a-zA-Z0-9-]/g, "")
             .toLowerCase()
             .slice(0, 60) || "resume"
+        const filename = `${rawName}-resume.pdf`
 
-        const originalTitle = document.title
-        document.title = `${rawName}-resume`
+        try {
+            // On mobile, if currently on "editor" tab, switch to "preview" so canvas is mounted
+            if (isMobile && mobileTab !== "preview") {
+                setMobileTab("preview")
+                await new Promise((resolve) => setTimeout(resolve, 200))
+            }
 
-        setTimeout(() => {
+            const success = await generateAndDownloadPdf("resume-preview-container", filename)
+            if (success) {
+                setDownloadToast("✓ PDF downloaded successfully!")
+                setTimeout(() => setDownloadToast(null), 3500)
+            } else {
+                window.print()
+            }
+        } catch (err) {
+            console.warn("Direct PDF export error, fallback to print:", err)
             window.print()
-            document.title = originalTitle
+        } finally {
             setDownloading(false)
-        }, 120)
+        }
     }
 
     // =========================================================
@@ -269,18 +285,24 @@ export default function BuilderPage() {
                         onClick={handleDownload}
                         disabled={downloading}
                         style={{
-                            padding: "7px 14px",
+                            padding: "8px 16px",
                             borderRadius: "8px",
-                            backgroundColor: "#4F46E5",
+                            background: downloading
+                                ? "#94A3B8"
+                                : "linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)",
                             color: "#FFFFFF",
-                            fontSize: "12px",
+                            fontSize: "12.5px",
                             fontWeight: "700",
                             border: "none",
-                            cursor: "pointer",
-                            boxShadow: "0 2px 8px rgba(79, 70, 229, 0.3)",
+                            cursor: downloading ? "not-allowed" : "pointer",
+                            boxShadow: "0 2px 10px rgba(79, 70, 229, 0.35)",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "6px",
+                            transition: "all 0.15s ease",
                         }}
                     >
-                        {downloading ? "⏳ Generating..." : "⬇ PDF"}
+                        {downloading ? "⏳ Generating..." : "⬇ Download PDF"}
                     </button>
                 </div>
             )}
@@ -474,6 +496,32 @@ export default function BuilderPage() {
                                         }}
                                     >+</button>
                                 </div>
+
+                                <button
+                                    onClick={handleDownload}
+                                    disabled={downloading}
+                                    title="1-Click Direct PDF Download"
+                                    style={{
+                                        padding: "6px 14px",
+                                        borderRadius: "8px",
+                                        background: downloading
+                                            ? "#94A3B8"
+                                            : "linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)",
+                                        color: "#FFFFFF",
+                                        border: "none",
+                                        cursor: downloading ? "not-allowed" : "pointer",
+                                        fontWeight: "700",
+                                        fontSize: "12px",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        gap: "6px",
+                                        boxShadow: "0 2px 8px rgba(79, 70, 229, 0.3)",
+                                        marginLeft: "4px",
+                                    }}
+                                >
+                                    <span>{downloading ? "⏳" : "⬇"}</span>
+                                    <span>{downloading ? "Generating..." : "Download PDF"}</span>
+                                </button>
                             </div>
                         </div>
 
@@ -534,6 +582,29 @@ export default function BuilderPage() {
                 )}
 
             </div>
+
+            {/* Download feedback toast */}
+            {downloadToast && (
+                <div style={{
+                    position: "fixed",
+                    bottom: "24px",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    backgroundColor: "#0F172A",
+                    color: "#FFFFFF",
+                    padding: "10px 20px",
+                    borderRadius: "10px",
+                    fontSize: "13px",
+                    fontWeight: "600",
+                    boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.4)",
+                    zIndex: 9999,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                }}>
+                    <span>{downloadToast}</span>
+                </div>
+            )}
         </div>
     )
 }
