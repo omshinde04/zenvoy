@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react"
 import { useParams, useRouter } from "next/navigation"
 import Link from "next/link"
 import { defaultResumeData, omShindeResumeData } from "@/lib/resumeData"
+import { trackZapiyaEvent } from "@/lib/telemetry"
 import BuilderForm, { TemplateSwitcher } from "@/components/builder/BuilderForm"
 import ClassicATS from "@/components/templates/tech/ClassicATS"
 import TechMinimal from "@/components/templates/tech/TechMinimal"
@@ -90,6 +91,9 @@ export default function BuilderPage() {
         }
     }, [])
 
+    const hasTrackedEditRef = useRef(false)
+    const isInitialMountRef = useRef(true)
+
     // =========================================================
     // AUTOSAVE TO LOCAL STORAGE
     // =========================================================
@@ -99,19 +103,34 @@ export default function BuilderPage() {
             try {
                 localStorage.setItem(DRAFT_KEY, JSON.stringify(data))
                 setIsSaved(true)
+
+                // Track first in-session edit event to gauge candidate engagement
+                if (!isInitialMountRef.current && !hasTrackedEditRef.current) {
+                    hasTrackedEditRef.current = true
+                    trackZapiyaEvent("edit", {
+                        templateId: templateId || "classic-ats",
+                        path: `/builder/${templateId || "classic-ats"}`,
+                    })
+                }
+                isInitialMountRef.current = false
             } catch (e) {
                 console.error("Local draft save error:", e)
             }
         }, 800)
 
         return () => clearTimeout(t)
-    }, [data])
+    }, [data, templateId])
 
     // =========================================================
     // IN-BROWSER VECTOR PDF DOWNLOAD
     // =========================================================
     const handleDownload = () => {
         setDownloading(true)
+        trackZapiyaEvent("download", {
+            templateId: templateId || "classic-ats",
+            path: `/builder/${templateId || "classic-ats"}`,
+        })
+
         const rawName = (data.personal?.name || "resume")
             .replace(/\s+/g, "-")
             .replace(/[^a-zA-Z0-9-]/g, "")

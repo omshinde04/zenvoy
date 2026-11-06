@@ -1,6 +1,7 @@
 // app/layout.jsx
 import "./globals.css"
 import LayoutShell from "@/components/LayoutShell"
+import ZapiyaTracker from "@/components/ZapiyaTracker"
 
 // ✅ WORLD-CLASS SEO METADATA — 100% FREE ATS RESUME BUILDER
 export const metadata = {
@@ -176,6 +177,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="bg-white text-slate-900 antialiased selection:bg-indigo-500 selection:text-white">
+        <ZapiyaTracker />
         <LayoutShell>{children}</LayoutShell>
       </body>
     </html>
