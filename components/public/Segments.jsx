@@ -2,107 +2,92 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { FaLaptopCode, FaChartLine, FaPalette } from "react-icons/fa"
+import { FaLaptopCode, FaChartLine, FaPalette, FaArrowRight } from "react-icons/fa"
 
 const templates = [
     {
         label: "Tech & Engineering",
-        desc: "Built for developers, product engineers & startups",
+        desc: "Single-column ATS formats optimized for software developers, backend, frontend, devops & data engineers.",
         icon: <FaLaptopCode />,
-        color: "#2563EB",
+        color: "text-blue-600",
+        bg: "bg-blue-50 border-blue-100",
+        templateId: "classic-ats",
     },
     {
         label: "MBA & Finance",
-        desc: "Perfect for consulting, finance & management roles",
+        desc: "High-density executive structures tailored for consulting, investment banking, and product leadership.",
         icon: <FaChartLine />,
-        color: "#059669",
+        color: "text-emerald-600",
+        bg: "bg-emerald-50 border-emerald-100",
+        templateId: "tech-minimal",
     },
     {
-        label: "Design & Creative",
-        desc: "Crafted for UI/UX, creatives & portfolios",
+        label: "Design & Product",
+        desc: "Balanced professional hierarchy tailored for UI/UX designers, design leads, and creative technologists.",
         icon: <FaPalette />,
-        color: "#7C3AED",
+        color: "text-violet-600",
+        bg: "bg-violet-50 border-violet-100",
+        templateId: "tech-two-column",
     },
 ]
 
 export default function Segments() {
     return (
-        <section className="relative px-6 py-28 bg-[#0B1120] overflow-hidden">
-
-            {/* 🔥 Background Glow */}
-            <div className="absolute top-[-100px] left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-[#6366F1] opacity-[0.05] blur-[120px] rounded-full" />
-
+        <section className="relative px-6 py-24 bg-slate-50/50 overflow-hidden border-t border-slate-200/60">
             <div className="relative max-w-6xl mx-auto">
 
-                {/* 🔥 Heading */}
-                <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-4xl font-bold text-white">
-                        Templates built for your{" "}
-                        <span className="text-[#6366F1]">career path</span>
+                {/* Heading */}
+                <div className="text-center max-w-2xl mx-auto mb-16">
+                    <span className="inline-block text-xs font-bold text-indigo-600 uppercase tracking-wider bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full mb-3.5 font-comfortaa">
+                        Role-Specific Formats
+                    </span>
+                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight font-comfortaa">
+                        Templates Built for Your{" "}
+                        <span className="text-indigo-600">Career Trajectory</span>
                     </h2>
 
-                    <p className="text-[#64748B] text-sm mt-4 max-w-xl mx-auto">
-                        Choose from industry-specific templates designed to get you shortlisted faster.
+                    <p className="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
+                        Every template follows proven recruiter reading patterns to highlight your greatest technical and leadership achievements.
                     </p>
                 </div>
 
-                {/* 🔥 Cards */}
+                {/* Cards */}
                 <div className="grid md:grid-cols-3 gap-6">
-
                     {templates.map((t, i) => (
                         <motion.div
                             key={i}
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 24 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: i * 0.15 }}
-                            whileHover={{ y: -6 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: i * 0.1, duration: 0.4 }}
+                            whileHover={{ y: -4 }}
+                            className="bg-white border border-slate-200/80 rounded-2xl p-7 flex flex-col justify-between shadow-subtle hover:shadow-hover hover:border-indigo-300 transition-all duration-200"
                         >
-                            <Link href="/templates">
-                                <div className="group relative bg-[#1E293B] border border-[#334155] rounded-2xl p-8 hover:border-[#6366F1] transition-all duration-300 cursor-pointer overflow-hidden">
-
-                                    {/* Glow hover */}
-                                    <div
-                                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300"
-                                        style={{
-                                            background: `radial-gradient(circle at top, ${t.color}20, transparent 70%)`
-                                        }}
-                                    />
-
-                                    {/* Icon */}
-                                    <div
-                                        className="w-12 h-12 flex items-center justify-center rounded-xl mb-6 text-white text-xl"
-                                        style={{ backgroundColor: t.color }}
-                                    >
-                                        {t.icon}
-                                    </div>
-
-                                    {/* Title */}
-                                    <h3 className="text-white font-semibold text-lg">
-                                        {t.label}
-                                    </h3>
-
-                                    {/* Description */}
-                                    <p className="text-[#64748B] text-sm mt-2 leading-relaxed">
-                                        {t.desc}
-                                    </p>
-
-                                    {/* CTA */}
-                                    <div className="mt-6 flex items-center justify-between">
-                                        <span className="text-[#6366F1] text-sm font-semibold group-hover:underline">
-                                            Explore templates →
-                                        </span>
-
-                                        {/* subtle arrow animation */}
-                                        <span className="text-[#6366F1] transform group-hover:translate-x-1 transition">
-                                            →
-                                        </span>
-                                    </div>
-
+                            <div>
+                                <div className={`w-12 h-12 rounded-2xl ${t.bg} border ${t.color} flex items-center justify-center text-xl mb-5 shadow-xs`}>
+                                    {t.icon}
                                 </div>
-                            </Link>
+
+                                <h3 className="text-lg font-bold text-slate-900 font-comfortaa">
+                                    {t.label}
+                                </h3>
+
+                                <p className="text-slate-600 text-sm mt-2.5 leading-relaxed">
+                                    {t.desc}
+                                </p>
+                            </div>
+
+                            <div className="mt-6 pt-5 border-t border-slate-100">
+                                <Link
+                                    href={`/builder/${t.templateId}`}
+                                    className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-indigo-600 hover:text-indigo-700 font-comfortaa"
+                                >
+                                    Use Template Free
+                                    <FaArrowRight className="text-[10px]" />
+                                </Link>
+                            </div>
                         </motion.div>
                     ))}
-
                 </div>
 
             </div>

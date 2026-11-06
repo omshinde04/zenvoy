@@ -1,83 +1,86 @@
 // app/terms/page.jsx
 
 export const metadata = {
-    title: "Terms of Use",
+    title: "Terms of Service | Zapiya",
     description:
-        "Read the terms and conditions for using Zapiya. Understand your rights, responsibilities, and platform usage policies.",
+        "Read the terms and conditions for using Zapiya. Learn about our 100% free resume building service, intellectual property, and user responsibilities.",
     alternates: {
         canonical: "https://www.zapiya.com/terms",
     },
 }
 
-export default function Terms() {
+export default function TermsPage() {
     return (
-        <div className="min-h-screen bg-[#0F172A] text-white px-6 py-20 max-w-3xl mx-auto">
+        <div className="min-h-screen bg-slate-50/50 py-16 px-6">
+            <div className="max-w-3xl mx-auto bg-white border border-slate-200/80 rounded-3xl p-8 sm:p-12 shadow-subtle text-slate-700 leading-relaxed text-sm sm:text-base">
 
-            {/* Title */}
-            <h1 className="text-3xl font-bold mb-6">Terms of Use</h1>
+                <div className="border-b border-slate-100 pb-6 mb-8">
+                    <span className="text-xs font-bold text-indigo-600 uppercase tracking-wider font-comfortaa">
+                        Legal Agreement
+                    </span>
+                    <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mt-2 font-comfortaa">
+                        Terms of Service
+                    </h1>
+                    <p className="text-slate-500 text-xs mt-2">
+                        Last updated: November 2026
+                    </p>
+                </div>
 
-            <p className="text-[#94A3B8] text-sm mb-6">
-                Last updated: April 2026
-            </p>
+                <div className="space-y-6">
+                    <p>
+                        Welcome to <strong className="text-slate-900">Zapiya</strong>. By accessing or using our website located at <a href="https://www.zapiya.com" className="text-indigo-600 hover:underline">https://www.zapiya.com</a>, you agree to be bound by these Terms of Service.
+                    </p>
 
-            {/* Intro */}
-            <p className="text-[#94A3B8] text-sm leading-relaxed mb-6">
-                By accessing and using <span className="text-white font-semibold">Zapiya</span>,
-                you agree to comply with these Terms of Use. Please read them carefully.
-            </p>
+                    <section>
+                        <h2 className="text-lg sm:text-xl font-bold text-slate-900 font-comfortaa mb-2">
+                            1. Description of Service
+                        </h2>
+                        <p>
+                            Zapiya provides client-side resume formatting, ATS-compliant templating, and vector PDF export tools. Our service is provided completely free of charge (&ldquo;as is&rdquo;) with no subscription fees, mandatory accounts, or payment requirements.
+                        </p>
+                    </section>
 
-            {/* Section */}
-            <h2 className="text-xl font-semibold mt-8 mb-3">1. Use of Service</h2>
-            <p className="text-[#94A3B8] text-sm leading-relaxed">
-                Zapiya provides tools to create resumes and related content. You agree to use the platform
-                only for lawful purposes and in a responsible manner.
-            </p>
+                    <section className="pt-4 border-t border-slate-100">
+                        <h2 className="text-lg sm:text-xl font-bold text-slate-900 font-comfortaa mb-2">
+                            2. User Content & Ownership
+                        </h2>
+                        <p>
+                            You retain 100% ownership of all career data, employment history, contact information, and content you input into Zapiya. We do not claim any intellectual property rights over the resume content you create. Because our application functions primarily in your local browser storage, you are responsible for maintaining your own backups (such as exporting a JSON file).
+                        </p>
+                    </section>
 
-            {/* Section */}
-            <h2 className="text-xl font-semibold mt-8 mb-3">2. User Responsibilities</h2>
-            <ul className="list-disc pl-6 text-[#94A3B8] text-sm space-y-2">
-                <li>You are responsible for the accuracy of the information you provide</li>
-                <li>You must not misuse or attempt to disrupt the platform</li>
-                <li>You agree not to upload harmful or illegal content</li>
-            </ul>
+                    <section className="pt-4 border-t border-slate-100">
+                        <h2 className="text-lg sm:text-xl font-bold text-slate-900 font-comfortaa mb-2">
+                            3. Acceptable Use
+                        </h2>
+                        <p>
+                            You agree not to use Zapiya for any unlawful purposes, including transmitting malicious scripts, attempting unauthorized access to infrastructure, or automated scraping that impairs the service for other users.
+                        </p>
+                    </section>
 
-            {/* Section */}
-            <h2 className="text-xl font-semibold mt-8 mb-3">3. Intellectual Property</h2>
-            <p className="text-[#94A3B8] text-sm leading-relaxed">
-                All content, design, and branding of Zapiya are owned by us. You may not copy, reproduce,
-                or distribute any part of the platform without permission.
-            </p>
+                    <section className="pt-4 border-t border-slate-100">
+                        <h2 className="text-lg sm:text-xl font-bold text-slate-900 font-comfortaa mb-2">
+                            4. Disclaimer of Warranties
+                        </h2>
+                        <p>
+                            While our templates are engineered to comply with recognized industry ATS standards, Zapiya does not guarantee employment, interviews, or hiring outcomes. The service is provided without warranties of any kind, either express or implied.
+                        </p>
+                    </section>
 
-            {/* Section */}
-            <h2 className="text-xl font-semibold mt-8 mb-3">4. Limitation of Liability</h2>
-            <p className="text-[#94A3B8] text-sm leading-relaxed">
-                Zapiya is not responsible for job outcomes, hiring decisions, or career results.
-                We provide tools to assist you, but success depends on multiple external factors.
-            </p>
+                    <section className="pt-4 border-t border-slate-100">
+                        <h2 className="text-lg sm:text-xl font-bold text-slate-900 font-comfortaa mb-2">
+                            5. Questions & Contact
+                        </h2>
+                        <p>
+                            If you have questions regarding these terms, please contact:
+                        </p>
+                        <p className="mt-2 font-medium text-slate-900">
+                            Email: <a href="mailto:support@zapiya.com" className="text-indigo-600 hover:underline">support@zapiya.com</a>
+                        </p>
+                    </section>
+                </div>
 
-            {/* Section */}
-            <h2 className="text-xl font-semibold mt-8 mb-3">5. Termination</h2>
-            <p className="text-[#94A3B8] text-sm leading-relaxed">
-                We reserve the right to suspend or terminate access to the platform if these terms are violated.
-            </p>
-
-            {/* Section */}
-            <h2 className="text-xl font-semibold mt-8 mb-3">6. Changes to Terms</h2>
-            <p className="text-[#94A3B8] text-sm leading-relaxed">
-                We may update these Terms of Use from time to time. Continued use of the platform means
-                you accept the updated terms.
-            </p>
-
-            {/* Section */}
-            <h2 className="text-xl font-semibold mt-8 mb-3">7. Contact</h2>
-            <p className="text-[#94A3B8] text-sm leading-relaxed">
-                If you have any questions about these terms, contact us at:
-            </p>
-
-            <p className="text-white text-sm mt-2">
-                📧 omradixsolutions@gmail.com
-            </p>
-
+            </div>
         </div>
     )
 }

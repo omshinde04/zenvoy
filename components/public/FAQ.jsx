@@ -13,49 +13,51 @@ export default function FAQ() {
     }
 
     return (
-        <section className="relative px-6 py-28 bg-[#0B1120] overflow-hidden">
-
-            {/* Glow */}
-            <div className="absolute top-[-80px] left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#6366F1] opacity-[0.05] blur-[120px] rounded-full" />
-
+        <section className="relative px-6 py-24 bg-white overflow-hidden border-t border-slate-200/60">
             <div className="relative max-w-3xl mx-auto">
 
                 {/* Header */}
-                <div className="text-center mb-14">
-                    <h2 className="text-3xl md:text-4xl font-bold text-white">
-                        Frequently asked{" "}
-                        <span className="text-[#6366F1]">questions</span>
+                <div className="text-center max-w-xl mx-auto mb-16">
+                    <span className="inline-block text-xs font-bold text-indigo-600 uppercase tracking-wider bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full mb-3.5 font-comfortaa">
+                        Frequently Asked Questions
+                    </span>
+                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight font-comfortaa">
+                        Got Questions?{" "}
+                        <span className="text-indigo-600">We&apos;ve Got Answers</span>
                     </h2>
 
-                    <p className="text-[#64748B] text-sm mt-4">
+                    <p className="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
                         Everything you need to know about building 100% free ATS resumes on Zapiya.
                     </p>
                 </div>
 
                 {/* FAQ Items */}
-                <div className="space-y-4">
+                <div className="space-y-3.5">
                     {faqs.map((faq, i) => (
-                        <motion.div
+                        <div
                             key={i}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: i * 0.1 }}
-                            className="bg-[#1E293B] border border-[#334155] rounded-xl overflow-hidden"
+                            className={`border rounded-2xl overflow-hidden transition-all duration-200 ${
+                                activeIndex === i
+                                    ? "bg-slate-50/90 border-indigo-200 shadow-xs"
+                                    : "bg-slate-50/50 border-slate-200/80 hover:bg-slate-50"
+                            }`}
                         >
-
-                            {/* Question */}
+                            {/* Question Button */}
                             <button
                                 onClick={() => toggle(i)}
-                                className="w-full flex items-center justify-between px-5 py-4 text-left"
+                                className="w-full flex items-center justify-between px-6 py-4.5 text-left gap-4"
                             >
-                                <span className="text-white font-medium text-sm">
+                                <span className="text-slate-900 font-bold text-sm sm:text-base font-comfortaa">
                                     {faq.q}
                                 </span>
 
-                                <FaChevronDown
-                                    className={`text-[#6366F1] transition-transform ${activeIndex === i ? "rotate-180" : ""
-                                        }`}
-                                />
+                                <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs transition-transform duration-200 flex-shrink-0 ${
+                                    activeIndex === i
+                                        ? "bg-indigo-600 text-white rotate-180"
+                                        : "bg-slate-200/80 text-slate-600"
+                                }`}>
+                                    <FaChevronDown />
+                                </div>
                             </button>
 
                             {/* Answer */}
@@ -65,13 +67,14 @@ export default function FAQ() {
                                         initial={{ height: 0, opacity: 0 }}
                                         animate={{ height: "auto", opacity: 1 }}
                                         exit={{ height: 0, opacity: 0 }}
-                                        className="px-5 pb-5 text-[#94A3B8] text-sm leading-relaxed"
+                                        transition={{ duration: 0.2 }}
+                                        className="px-6 pb-5 text-slate-600 text-sm sm:text-base leading-relaxed border-t border-slate-200/60 pt-3"
                                     >
                                         {faq.a}
                                     </motion.div>
                                 )}
                             </AnimatePresence>
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
 

@@ -164,12 +164,18 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&family=Tinos:wght@400;700&display=swap"
+          rel="stylesheet"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
         />
       </head>
-      <body>
+      <body className="bg-white text-slate-900 antialiased selection:bg-indigo-500 selection:text-white">
         <LayoutShell>{children}</LayoutShell>
       </body>
     </html>

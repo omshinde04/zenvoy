@@ -1,36 +1,53 @@
-/* Google Fonts — Inter, Tinos (Times New Roman metric equivalent), EB Garamond */
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700;900&family=Tinos:wght@400;700&display=swap');
-/* app/globals.css */
+/* Google Fonts — Comfortaa (Aesthetic Brand & Headings), Inter, Tinos (Times Roman Equivalent) */
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&family=Tinos:wght@400;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+.font-comfortaa {
+  font-family: 'Comfortaa', cursive, sans-serif;
+}
 
 .footer-link {
   color: #64748B;
   font-size: 14px;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
+  font-weight: 400;
 }
 
 .footer-link:hover {
-  color: white;
+  color: #4F46E5;
+  padding-left: 2px;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-/* Global resets only */
+/* Global resets */
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: #F8FAFC;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #FFFFFF;
   color: #0F172A;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle modern mesh gradient for hero & headers */
+.mesh-glow-light {
+  background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.08) 0%, rgba(241, 245, 249, 0) 70%);
+}
+
+/* Glassmorphism light */
+.glass-panel-light {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
 }
 
 /* Template preview wrapper — used in builder page */
@@ -50,12 +67,13 @@ body {
 
 /* =========================================================
    UNIVERSAL RESUME TYPOGRAPHY — TIMES NEW ROMAN EVERYWHERE
+   (Preserves 100% ATS score for all generated resumes)
    ========================================================= */
 #resume-preview-container,
 #resume-preview-container *,
 .a4-page,
 .a4-page * {
-  font-family: "Times New Roman", Times, serif !important;
+  font-family: "Times New Roman", Times, "Tinos", serif !important;
 }
 
 /* Dot separator — used in template headers */
@@ -100,7 +118,7 @@ body {
   #resume-preview-container,
   #resume-preview-container * {
     visibility: visible !important;
-    font-family: "Times New Roman", Times, serif !important;
+    font-family: "Times New Roman", Times, "Tinos", serif !important;
   }
 
   #resume-preview-container {
@@ -115,7 +133,6 @@ body {
     background: #ffffff !important;
   }
 
-  /* Hide editor helpers like the page break line during printing */
   .editor-seam,
   .no-print {
     display: none !important;

@@ -28,3 +28,4 @@ export const metadata = {
 export default function TemplatesLayout({ children }) {
   return <>{children}</>
 }
+

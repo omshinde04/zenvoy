@@ -6,11 +6,7 @@ import { FaInstagram, FaLinkedin, FaXTwitter } from "react-icons/fa6"
 
 export default function Footer() {
     return (
-        <footer className="relative bg-[#0F172A] border-t border-[#1E293B] overflow-hidden">
-
-            {/* Glow Effect */}
-            <div className="absolute top-[-60px] left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#6366F1] opacity-[0.05] blur-[120px] rounded-full" />
-
+        <footer className="relative bg-slate-50 border-t border-slate-200/80 overflow-hidden text-slate-600">
             <div className="relative max-w-6xl mx-auto px-6 py-14">
 
                 {/* Top Grid */}
@@ -18,99 +14,104 @@ export default function Footer() {
 
                     {/* Brand */}
                     <div className="col-span-2 md:col-span-1">
-
-                        {/* ✅ LOGO */}
-                        <Link href="/" className="flex items-center gap-2">
-                            <Image
-                                src="/logo.png"
-                                alt="Zapiya Logo"
-                                width={40}
-                                height={40}
-                                priority
-                            />
-                            <span className="text-white text-xl font-bold tracking-tight">
+                        <Link href="/" className="flex items-center gap-2.5">
+                            <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center p-1.5">
+                                <Image
+                                    src="/logo.png"
+                                    alt="Zapiya Logo"
+                                    width={28}
+                                    height={28}
+                                    className="object-contain filter invert brightness-0"
+                                />
+                            </div>
+                            <span className="text-slate-900 text-xl font-bold tracking-tight font-comfortaa">
                                 Zapiya
                             </span>
                         </Link>
 
-                        <p className="text-[#64748B] text-sm mt-3 leading-relaxed">
-                            100% free ATS resume builder for developers, engineers, and students. Zero paywalls, no signup, no watermarks.
+                        <p className="text-slate-500 text-xs sm:text-sm mt-3 leading-relaxed">
+                            100% free ATS resume builder for software engineers, developers, and students. Zero paywalls, no signup required, zero watermarks.
                         </p>
 
                         {/* Social */}
-                        <div className="flex gap-3 mt-5">
+                        <div className="flex gap-2.5 mt-5">
                             <a
-                                href="https://instagram.com/zapiya"
+                                href="https://linkedin.com"
                                 target="_blank"
                                 rel="noreferrer"
-                                className="w-9 h-9 rounded-xl bg-[#1E293B] border border-[#334155] flex items-center justify-center text-[#64748B] hover:text-white hover:border-[#6366F1] transition"
+                                aria-label="LinkedIn"
+                                className="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:text-indigo-600 hover:border-indigo-300 transition shadow-xs"
                             >
-                                <FaInstagram size={14} />
+                                <FaLinkedin size={13} />
                             </a>
-
                             <a
-                                href="https://linkedin.com/company/zapiya"
+                                href="https://twitter.com"
                                 target="_blank"
                                 rel="noreferrer"
-                                className="w-9 h-9 rounded-xl bg-[#1E293B] border border-[#334155] flex items-center justify-center text-[#64748B] hover:text-white hover:border-[#6366F1] transition"
+                                aria-label="Twitter"
+                                className="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:text-indigo-600 hover:border-indigo-300 transition shadow-xs"
                             >
-                                <FaLinkedin size={14} />
+                                <FaXTwitter size={13} />
                             </a>
-
                             <a
-                                href="https://twitter.com/zapiya"
+                                href="https://instagram.com"
                                 target="_blank"
                                 rel="noreferrer"
-                                className="w-9 h-9 rounded-xl bg-[#1E293B] border border-[#334155] flex items-center justify-center text-[#64748B] hover:text-white hover:border-[#6366F1] transition"
+                                aria-label="Instagram"
+                                className="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:text-indigo-600 hover:border-indigo-300 transition shadow-xs"
                             >
-                                <FaXTwitter size={14} />
+                                <FaInstagram size={13} />
                             </a>
                         </div>
                     </div>
 
                     {/* Product */}
                     <div>
-                        <p className="text-white text-sm font-semibold mb-4">Product</p>
-                        <div className="flex flex-col gap-3">
-                            <Link href="/templates" className="footer-link">Templates</Link>
-                            <Link href="/#features" className="footer-link">Features</Link>
-                            <Link href="/#pricing" className="footer-link">Pricing</Link>
+                        <p className="text-slate-900 text-xs font-bold uppercase tracking-wider font-comfortaa mb-4">Templates</p>
+                        <div className="flex flex-col gap-2.5 text-sm">
+                            <Link href="/builder/classic-ats" className="footer-link">Classic ATS (Harvard)</Link>
+                            <Link href="/builder/tech-minimal" className="footer-link">Tech Minimal</Link>
+                            <Link href="/builder/tech-two-column" className="footer-link">Tech Pro</Link>
+                            <Link href="/builder/tech-bold-header" className="footer-link">Tech Bold Header</Link>
+                            <Link href="/templates" className="footer-link font-semibold text-indigo-600">Browse All Templates →</Link>
                         </div>
                     </div>
 
-                    {/* Segments */}
+                    {/* Guides & Resources */}
                     <div>
-                        <p className="text-white text-sm font-semibold mb-4">Segments</p>
-                        <div className="flex flex-col gap-3">
-                            <Link href="/templates?segment=tech" className="footer-link">Tech & Engineering</Link>
-                            <Link href="/templates?segment=mba" className="footer-link">MBA & Finance</Link>
-                            <Link href="/templates?segment=design" className="footer-link">Design & Creative</Link>
+                        <p className="text-slate-900 text-xs font-bold uppercase tracking-wider font-comfortaa mb-4">Guides & Career</p>
+                        <div className="flex flex-col gap-2.5 text-sm">
+                            <Link href="/guides/ats-resume-guide-2026" className="footer-link">ATS Resume Guide 2026</Link>
+                            <Link href="/guides/harvard-resume-format-breakdown" className="footer-link">Harvard Format Breakdown</Link>
+                            <Link href="/guides/action-verbs-for-software-engineers" className="footer-link">150+ Action Verbs</Link>
+                            <Link href="/guides/single-column-vs-two-column-resumes" className="footer-link">Single vs Two Column</Link>
+                            <Link href="/guides" className="footer-link font-semibold text-indigo-600">Career Knowledge Hub →</Link>
                         </div>
                     </div>
 
-                    {/* Company & Support */}
+                    {/* Company & Legal */}
                     <div>
-                        <p className="text-white text-sm font-semibold mb-4">Support & Legal</p>
-                        <div className="flex flex-col gap-3">
-                            <Link href="/#faq" className="footer-link">FAQ</Link>
-                            <a href="mailto:support@zapiya.com" className="footer-link">Contact Support</a>
+                        <p className="text-slate-900 text-xs font-bold uppercase tracking-wider font-comfortaa mb-4">Company & Legal</p>
+                        <div className="flex flex-col gap-2.5 text-sm">
+                            <Link href="/about" className="footer-link">About Zapiya</Link>
+                            <Link href="/contact" className="footer-link">Contact & Support</Link>
                             <Link href="/privacy" className="footer-link">Privacy Policy</Link>
-                            <Link href="/terms" className="footer-link">Terms of Use</Link>
+                            <Link href="/terms" className="footer-link">Terms of Service</Link>
+                            <a href="mailto:support@zapiya.com" className="footer-link text-indigo-600">support@zapiya.com</a>
                         </div>
                     </div>
+
                 </div>
 
-                {/* Bottom */}
-                <div className="border-t border-[#1E293B] pt-6 flex flex-col md:flex-row items-center justify-between gap-3">
-
-                    <p className="text-[#475569] text-xs">
-                        © 2026 Zapiya. All rights reserved.
-                    </p>
-
-                    <p className="text-[#475569] text-xs">
-                        Build Smart • Stand Out 🚀
-                    </p>
-
+                {/* Bottom Bar */}
+                <div className="pt-8 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                    <p>© {new Date().getFullYear()} Zapiya. 100% Free Client-Side ATS Resume Builder. All rights reserved.</p>
+                    <div className="flex items-center gap-4">
+                        <span className="inline-flex items-center gap-1.5 text-emerald-600 font-semibold bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full">
+                            ● Zero Paywalls Forever
+                        </span>
+                        <span>Times New Roman Standard</span>
+                    </div>
                 </div>
 
             </div>
