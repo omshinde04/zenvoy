@@ -107,7 +107,9 @@ export default function Footer() {
 
                 {/* Bottom Bar */}
                 <div className="pt-8 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-                    <p>© {new Date().getFullYear()} Zapiya. 100% Free Client-Side ATS Resume Builder. All rights reserved.</p>
+                    <p>
+                        © {new Date().getFullYear()} Zapiya · Founder: <span className="font-semibold text-slate-700">Om Vilas Shinde</span>. 100% Free Client-Side ATS Resume Builder.
+                    </p>
                     <div className="flex items-center gap-4">
                         <span className="inline-flex items-center gap-1.5 text-emerald-600 font-semibold bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full">
                             ● Zero Paywalls Forever

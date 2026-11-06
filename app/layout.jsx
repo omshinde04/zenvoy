@@ -141,13 +141,19 @@ const jsonLdData = {
       "@id": "https://www.zapiya.com/#organization",
       "name": "Zapiya",
       "url": "https://www.zapiya.com",
+      "founder": {
+        "@type": "Person",
+        "name": "Om Vilas Shinde",
+        "jobTitle": "Founder & Lead Engineer",
+        "url": "https://www.zapiya.com/about"
+      },
       "logo": {
         "@type": "ImageObject",
         "url": "https://www.zapiya.com/logo.png",
         "width": 512,
         "height": 512
       },
-      "description": "Zapiya is a privacy-first, 100% free ATS resume builder built for developers, engineers, and students."
+      "description": "Zapiya is a privacy-first, 100% free ATS resume builder founded by Om Vilas Shinde, built for developers, engineers, and students."
     },
     {
       "@type": "WebSite",

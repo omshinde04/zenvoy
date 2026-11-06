@@ -65,6 +65,15 @@ export default function ContactPage() {
               <h3 className="font-bold text-slate-900 text-sm font-comfortaa">Online Platform</h3>
               <p className="text-xs text-slate-500 mt-1">Available globally 24/7 across all modern browsers.</p>
             </div>
+
+            <div className="bg-white border border-slate-200/80 rounded-2xl p-6 shadow-subtle">
+              <div className="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center text-xs font-bold font-comfortaa mb-3">
+                OS
+              </div>
+              <h3 className="font-bold text-slate-900 text-sm font-comfortaa">Founder & Engineering Lead</h3>
+              <p className="text-xs font-semibold text-slate-800 mt-1">Om Vilas Shinde</p>
+              <p className="text-xs text-slate-500 mt-0.5">Maharashtra, India</p>
+            </div>
           </div>
 
           {/* Form Side */}

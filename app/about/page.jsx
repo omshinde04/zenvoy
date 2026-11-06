@@ -78,6 +78,30 @@ export default function AboutPage() {
             </p>
           </section>
 
+          {/* Founder & Leadership (E-E-A-T Transparency) */}
+          <section className="pt-6 border-t border-slate-100">
+            <div className="bg-slate-50 border border-slate-200/80 rounded-2xl p-6 sm:p-7">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-indigo-600 text-white flex items-center justify-center font-bold text-lg font-comfortaa shrink-0 shadow-md shadow-indigo-500/20">
+                  OS
+                </div>
+                <div>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <h3 className="text-base sm:text-lg font-bold text-slate-900 font-comfortaa">
+                      Om Vilas Shinde
+                    </h3>
+                    <span className="text-[11px] font-semibold bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full">
+                      Founder & Lead Engineer
+                    </span>
+                  </div>
+                  <p className="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
+                    Software engineer and digital tools creator dedicated to building ethical, open web utilities. Zapiya was conceived to ensure that no developer, college graduate, or job seeker ever has to pay a monthly fee or provide credit card details just to download their own resume.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
           <section className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-6">
             <div>
               <h3 className="text-base font-bold text-slate-900 font-comfortaa">Have feedback or suggestions?</h3>

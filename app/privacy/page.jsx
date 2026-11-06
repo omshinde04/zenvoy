@@ -28,7 +28,7 @@ export default function PrivacyPage() {
 
                 <div className="space-y-6">
                     <p>
-                        At <strong className="text-slate-900">Zapiya</strong> (accessible from <a href="https://www.zapiya.com" className="text-indigo-600 hover:underline">https://www.zapiya.com</a>), one of our primary priorities is the privacy of our visitors. This Privacy Policy document outlines the types of information that is collected and recorded by Zapiya and how we use it.
+                        At <strong className="text-slate-900">Zapiya</strong> (accessible from <a href="https://www.zapiya.com" className="text-indigo-600 hover:underline">https://www.zapiya.com</a>, operated by Om Vilas Shinde), one of our primary priorities is the privacy of our visitors. This Privacy Policy document outlines the types of information that is collected and recorded by Zapiya and how we use it.
                     </p>
 
                     <section>
