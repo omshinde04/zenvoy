@@ -3,6 +3,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { useParams, useRouter } from "next/navigation"
+import Link from "next/link"
 import { defaultResumeData, omShindeResumeData } from "@/lib/resumeData"
 import BuilderForm, { TemplateSwitcher } from "@/components/builder/BuilderForm"
 import ClassicATS from "@/components/templates/tech/ClassicATS"
@@ -25,14 +26,19 @@ const TEMPLATE_META = {
 }
 
 const C = {
-    bg: "#080F1C",
-    border: "#1A2744",
-    indigo: "#6366F1",
-    textSec: "#94A3B8",
-    textMuted: "#4A5568",
-    textFaint: "#2D3748",
-    card: "#0D1526",
-    green: "#10B981",
+    bg: "#F1F5F9",
+    panel: "#FFFFFF",
+    card: "#FFFFFF",
+    border: "#E2E8F0",
+    borderHover: "#CBD5E1",
+    indigo: "#4F46E5",
+    indigoLight: "#EEF2FF",
+    text: "#0F172A",
+    textSec: "#334155",
+    textMuted: "#64748B",
+    textFaint: "#94A3B8",
+    green: "#059669",
+    greenLight: "#ECFDF5",
 }
 
 export default function BuilderPage() {
@@ -46,8 +52,26 @@ export default function BuilderPage() {
     const [downloading, setDownloading] = useState(false)
     const [zoom, setZoom] = useState(0.72)
     const [isSaved, setIsSaved] = useState(true)
+    const [isMobile, setIsMobile] = useState(false)
+    const [mobileTab, setMobileTab] = useState("editor") // "editor" | "preview"
 
     const DRAFT_KEY = `zenvoy_resume_draft`
+
+    // Responsive screen detection
+    useEffect(() => {
+        const checkMobile = () => {
+            const mobile = window.innerWidth < 1024
+            setIsMobile(mobile)
+            if (mobile && zoom > 0.45) {
+                // Adjust zoom for mobile screens
+                const calculatedZoom = Math.min(0.48, +(window.innerWidth / 860).toFixed(2))
+                setZoom(calculatedZoom)
+            }
+        }
+        checkMobile()
+        window.addEventListener("resize", checkMobile)
+        return () => window.removeEventListener("resize", checkMobile)
+    }, [])
 
     // =========================================================
     // INITIAL LOAD FROM LOCAL STORAGE
@@ -155,9 +179,9 @@ export default function BuilderPage() {
     if (!TemplateComponent) {
         return (
             <div style={{ height: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", backgroundColor: C.bg, gap: "12px" }}>
-                <p style={{ color: C.textSec }}>Template not found</p>
+                <p style={{ color: C.textSec, fontWeight: "600" }}>Template not found</p>
                 <button onClick={() => router.push("/templates")}
-                    style={{ color: C.indigo, background: "none", border: "none", cursor: "pointer", fontSize: "14px" }}>
+                    style={{ color: C.indigo, background: "none", border: "none", cursor: "pointer", fontSize: "14px", fontWeight: "600" }}>
                     ← Back to templates
                 </button>
             </div>
@@ -166,201 +190,329 @@ export default function BuilderPage() {
 
     return (
         <div style={{
-            display: "flex", height: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            height: "100vh",
             backgroundColor: C.bg,
             fontFamily: "Inter, sans-serif",
             overflow: "hidden",
         }}>
 
-            {/* Left Panel — Form Editor */}
-            <BuilderForm
-                data={data}
-                setData={setData}
-                activeSection={activeSection}
-                setActiveSection={setActiveSection}
-                downloading={downloading}
-                onDownload={handleDownload}
-                onBack={() => router.push("/templates")}
-                templateMeta={TEMPLATE_META[activeTemplateId]}
-                activeTemplateId={activeTemplateId}
-            />
-
-            {/* Right Panel — Canvas Preview */}
-            <div style={{
-                flex: 1, backgroundColor: C.bg,
-                display: "flex", flexDirection: "column",
-                alignItems: "center", overflow: "auto",
-                padding: "20px 28px",
-                backgroundImage: "radial-gradient(circle, #1A2744 1px, transparent 1px)",
-                backgroundSize: "22px 22px",
-            }}>
-
-                {/* Top Control Bar */}
+            {/* Mobile Top Segmented Control (Visible on < 1024px screens) */}
+            {isMobile && (
                 <div style={{
-                    width: "100%", maxWidth: "860px",
-                    display: "flex", justifyContent: "space-between",
-                    alignItems: "center", marginBottom: "16px", flexShrink: 0,
-                    gap: "12px", flexWrap: "wrap",
+                    height: "56px",
+                    backgroundColor: "#FFFFFF",
+                    borderBottom: "1px solid #E2E8F0",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    padding: "0 12px",
+                    flexShrink: 0,
+                    zIndex: 50,
                 }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
-                        <span style={{ fontSize: "11px", color: C.textFaint, letterSpacing: "0.06em", fontWeight: "600" }}>LIVE PREVIEW</span>
-                        <TemplateSwitcher
-                            activeId={activeTemplateId}
-                            onSwitch={setActiveTemplateId}
-                            meta={TEMPLATE_META}
-                        />
-
-                        {/* Auto-save status */}
-                        <span style={{
-                            fontSize: "11px",
-                            padding: "3px 8px",
-                            borderRadius: "12px",
-                            backgroundColor: isSaved ? "#064E3B" : "#1E1B4B",
-                            color: isSaved ? "#34D399" : "#818CF8",
-                            border: `1px solid ${isSaved ? "#059669" : "#4338CA"}`,
-                            fontWeight: "500",
-                        }}>
-                            {isSaved ? "✓ Auto-Saved Locally" : "⏳ Saving..."}
-                        </span>
+                    <div style={{ display: "flex", backgroundColor: "#F1F5F9", padding: "3px", borderRadius: "8px", border: "1px solid #E2E8F0" }}>
+                        <button
+                            onClick={() => setMobileTab("editor")}
+                            style={{
+                                padding: "6px 14px",
+                                borderRadius: "6px",
+                                fontSize: "12px",
+                                fontWeight: mobileTab === "editor" ? "700" : "500",
+                                backgroundColor: mobileTab === "editor" ? "#FFFFFF" : "transparent",
+                                color: mobileTab === "editor" ? "#4F46E5" : "#64748B",
+                                border: mobileTab === "editor" ? "1px solid #CBD5E1" : "1px solid transparent",
+                                boxShadow: mobileTab === "editor" ? "0 1px 3px rgba(0,0,0,0.06)" : "none",
+                                cursor: "pointer",
+                            }}
+                        >
+                            ✏️ Edit Form
+                        </button>
+                        <button
+                            onClick={() => setMobileTab("preview")}
+                            style={{
+                                padding: "6px 14px",
+                                borderRadius: "6px",
+                                fontSize: "12px",
+                                fontWeight: mobileTab === "preview" ? "700" : "500",
+                                backgroundColor: mobileTab === "preview" ? "#FFFFFF" : "transparent",
+                                color: mobileTab === "preview" ? "#4F46E5" : "#64748B",
+                                border: mobileTab === "preview" ? "1px solid #CBD5E1" : "1px solid transparent",
+                                boxShadow: mobileTab === "preview" ? "0 1px 3px rgba(0,0,0,0.06)" : "none",
+                                cursor: "pointer",
+                            }}
+                        >
+                            👁️ View Preview
+                        </button>
                     </div>
 
-                    {/* Toolbar: JSON Backup, Reset & Zoom */}
-                    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                        {/* Hidden JSON file input */}
-                        <input
-                            type="file"
-                            accept=".json"
-                            ref={fileInputRef}
-                            style={{ display: "none" }}
-                            onChange={handleImportJSON}
-                        />
-                        <button
-                            onClick={() => {
-                                setData(omShindeResumeData)
-                                setActiveTemplateId("classic-ats")
-                            }}
-                            title="Load Om Shinde's exact resume"
-                            style={{
-                                padding: "4px 10px", borderRadius: "6px", fontSize: "11px",
-                                backgroundColor: "#1E1B4B", color: "#A5B4FC",
-                                border: "1px solid #4338CA", cursor: "pointer",
-                                fontWeight: "600",
-                            }}
-                        >
-                            ⚡ Load Om Shinde
-                        </button>
-
-                        <button
-                            onClick={() => fileInputRef.current?.click()}
-                            title="Load a saved JSON resume"
-                            style={{
-                                padding: "4px 9px", borderRadius: "6px", fontSize: "11px",
-                                backgroundColor: C.card, color: C.textSec,
-                                border: `1px solid ${C.border}`, cursor: "pointer",
-                                fontWeight: "500",
-                            }}
-                        >
-                            Import JSON
-                        </button>
-
-                        <button
-                            onClick={handleExportJSON}
-                            title="Backup resume data to a local file"
-                            style={{
-                                padding: "4px 9px", borderRadius: "6px", fontSize: "11px",
-                                backgroundColor: C.card, color: C.textSec,
-                                border: `1px solid ${C.border}`, cursor: "pointer",
-                                fontWeight: "500",
-                            }}
-                        >
-                            Export JSON
-                        </button>
-
-                        <button
-                            onClick={handleResetSample}
-                            title="Reset to sample data"
-                            style={{
-                                padding: "4px 9px", borderRadius: "6px", fontSize: "11px",
-                                backgroundColor: C.card, color: "#EF4444",
-                                border: `1px solid ${C.border}`, cursor: "pointer",
-                                fontWeight: "500",
-                            }}
-                        >
-                            Reset
-                        </button>
-
-                        <div style={{ width: "1px", height: "18px", backgroundColor: C.border, margin: "0 4px" }} />
-
-                        {/* Zoom Controls */}
-                        <button onClick={() => setZoom(z => Math.max(0.45, +(z - 0.05).toFixed(2)))}
-                            style={{
-                                padding: "4px 10px", borderRadius: "6px", fontSize: "14px",
-                                backgroundColor: C.card, color: C.textSec,
-                                border: `1px solid ${C.border}`, cursor: "pointer",
-                            }}>−</button>
-                        <span style={{ fontSize: "11px", color: C.textMuted, minWidth: "38px", textAlign: "center" }}>
-                            {Math.round(zoom * 100)}%
-                        </span>
-                        <button onClick={() => setZoom(z => Math.min(1.0, +(z + 0.05).toFixed(2)))}
-                            style={{
-                                padding: "4px 10px", borderRadius: "6px", fontSize: "14px",
-                                backgroundColor: C.card, color: C.textSec,
-                                border: `1px solid ${C.border}`, cursor: "pointer",
-                            }}>+</button>
-                    </div>
-                </div>
-
-                {/* A4 Canvas Container */}
-                <div
-                    id="resume-preview-container"
-                    style={{
-                        position: "relative",
-                        transform: `scale(${zoom})`,
-                        transformOrigin: "top center",
-                        boxShadow: "0 32px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.06)",
-                        borderRadius: "2px",
-                        flexShrink: 0,
-                        marginBottom: `${-(1 - zoom) * 1123 + 32}px`,
-                        backgroundColor: "#FFFFFF",
-                    }}
-                >
-                    <TemplateComponent
-                        data={data}
-                        fontFamily="'Times New Roman', Times, 'Tinos', serif"
-                    />
-
-                    {/* Visual Page 1 Seam Indicator (Editor Only - Hidden in Print) */}
-                    <div
-                        className="editor-seam no-print"
+                    <button
+                        onClick={handleDownload}
+                        disabled={downloading}
                         style={{
-                            position: "absolute",
-                            top: "1123px",
-                            left: 0,
-                            right: 0,
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            pointerEvents: "none",
-                            zIndex: 40,
+                            padding: "7px 14px",
+                            borderRadius: "8px",
+                            backgroundColor: "#4F46E5",
+                            color: "#FFFFFF",
+                            fontSize: "12px",
+                            fontWeight: "700",
+                            border: "none",
+                            cursor: "pointer",
+                            boxShadow: "0 2px 8px rgba(79, 70, 229, 0.3)",
                         }}
                     >
-                        <div style={{ flex: 1, borderTop: "1.5px dashed #EF4444", opacity: 0.7 }} />
-                        <span style={{
-                            padding: "2px 10px",
-                            backgroundColor: "#1E1B4B",
-                            color: "#F87171",
-                            fontSize: "10px",
-                            fontWeight: "600",
-                            borderRadius: "10px",
-                            border: "1px solid #EF4444",
-                            margin: "0 8px",
-                            letterSpacing: "0.03em"
-                        }}>
-                            Page 1 End (1123px) · Content below prints on Page 2
-                        </span>
-                        <div style={{ flex: 1, borderTop: "1.5px dashed #EF4444", opacity: 0.7 }} />
-                    </div>
+                        {downloading ? "⏳ Generating..." : "⬇ PDF"}
+                    </button>
                 </div>
+            )}
+
+            {/* Main Studio Body */}
+            <div style={{
+                display: "flex",
+                flex: 1,
+                overflow: "hidden",
+            }}>
+
+                {/* Left Panel — Form Editor (Hidden on mobile if preview tab is active) */}
+                {(!isMobile || mobileTab === "editor") && (
+                    <BuilderForm
+                        data={data}
+                        setData={setData}
+                        activeSection={activeSection}
+                        setActiveSection={setActiveSection}
+                        downloading={downloading}
+                        onDownload={handleDownload}
+                        onBack={() => router.push("/templates")}
+                        templateMeta={TEMPLATE_META[activeTemplateId]}
+                        activeTemplateId={activeTemplateId}
+                        isMobile={isMobile}
+                    />
+                )}
+
+                {/* Right Panel — Canvas Preview (Hidden on mobile if editor tab is active) */}
+                {(!isMobile || mobileTab === "preview") && (
+                    <div style={{
+                        flex: 1,
+                        backgroundColor: C.bg,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        overflow: "auto",
+                        padding: isMobile ? "12px 8px 32px 8px" : "20px 28px",
+                        backgroundImage: "radial-gradient(circle, #CBD5E1 1.2px, transparent 1.2px)",
+                        backgroundSize: "20px 20px",
+                    }}>
+
+                        {/* Top Control Bar */}
+                        <div style={{
+                            width: "100%",
+                            maxWidth: "880px",
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            marginBottom: "18px",
+                            flexShrink: 0,
+                            gap: "12px",
+                            flexWrap: "wrap",
+                            backgroundColor: "rgba(255, 255, 255, 0.92)",
+                            backdropFilter: "blur(12px)",
+                            border: "1px solid #E2E8F0",
+                            borderRadius: "14px",
+                            padding: "9px 16px",
+                            boxShadow: "0 4px 20px -2px rgba(15, 23, 42, 0.05)",
+                        }}>
+                            <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
+                                <Link href="/" style={{ textDecoration: "none" }}>
+                                    <span className="font-comfortaa font-bold" style={{ fontSize: "13px", color: "#4F46E5", display: "flex", alignItems: "center", gap: "6px" }}>
+                                        <span style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "#4F46E5" }} />
+                                        Zapiya Studio
+                                    </span>
+                                </Link>
+
+                                <div style={{ width: "1px", height: "16px", backgroundColor: "#E2E8F0" }} />
+
+                                <TemplateSwitcher
+                                    activeId={activeTemplateId}
+                                    onSwitch={setActiveTemplateId}
+                                    meta={TEMPLATE_META}
+                                />
+
+                                {/* Auto-save status */}
+                                <span style={{
+                                    fontSize: "11px",
+                                    padding: "3px 10px",
+                                    borderRadius: "12px",
+                                    backgroundColor: isSaved ? "#ECFDF5" : "#FEF3C7",
+                                    color: isSaved ? "#059669" : "#D97706",
+                                    border: `1px solid ${isSaved ? "#A7F3D0" : "#FDE68A"}`,
+                                    fontWeight: "600",
+                                }}>
+                                    {isSaved ? "✓ Auto-Saved" : "⏳ Saving..."}
+                                </span>
+                            </div>
+
+                            {/* Toolbar: JSON Backup, Reset & Zoom */}
+                            <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
+                                {/* Hidden JSON file input */}
+                                <input
+                                    type="file"
+                                    accept=".json"
+                                    ref={fileInputRef}
+                                    style={{ display: "none" }}
+                                    onChange={handleImportJSON}
+                                />
+                                <button
+                                    onClick={() => {
+                                        setData(omShindeResumeData)
+                                        setActiveTemplateId("classic-ats")
+                                    }}
+                                    title="Load Om Shinde's exact sample resume"
+                                    style={{
+                                        padding: "5px 11px", borderRadius: "7px", fontSize: "11.5px",
+                                        backgroundColor: C.indigoLight, color: C.indigo,
+                                        border: "1px solid #C7D2FE", cursor: "pointer",
+                                        fontWeight: "700", transition: "all 0.15s ease",
+                                    }}
+                                >
+                                    ⚡ Load Sample
+                                </button>
+
+                                <button
+                                    onClick={() => fileInputRef.current?.click()}
+                                    title="Load a saved JSON resume"
+                                    style={{
+                                        padding: "5px 10px", borderRadius: "7px", fontSize: "11.5px",
+                                        backgroundColor: "#FFFFFF", color: C.textSec,
+                                        border: `1px solid ${C.border}`, cursor: "pointer",
+                                        fontWeight: "600", transition: "all 0.15s ease",
+                                    }}
+                                    onMouseEnter={e => e.currentTarget.style.backgroundColor = "#F8FAFC"}
+                                    onMouseLeave={e => e.currentTarget.style.backgroundColor = "#FFFFFF"}
+                                >
+                                    Import JSON
+                                </button>
+
+                                <button
+                                    onClick={handleExportJSON}
+                                    title="Backup resume data to a local JSON file"
+                                    style={{
+                                        padding: "5px 10px", borderRadius: "7px", fontSize: "11.5px",
+                                        backgroundColor: "#FFFFFF", color: C.textSec,
+                                        border: `1px solid ${C.border}`, cursor: "pointer",
+                                        fontWeight: "600", transition: "all 0.15s ease",
+                                    }}
+                                    onMouseEnter={e => e.currentTarget.style.backgroundColor = "#F8FAFC"}
+                                    onMouseLeave={e => e.currentTarget.style.backgroundColor = "#FFFFFF"}
+                                >
+                                    Export JSON
+                                </button>
+
+                                <button
+                                    onClick={handleResetSample}
+                                    title="Reset to sample data"
+                                    style={{
+                                        padding: "5px 10px", borderRadius: "7px", fontSize: "11.5px",
+                                        backgroundColor: "#FEF2F2", color: "#DC2626",
+                                        border: `1px solid #FECACA`, cursor: "pointer",
+                                        fontWeight: "600", transition: "all 0.15s ease",
+                                    }}
+                                    onMouseEnter={e => e.currentTarget.style.backgroundColor = "#FEE2E2"}
+                                    onMouseLeave={e => e.currentTarget.style.backgroundColor = "#FEF2F2"}
+                                >
+                                    Reset
+                                </button>
+
+                                <div style={{ width: "1px", height: "18px", backgroundColor: "#E2E8F0", margin: "0 4px" }} />
+
+                                {/* Zoom Controls */}
+                                <div style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    backgroundColor: "#FFFFFF",
+                                    border: "1px solid #E2E8F0",
+                                    borderRadius: "8px",
+                                    overflow: "hidden",
+                                }}>
+                                    <button
+                                        onClick={() => setZoom(z => Math.max(0.35, +(z - 0.05).toFixed(2)))}
+                                        title="Zoom out"
+                                        style={{
+                                            padding: "4px 9px", fontSize: "13px",
+                                            backgroundColor: "transparent", color: C.textSec,
+                                            border: "none", cursor: "pointer", fontWeight: "700",
+                                        }}
+                                    >−</button>
+                                    <span style={{ fontSize: "11px", color: C.textSec, minWidth: "38px", textAlign: "center", fontWeight: "600" }}>
+                                        {Math.round(zoom * 100)}%
+                                    </span>
+                                    <button
+                                        onClick={() => setZoom(z => Math.min(1.0, +(z + 0.05).toFixed(2)))}
+                                        title="Zoom in"
+                                        style={{
+                                            padding: "4px 9px", fontSize: "13px",
+                                            backgroundColor: "transparent", color: C.textSec,
+                                            border: "none", cursor: "pointer", fontWeight: "700",
+                                        }}
+                                    >+</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* A4 Canvas Container */}
+                        <div
+                            id="resume-preview-container"
+                            style={{
+                                position: "relative",
+                                transform: `scale(${zoom})`,
+                                transformOrigin: "top center",
+                                boxShadow: "0 25px 60px -12px rgba(15, 23, 42, 0.16), 0 0 0 1px rgba(15, 23, 42, 0.06)",
+                                borderRadius: "2px",
+                                flexShrink: 0,
+                                marginBottom: `${-(1 - zoom) * 1123 + 40}px`,
+                                backgroundColor: "#FFFFFF",
+                            }}
+                        >
+                            <TemplateComponent
+                                data={data}
+                                fontFamily="'Times New Roman', Times, 'Tinos', serif"
+                            />
+
+                            {/* Visual Page 1 Seam Indicator (Editor Only - Hidden in Print) */}
+                            <div
+                                className="editor-seam no-print"
+                                style={{
+                                    position: "absolute",
+                                    top: "1123px",
+                                    left: 0,
+                                    right: 0,
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    pointerEvents: "none",
+                                    zIndex: 40,
+                                }}
+                            >
+                                <div style={{ flex: 1, borderTop: "1.5px dashed #F87171", opacity: 0.8 }} />
+                                <span style={{
+                                    padding: "3px 12px",
+                                    backgroundColor: "#FEF2F2",
+                                    color: "#DC2626",
+                                    fontSize: "10.5px",
+                                    fontWeight: "700",
+                                    borderRadius: "12px",
+                                    border: "1px solid #FECACA",
+                                    margin: "0 10px",
+                                    letterSpacing: "0.03em",
+                                    boxShadow: "0 2px 6px rgba(220, 38, 38, 0.08)",
+                                }}>
+                                    Page 1 Boundary (A4 · 1123px) · Content below will flow to Page 2
+                                </span>
+                                <div style={{ flex: 1, borderTop: "1.5px dashed #F87171", opacity: 0.8 }} />
+                            </div>
+                        </div>
+
+                    </div>
+                )}
 
             </div>
         </div>
