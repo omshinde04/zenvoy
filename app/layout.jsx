@@ -175,14 +175,12 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
         />
-        {process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID &&
-          !process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID.includes("XXXX") && (
-            <script
-              async
-              src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID}`}
-              crossOrigin="anonymous"
-            />
-          )}
+        <meta name="google-adsense-account" content="ca-pub-7778964423995383" />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7778964423995383"
+          crossOrigin="anonymous"
+        />
       </head>
       <body className="bg-white text-slate-900 antialiased selection:bg-indigo-500 selection:text-white">
         <ZapiyaTracker />
