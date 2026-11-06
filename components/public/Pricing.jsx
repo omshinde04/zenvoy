@@ -14,12 +14,12 @@ export default function Pricing() {
 
                 {/* Header */}
                 <div className="text-center max-w-2xl mx-auto mb-16">
-                    <span className="inline-block text-xs font-bold text-emerald-700 uppercase tracking-wider bg-emerald-50 border border-emerald-200 px-3.5 py-1.5 rounded-full mb-3.5 font-comfortaa">
+                    <span className="inline-block text-xs font-semibold text-emerald-800 uppercase tracking-wider bg-emerald-50 border border-emerald-200 px-3.5 py-1.5 rounded-full mb-3.5">
                         Zero Cost • Zero Paywalls
                     </span>
-                    <h2 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight font-comfortaa">
+                    <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
                         100% Free.{" "}
-                        <span className="text-indigo-600">Always.</span>
+                        <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">Always.</span>
                     </h2>
 
                     <p className="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
@@ -35,19 +35,19 @@ export default function Pricing() {
                         initial={{ opacity: 0, y: 24 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="relative bg-white border-2 border-indigo-600 rounded-3xl p-8 sm:p-10 flex flex-col justify-between shadow-hover"
+                        className="relative bg-white border-2 border-indigo-600/90 rounded-3xl p-8 sm:p-10 flex flex-col justify-between shadow-xl shadow-indigo-500/5"
                     >
-                        <span className="absolute top-5 right-5 text-[11px] font-bold bg-indigo-600 text-white px-3 py-1 rounded-full font-comfortaa shadow-xs">
+                        <span className="absolute top-5 right-5 text-[11px] font-bold bg-indigo-600 text-white px-3 py-1 rounded-full shadow-xs tracking-wide">
                             UNLIMITED ACCESS
                         </span>
 
                         <div>
-                            <h3 className="text-slate-900 font-bold text-2xl font-comfortaa">
+                            <h3 className="text-slate-900 font-bold text-2xl tracking-tight">
                                 Community Edition
                             </h3>
 
                             <div className="mt-4 flex items-baseline gap-2">
-                                <span className="text-5xl font-bold text-slate-900 font-comfortaa">
+                                <span className="text-5xl font-extrabold text-slate-900 tracking-tight">
                                     ₹0
                                 </span>
                                 <span className="text-sm font-semibold text-emerald-600">
@@ -78,7 +78,7 @@ export default function Pricing() {
 
                         <Link
                             href="/templates"
-                            className="mt-10 block text-center bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-semibold py-4 rounded-2xl shadow-md shadow-indigo-500/25 transition-all hover:shadow-lg hover:shadow-indigo-500/35 font-comfortaa text-sm sm:text-base"
+                            className="mt-10 block text-center rounded-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-4 shadow-md transition-all hover:scale-[1.01] active:scale-[0.99] text-sm sm:text-base"
                         >
                             Start Building Now — 100% Free →
                         </Link>
@@ -93,12 +93,12 @@ export default function Pricing() {
                         className="bg-white border border-slate-200/90 rounded-3xl p-8 sm:p-10 flex flex-col justify-between shadow-subtle"
                     >
                         <div>
-                            <div className="flex items-center gap-2 text-slate-500 text-xs font-semibold uppercase tracking-wider mb-2 font-comfortaa">
+                            <div className="flex items-center gap-2 text-slate-500 text-xs font-semibold uppercase tracking-wider mb-2">
                                 <FaShieldAlt className="text-indigo-600" />
                                 Our Honest Promise
                             </div>
 
-                            <h3 className="text-slate-900 font-bold text-2xl font-comfortaa">
+                            <h3 className="text-slate-900 font-bold text-2xl tracking-tight">
                                 Why is Zapiya Free?
                             </h3>
 

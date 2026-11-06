@@ -22,16 +22,16 @@ export default function TemplatesPage() {
 
                 {/* Header */}
                 <div className="text-center max-w-2xl mx-auto mb-12">
-                    <span className="inline-block text-xs font-bold text-indigo-600 uppercase tracking-wider bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full mb-3.5 font-comfortaa">
+                    <span className="inline-block text-xs font-semibold text-indigo-700 uppercase tracking-wider bg-indigo-50/80 border border-indigo-100 px-3.5 py-1.5 rounded-full mb-3.5">
                         ATS-Compliant Gallery
                     </span>
                     <motion.h1
                         initial={{ opacity: 0, y: 16 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4 }}
-                        className="text-3xl sm:text-5xl font-bold text-slate-900 tracking-tight font-comfortaa"
+                        className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight"
                     >
-                        Browse ATS <span className="text-indigo-600">Templates</span>
+                        Browse ATS <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">Templates</span>
                     </motion.h1>
                     <p className="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
                         Pick a template. Fill in your details. Download your 100% free vector PDF instantly.
@@ -39,15 +39,15 @@ export default function TemplatesPage() {
                 </div>
 
                 {/* Segment Filter */}
-                <div className="flex items-center justify-center gap-2.5 mb-12 flex-wrap">
+                <div className="flex items-center justify-center gap-2 mb-12 flex-wrap">
                     {segments.map((seg) => (
                         <button
                             key={seg}
                             onClick={() => setActive(seg)}
-                            className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all capitalize font-comfortaa
+                            className={`px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all capitalize
                 ${active === seg
-                                    ? "bg-indigo-600 text-white shadow-md shadow-indigo-500/20"
-                                    : "bg-white border border-slate-200 text-slate-600 hover:border-indigo-300 hover:text-indigo-600 shadow-xs"
+                                    ? "bg-slate-900 text-white shadow-md shadow-slate-900/10"
+                                    : "bg-white border border-slate-200/90 text-slate-600 hover:border-slate-300 hover:text-slate-900 shadow-xs"
                                 }`}
                         >
                             {seg === "all" ? "All Templates" : seg}
@@ -86,10 +86,10 @@ export default function TemplatesPage() {
                                     <div className="p-6 flex flex-col flex-1 justify-between">
                                         <div>
                                             <div className="flex items-center justify-between mb-2">
-                                                <h3 className="text-slate-900 font-bold text-base font-comfortaa group-hover:text-indigo-600 transition-colors">
+                                                <h3 className="text-slate-900 font-bold text-base tracking-tight group-hover:text-indigo-600 transition-colors">
                                                     {t.name}
                                                 </h3>
-                                                <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full capitalize bg-indigo-50 text-indigo-700 border border-indigo-100 font-comfortaa">
+                                                <span className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full capitalize bg-indigo-50 text-indigo-700 border border-indigo-100">
                                                     {t.segment}
                                                 </span>
                                             </div>
@@ -100,11 +100,10 @@ export default function TemplatesPage() {
                                         </div>
 
                                         <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between">
-                                            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 group-hover:text-indigo-700 font-comfortaa">
-                                                <FaBolt className="text-amber-400 text-xs" />
-                                                Open Builder Free
+                                            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-800 group-hover:text-indigo-600">
+                                                <span>Open Builder Free</span>
                                             </span>
-                                            <FaArrowRight className="text-xs text-indigo-500 group-hover:translate-x-1 transition-transform" />
+                                            <FaArrowRight className="text-xs text-slate-400 group-hover:text-indigo-600 group-hover:translate-x-1 transition-all" />
                                         </div>
                                     </div>
 

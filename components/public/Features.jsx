@@ -40,12 +40,14 @@ export default function Features() {
 
                 {/* Header */}
                 <div className="text-center max-w-2xl mx-auto mb-16">
-                    <span className="inline-block text-xs font-bold text-indigo-600 uppercase tracking-wider bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full mb-3.5 font-comfortaa">
+                    <span className="inline-block text-xs font-semibold text-indigo-700 uppercase tracking-wider bg-indigo-50/80 border border-indigo-100 px-3.5 py-1.5 rounded-full mb-3.5">
                         Engineering Precision
                     </span>
-                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight font-comfortaa">
+                    <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
                         Everything You Need to{" "}
-                        <span className="text-indigo-600">Get Recruiter Callbacks</span>
+                        <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">
+                            Get Recruiter Callbacks
+                        </span>
                     </h2>
 
                     <p className="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
@@ -69,11 +71,11 @@ export default function Features() {
                                     {f.icon}
                                 </div>
 
-                                <span className="inline-block text-[10px] font-bold tracking-wider text-indigo-600 uppercase bg-indigo-50/80 px-2.5 py-0.5 rounded-full mb-2 font-comfortaa">
+                                <span className="inline-block text-[10px] font-semibold tracking-wider text-indigo-600 uppercase bg-indigo-50/80 px-2.5 py-0.5 rounded-full mb-2">
                                     {f.tag}
                                 </span>
 
-                                <h3 className="text-base font-bold text-slate-900 font-comfortaa">
+                                <h3 className="text-base font-bold text-slate-900 tracking-tight">
                                     {f.title}
                                 </h3>
 

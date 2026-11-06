@@ -19,50 +19,49 @@ export default function CTA() {
                         {/* Flow Icons */}
                         <div className="flex items-center justify-center mb-8 gap-4 sm:gap-6 text-sm">
                             <div className="flex flex-col items-center">
-                                <div className="w-12 h-12 bg-white/15 backdrop-blur-md rounded-2xl flex items-center justify-center text-xl border border-white/20">
+                                <div className="w-12 h-12 bg-white/15 backdrop-blur-md rounded-2xl flex items-center justify-center text-xl border border-white/20 shadow-sm">
                                     🎓
                                 </div>
-                                <span className="text-[11px] text-indigo-100 font-medium mt-1.5 font-comfortaa">Student</span>
+                                <span className="text-[11px] text-indigo-100 font-semibold mt-2 tracking-wide uppercase">Candidate</span>
                             </div>
 
                             <span className="text-indigo-200 text-lg">→</span>
 
                             <div className="flex flex-col items-center">
-                                <div className="w-12 h-12 bg-white/15 backdrop-blur-md rounded-2xl flex items-center justify-center text-xl border border-white/20">
+                                <div className="w-12 h-12 bg-white/15 backdrop-blur-md rounded-2xl flex items-center justify-center text-xl border border-white/20 shadow-sm">
                                     📄
                                 </div>
-                                <span className="text-[11px] text-indigo-100 font-medium mt-1.5 font-comfortaa">ATS Resume</span>
+                                <span className="text-[11px] text-indigo-100 font-semibold mt-2 tracking-wide uppercase">ATS Resume</span>
                             </div>
 
                             <span className="text-indigo-200 text-lg">→</span>
 
                             <div className="flex flex-col items-center">
-                                <div className="w-12 h-12 bg-white/15 backdrop-blur-md rounded-2xl flex items-center justify-center text-xl border border-white/20">
+                                <div className="w-12 h-12 bg-white/15 backdrop-blur-md rounded-2xl flex items-center justify-center text-xl border border-white/20 shadow-sm">
                                     💼
                                 </div>
-                                <span className="text-[11px] text-indigo-100 font-medium mt-1.5 font-comfortaa">Hired</span>
+                                <span className="text-[11px] text-indigo-100 font-semibold mt-2 tracking-wide uppercase">Shortlisted</span>
                             </div>
                         </div>
 
                         {/* Heading */}
-                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight font-comfortaa">
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
                             From Application to Shortlist.
                         </h2>
 
                         {/* Subtext */}
                         <p className="mt-4 text-indigo-100 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
-                            Stop getting filtered out by ATS parsers. Build your clean, Harvard-standard developer resume in minutes.
+                            Stop getting filtered out by automated parsers. Build your clean, Harvard-standard developer resume in minutes.
                         </p>
 
                         {/* CTA Button */}
                         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
                             <Link
                                 href="/templates"
-                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-indigo-600 rounded-2xl font-bold hover:bg-slate-50 transition shadow-lg hover:scale-[1.02] font-comfortaa text-sm sm:text-base"
+                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-9 py-4 rounded-full bg-white text-slate-900 font-bold hover:bg-slate-50 transition shadow-xl shadow-indigo-950/20 hover:scale-[1.02] active:scale-[0.98] text-sm sm:text-base"
                             >
-                                <FaBolt className="text-amber-400 text-xs" />
-                                Start Building Free
-                                <FaArrowRight className="text-xs ml-1" />
+                                <span>Start Building Free</span>
+                                <FaArrowRight className="text-xs ml-1 text-slate-500" />
                             </Link>
                         </div>
 

@@ -18,12 +18,12 @@ export default function FAQ() {
 
                 {/* Header */}
                 <div className="text-center max-w-xl mx-auto mb-16">
-                    <span className="inline-block text-xs font-bold text-indigo-600 uppercase tracking-wider bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full mb-3.5 font-comfortaa">
+                    <span className="inline-block text-xs font-semibold text-indigo-700 uppercase tracking-wider bg-indigo-50/80 border border-indigo-100 px-3.5 py-1.5 rounded-full mb-3.5">
                         Frequently Asked Questions
                     </span>
-                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight font-comfortaa">
+                    <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
                         Got Questions?{" "}
-                        <span className="text-indigo-600">We&apos;ve Got Answers</span>
+                        <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">We&apos;ve Got Answers</span>
                     </h2>
 
                     <p className="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
@@ -47,7 +47,7 @@ export default function FAQ() {
                                 onClick={() => toggle(i)}
                                 className="w-full flex items-center justify-between px-6 py-4.5 text-left gap-4"
                             >
-                                <span className="text-slate-900 font-bold text-sm sm:text-base font-comfortaa">
+                                <span className="text-slate-900 font-bold text-sm sm:text-base tracking-tight">
                                     {faq.q}
                                 </span>
 

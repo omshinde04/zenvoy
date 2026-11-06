@@ -38,12 +38,14 @@ export default function Segments() {
 
                 {/* Heading */}
                 <div className="text-center max-w-2xl mx-auto mb-16">
-                    <span className="inline-block text-xs font-bold text-indigo-600 uppercase tracking-wider bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full mb-3.5 font-comfortaa">
+                    <span className="inline-block text-xs font-semibold text-indigo-700 uppercase tracking-wider bg-indigo-50/80 border border-indigo-100 px-3.5 py-1.5 rounded-full mb-3.5">
                         Role-Specific Formats
                     </span>
-                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight font-comfortaa">
+                    <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
                         Templates Built for Your{" "}
-                        <span className="text-indigo-600">Career Trajectory</span>
+                        <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">
+                            Career Trajectory
+                        </span>
                     </h2>
 
                     <p className="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
@@ -68,7 +70,7 @@ export default function Segments() {
                                     {t.icon}
                                 </div>
 
-                                <h3 className="text-lg font-bold text-slate-900 font-comfortaa">
+                                <h3 className="text-lg font-bold text-slate-900 tracking-tight">
                                     {t.label}
                                 </h3>
 
@@ -80,9 +82,9 @@ export default function Segments() {
                             <div className="mt-6 pt-5 border-t border-slate-100">
                                 <Link
                                     href={`/builder/${t.templateId}`}
-                                    className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-indigo-600 hover:text-indigo-700 font-comfortaa"
+                                    className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-indigo-600 hover:text-indigo-700"
                                 >
-                                    Use Template Free
+                                    <span>Use Template Free</span>
                                     <FaArrowRight className="text-[10px]" />
                                 </Link>
                             </div>
