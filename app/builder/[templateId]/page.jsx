@@ -1,24 +1,24 @@
 // app/builder/[templateId]/page.jsx
 "use client"
 
-import { useState, useRef, useEffect, useMemo } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useParams, useRouter } from "next/navigation"
-import { motion } from "framer-motion"
-import { useAuth } from "@/lib/AuthContext"
-import { defaultResumeData } from "@/lib/resumeData"
+import { defaultResumeData, omShindeResumeData } from "@/lib/resumeData"
 import BuilderForm, { TemplateSwitcher } from "@/components/builder/BuilderForm"
+import ClassicATS from "@/components/templates/tech/ClassicATS"
 import TechMinimal from "@/components/templates/tech/TechMinimal"
 import TechTwoColumn from "@/components/templates/tech/TechTwoColumn"
 import TechBoldHeader from "@/components/templates/tech/TechBoldHeader"
 
 const TEMPLATE_MAP = {
+    "classic-ats": ClassicATS,
     "tech-minimal": TechMinimal,
     "tech-two-column": TechTwoColumn,
     "tech-bold-header": TechBoldHeader,
-
 }
 
 const TEMPLATE_META = {
+    "classic-ats": { name: "Classic ATS", segment: "tech" },
     "tech-minimal": { name: "Tech Minimal", segment: "tech" },
     "tech-two-column": { name: "Tech Pro", segment: "tech" },
     "tech-bold-header": { name: "Tech Bold", segment: "tech" },
@@ -32,52 +32,122 @@ const C = {
     textMuted: "#4A5568",
     textFaint: "#2D3748",
     card: "#0D1526",
+    green: "#10B981",
 }
 
 export default function BuilderPage() {
-    const { user, loading } = useAuth()
     const { templateId } = useParams()
     const router = useRouter()
+    const fileInputRef = useRef(null)
 
-    const [data, setData] = useState(defaultResumeData)
+    const [data, setData] = useState(() => (templateId === "classic-ats" ? omShindeResumeData : defaultResumeData))
     const [activeSection, setActiveSection] = useState("personal")
-    const [activeTemplateId, setActiveTemplateId] = useState(templateId)
+    const [activeTemplateId, setActiveTemplateId] = useState(templateId || "tech-minimal")
     const [downloading, setDownloading] = useState(false)
     const [zoom, setZoom] = useState(0.72)
+    const [isSaved, setIsSaved] = useState(true)
 
-    const DRAFT_KEY = `zenvoy_draft_${templateId}`
+    const DRAFT_KEY = `zenvoy_resume_draft`
 
-    // Autosave
+    // =========================================================
+    // INITIAL LOAD FROM LOCAL STORAGE
+    // =========================================================
     useEffect(() => {
+        try {
+            const saved = localStorage.getItem(DRAFT_KEY)
+            if (saved) {
+                const parsed = JSON.parse(saved)
+                if (parsed && typeof parsed === "object") {
+                    setData(parsed)
+                }
+            }
+        } catch (e) {
+            console.error("Could not load local draft:", e)
+        }
+    }, [])
+
+    // =========================================================
+    // AUTOSAVE TO LOCAL STORAGE
+    // =========================================================
+    useEffect(() => {
+        setIsSaved(false)
         const t = setTimeout(() => {
-            try { localStorage.setItem(DRAFT_KEY, JSON.stringify(data)) } catch { }
-        }, 1500)
+            try {
+                localStorage.setItem(DRAFT_KEY, JSON.stringify(data))
+                setIsSaved(true)
+            } catch (e) {
+                console.error("Local draft save error:", e)
+            }
+        }, 800)
+
         return () => clearTimeout(t)
     }, [data])
 
-    // Auth loading
-    if (loading) {
-        return (
-            <div style={{ height: "100vh", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: C.bg }}>
-                <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ repeat: Infinity, duration: 1.5 }}
-                    style={{ color: C.textSec, fontSize: "13px" }}>
-                    Loading...
-                </motion.div>
-            </div>
-        )
+    // =========================================================
+    // IN-BROWSER VECTOR PDF DOWNLOAD
+    // =========================================================
+    const handleDownload = () => {
+        setDownloading(true)
+        const rawName = (data.personal?.name || "resume")
+            .replace(/\s+/g, "-")
+            .replace(/[^a-zA-Z0-9-]/g, "")
+            .toLowerCase()
+            .slice(0, 60) || "resume"
+
+        const originalTitle = document.title
+        document.title = `${rawName}-resume`
+
+        setTimeout(() => {
+            window.print()
+            document.title = originalTitle
+            setDownloading(false)
+        }, 120)
     }
 
-    // Auth guard
-    if (!user) {
-        return (
-            <div style={{ height: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", backgroundColor: C.bg, gap: "12px" }}>
-                <p style={{ color: C.textSec, fontSize: "14px" }}>Please log in to access the builder</p>
-                <button onClick={() => router.push("/login")} style={{
-                    backgroundColor: C.indigo, color: "#fff", padding: "10px 22px",
-                    borderRadius: "8px", border: "none", cursor: "pointer", fontWeight: "600", fontSize: "13px",
-                }}>Go to Login</button>
-            </div>
-        )
+    // =========================================================
+    // EXPORT JSON BACKUP
+    // =========================================================
+    const handleExportJSON = () => {
+        const jsonString = `data:text/json;charset=utf-8,${encodeURIComponent(
+            JSON.stringify(data, null, 2)
+        )}`
+        const a = document.createElement("a")
+        a.href = jsonString
+        const rawName = (data.personal?.name || "resume")
+            .toLowerCase()
+            .replace(/\s+/g, "-")
+        a.download = `${rawName}-backup.json`
+        a.click()
+    }
+
+    // =========================================================
+    // IMPORT JSON BACKUP
+    // =========================================================
+    const handleImportJSON = (e) => {
+        const file = e.target.files?.[0]
+        if (!file) return
+        const reader = new FileReader()
+        reader.onload = (event) => {
+            try {
+                const parsed = JSON.parse(event.target.result)
+                if (parsed && typeof parsed === "object") {
+                    setData(parsed)
+                    alert("✅ Resume loaded successfully!")
+                }
+            } catch {
+                alert("❌ Invalid JSON resume file.")
+            }
+        }
+        reader.readAsText(file)
+    }
+
+    // =========================================================
+    // RESET TO SAMPLE
+    // =========================================================
+    const handleResetSample = () => {
+        if (confirm("Reset resume to sample template data? Your current edits will be overwritten.")) {
+            setData(activeTemplateId === "classic-ats" ? omShindeResumeData : defaultResumeData)
+        }
     }
 
     const TemplateComponent = TEMPLATE_MAP[activeTemplateId]
@@ -94,43 +164,6 @@ export default function BuilderPage() {
         )
     }
 
-    const handleDownload = async () => {
-        setDownloading(true)
-        try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/pdf/generate`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                credentials: "include",
-                body: JSON.stringify({ templateId: activeTemplateId, data }),
-            })
-
-            console.log("Status:", res.status)
-
-            if (!res.ok) {
-                const errText = await res.text()
-                console.error("Backend error:", errText)
-                throw new Error("PDF failed")
-            }
-
-            const blob = await res.blob()
-
-            console.log("Blob size:", blob.size)
-
-            const url = URL.createObjectURL(blob)
-            const a = document.createElement("a")
-            a.href = url
-            a.download = `${data.personal.name || "resume"}-zenvoy.pdf`
-            a.click()
-            URL.revokeObjectURL(url)
-
-        } catch (err) {
-            console.error(err)
-            alert("PDF generation failed")
-        } finally {
-            setDownloading(false)
-        }
-    }
-
     return (
         <div style={{
             display: "flex", height: "100vh",
@@ -139,7 +172,7 @@ export default function BuilderPage() {
             overflow: "hidden",
         }}>
 
-            {/* Left Panel — Form */}
+            {/* Left Panel — Form Editor */}
             <BuilderForm
                 data={data}
                 setData={setData}
@@ -152,33 +185,113 @@ export default function BuilderPage() {
                 activeTemplateId={activeTemplateId}
             />
 
-            {/* Right Panel — Preview */}
+            {/* Right Panel — Canvas Preview */}
             <div style={{
                 flex: 1, backgroundColor: C.bg,
                 display: "flex", flexDirection: "column",
                 alignItems: "center", overflow: "auto",
-                padding: "24px 28px",
+                padding: "20px 28px",
                 backgroundImage: "radial-gradient(circle, #1A2744 1px, transparent 1px)",
                 backgroundSize: "22px 22px",
             }}>
 
-                {/* Preview Top Bar */}
+                {/* Top Control Bar */}
                 <div style={{
                     width: "100%", maxWidth: "860px",
                     display: "flex", justifyContent: "space-between",
-                    alignItems: "center", marginBottom: "20px", flexShrink: 0,
+                    alignItems: "center", marginBottom: "16px", flexShrink: 0,
+                    gap: "12px", flexWrap: "wrap",
                 }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                        <span style={{ fontSize: "11px", color: C.textFaint, letterSpacing: "0.04em" }}>LIVE PREVIEW</span>
+                    <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
+                        <span style={{ fontSize: "11px", color: C.textFaint, letterSpacing: "0.06em", fontWeight: "600" }}>LIVE PREVIEW</span>
                         <TemplateSwitcher
                             activeId={activeTemplateId}
                             onSwitch={setActiveTemplateId}
                             meta={TEMPLATE_META}
                         />
+
+                        {/* Auto-save status */}
+                        <span style={{
+                            fontSize: "11px",
+                            padding: "3px 8px",
+                            borderRadius: "12px",
+                            backgroundColor: isSaved ? "#064E3B" : "#1E1B4B",
+                            color: isSaved ? "#34D399" : "#818CF8",
+                            border: `1px solid ${isSaved ? "#059669" : "#4338CA"}`,
+                            fontWeight: "500",
+                        }}>
+                            {isSaved ? "✓ Auto-Saved Locally" : "⏳ Saving..."}
+                        </span>
                     </div>
 
-                    {/* Zoom Controls */}
-                    <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                    {/* Toolbar: JSON Backup, Reset & Zoom */}
+                    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                        {/* Hidden JSON file input */}
+                        <input
+                            type="file"
+                            accept=".json"
+                            ref={fileInputRef}
+                            style={{ display: "none" }}
+                            onChange={handleImportJSON}
+                        />
+                        <button
+                            onClick={() => {
+                                setData(omShindeResumeData)
+                                setActiveTemplateId("classic-ats")
+                            }}
+                            title="Load Om Shinde's exact resume"
+                            style={{
+                                padding: "4px 10px", borderRadius: "6px", fontSize: "11px",
+                                backgroundColor: "#1E1B4B", color: "#A5B4FC",
+                                border: "1px solid #4338CA", cursor: "pointer",
+                                fontWeight: "600",
+                            }}
+                        >
+                            ⚡ Load Om Shinde
+                        </button>
+
+                        <button
+                            onClick={() => fileInputRef.current?.click()}
+                            title="Load a saved JSON resume"
+                            style={{
+                                padding: "4px 9px", borderRadius: "6px", fontSize: "11px",
+                                backgroundColor: C.card, color: C.textSec,
+                                border: `1px solid ${C.border}`, cursor: "pointer",
+                                fontWeight: "500",
+                            }}
+                        >
+                            Import JSON
+                        </button>
+
+                        <button
+                            onClick={handleExportJSON}
+                            title="Backup resume data to a local file"
+                            style={{
+                                padding: "4px 9px", borderRadius: "6px", fontSize: "11px",
+                                backgroundColor: C.card, color: C.textSec,
+                                border: `1px solid ${C.border}`, cursor: "pointer",
+                                fontWeight: "500",
+                            }}
+                        >
+                            Export JSON
+                        </button>
+
+                        <button
+                            onClick={handleResetSample}
+                            title="Reset to sample data"
+                            style={{
+                                padding: "4px 9px", borderRadius: "6px", fontSize: "11px",
+                                backgroundColor: C.card, color: "#EF4444",
+                                border: `1px solid ${C.border}`, cursor: "pointer",
+                                fontWeight: "500",
+                            }}
+                        >
+                            Reset
+                        </button>
+
+                        <div style={{ width: "1px", height: "18px", backgroundColor: C.border, margin: "0 4px" }} />
+
+                        {/* Zoom Controls */}
                         <button onClick={() => setZoom(z => Math.max(0.45, +(z - 0.05).toFixed(2)))}
                             style={{
                                 padding: "4px 10px", borderRadius: "6px", fontSize: "14px",
@@ -194,26 +307,59 @@ export default function BuilderPage() {
                                 backgroundColor: C.card, color: C.textSec,
                                 border: `1px solid ${C.border}`, cursor: "pointer",
                             }}>+</button>
-                        <span style={{
-                            fontSize: "10px", color: C.textFaint,
-                            backgroundColor: "#0A1628", padding: "4px 12px",
-                            borderRadius: "20px", border: `1px solid ${C.border}`,
-                        }}>
-                            A4 · 794 × 1123px
-                        </span>
                     </div>
                 </div>
 
-                {/* Template Preview */}
-                <div style={{
-                    transform: `scale(${zoom})`,
-                    transformOrigin: "top center",
-                    boxShadow: "0 32px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.04)",
-                    borderRadius: "2px",
-                    flexShrink: 0,
-                    marginBottom: `${-(1 - zoom) * 1123 + 24}px`,
-                }}>
-                    <TemplateComponent data={data} />
+                {/* A4 Canvas Container */}
+                <div
+                    id="resume-preview-container"
+                    style={{
+                        position: "relative",
+                        transform: `scale(${zoom})`,
+                        transformOrigin: "top center",
+                        boxShadow: "0 32px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.06)",
+                        borderRadius: "2px",
+                        flexShrink: 0,
+                        marginBottom: `${-(1 - zoom) * 1123 + 32}px`,
+                        backgroundColor: "#FFFFFF",
+                    }}
+                >
+                    <TemplateComponent
+                        data={data}
+                        fontFamily="'Times New Roman', Times, 'Tinos', serif"
+                    />
+
+                    {/* Visual Page 1 Seam Indicator (Editor Only - Hidden in Print) */}
+                    <div
+                        className="editor-seam no-print"
+                        style={{
+                            position: "absolute",
+                            top: "1123px",
+                            left: 0,
+                            right: 0,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            pointerEvents: "none",
+                            zIndex: 40,
+                        }}
+                    >
+                        <div style={{ flex: 1, borderTop: "1.5px dashed #EF4444", opacity: 0.7 }} />
+                        <span style={{
+                            padding: "2px 10px",
+                            backgroundColor: "#1E1B4B",
+                            color: "#F87171",
+                            fontSize: "10px",
+                            fontWeight: "600",
+                            borderRadius: "10px",
+                            border: "1px solid #EF4444",
+                            margin: "0 8px",
+                            letterSpacing: "0.03em"
+                        }}>
+                            Page 1 End (1123px) · Content below prints on Page 2
+                        </span>
+                        <div style={{ flex: 1, borderTop: "1.5px dashed #EF4444", opacity: 0.7 }} />
+                    </div>
                 </div>
 
             </div>

@@ -256,19 +256,36 @@ function EmptyState({ icon, title, sub }) {
 
 // ── Section Panels ───────────────────────────────────────────
 
-function PersonalSection({ data, onChange }) {
+function PersonalSection({ data, onChange, onSummaryChange }) {
     const set = (field) => (val) => onChange({ ...data.personal, [field]: val })
     return (
         <div>
-            <Field label="Full Name" value={data.personal.name} onChange={set("name")} placeholder="Rahul Sharma" />
-            <Field label="Role / Title" value={data.personal.role} onChange={set("role")} placeholder="Software Engineer" />
-            <Field label="Email" value={data.personal.email} onChange={set("email")} placeholder="rahul@email.com" type="email" />
-            <Field label="Phone" value={data.personal.phone} onChange={set("phone")} placeholder="+91 98765 43210" />
-            <Field label="Location" value={data.personal.location} onChange={set("location")} placeholder="Mumbai, Maharashtra" />
-            <Field label="LinkedIn" value={data.personal.linkedin} onChange={set("linkedin")} placeholder="linkedin.com/in/rahul" />
+            <Field label="Full Name" value={data.personal?.name} onChange={set("name")} placeholder="Rahul Sharma" />
+            <Field label="Role / Title" value={data.personal?.role} onChange={set("role")} placeholder="Software Engineer" />
+            
+            <div style={{ display: "flex", flexDirection: "column", marginBottom: "12px" }}>
+                <label style={lbl}>Professional Summary</label>
+                <textarea
+                    value={data.summary || ""}
+                    onChange={e => onSummaryChange(e.target.value)}
+                    placeholder="Brief overview of your background, tech stack, and engineering impact..."
+                    rows={3}
+                    style={{
+                        ...input,
+                        height: "auto",
+                        resize: "vertical",
+                        lineHeight: "1.5",
+                    }}
+                />
+            </div>
+
+            <Field label="Email" value={data.personal?.email} onChange={set("email")} placeholder="rahul@email.com" type="email" />
+            <Field label="Phone" value={data.personal?.phone} onChange={set("phone")} placeholder="+91 98765 43210" />
+            <Field label="Location" value={data.personal?.location} onChange={set("location")} placeholder="Mumbai, Maharashtra" />
+            <Field label="LinkedIn" value={data.personal?.linkedin} onChange={set("linkedin")} placeholder="linkedin.com/in/rahul" />
             <Grid2>
-                <Field label="GitHub" value={data.personal.github} onChange={set("github")} placeholder="github.com/rahul" />
-                <Field label="Portfolio" value={data.personal.portfolio} onChange={set("portfolio")} placeholder="rahul.dev" />
+                <Field label="GitHub" value={data.personal?.github} onChange={set("github")} placeholder="github.com/rahul" />
+                <Field label="Portfolio" value={data.personal?.portfolio} onChange={set("portfolio")} placeholder="rahul.dev" />
             </Grid2>
         </div>
     )
@@ -286,10 +303,13 @@ function SkillsSection({ data, onChange }) {
                     Type a skill and press <kbd style={{ backgroundColor: C.border, color: C.textSec, padding: "1px 5px", borderRadius: "4px", fontSize: "10px" }}>Enter</kbd> or <kbd style={{ backgroundColor: C.border, color: C.textSec, padding: "1px 5px", borderRadius: "4px", fontSize: "10px" }}>,</kbd> to add it.
                 </p>
             </div>
-            <TagInput label="Languages" values={data.skills.languages} onChange={set("languages")} />
-            <TagInput label="Frameworks & Libraries" values={data.skills.frameworks} onChange={set("frameworks")} />
-            <TagInput label="Tools & Platforms" values={data.skills.tools} onChange={set("tools")} />
-            <TagInput label="Other" values={data.skills.other} onChange={set("other")} />
+            <TagInput label="Languages" values={data.skills?.languages || []} onChange={set("languages")} />
+            <TagInput label="Backend & APIs" values={data.skills?.backend || []} onChange={set("backend")} />
+            <TagInput label="Frontend & Libraries" values={data.skills?.frontend || data.skills?.frameworks || []} onChange={(val) => { set("frontend")(val); set("frameworks")(val); }} />
+            <TagInput label="Databases" values={data.skills?.databases || []} onChange={set("databases")} />
+            <TagInput label="AI / ML & Search Systems" values={data.skills?.ai || []} onChange={set("ai")} />
+            <TagInput label="Tools & Platforms" values={data.skills?.tools || []} onChange={set("tools")} />
+            <TagInput label="Other" values={data.skills?.other || []} onChange={set("other")} />
         </div>
     )
 }
@@ -736,9 +756,13 @@ export default function BuilderForm({
         setData(prev => ({ ...prev, personal: val }))
     }, [setData])
 
+    const updateSummary = useCallback((val) => {
+        setData(prev => ({ ...prev, summary: val }))
+    }, [setData])
+
     const renderSection = () => {
         switch (activeSection) {
-            case "personal": return <PersonalSection data={data} onChange={updatePersonal} />
+            case "personal": return <PersonalSection data={data} onChange={updatePersonal} onSummaryChange={updateSummary} />
             case "skills": return <SkillsSection data={data} onChange={updateSection("skills")} />
             case "experience": return <ExperienceSection data={data} onChange={updateSection("experience")} />
             case "projects": return <ProjectsSection data={data} onChange={updateSection("projects")} />

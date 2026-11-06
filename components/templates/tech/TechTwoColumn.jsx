@@ -1,6 +1,6 @@
 // components/templates/tech/TechTwoColumn.jsx
 
-export default function TechTwoColumn({ data }) {
+export default function TechTwoColumn({ data, fontFamily = "'Times New Roman', Times, 'Tinos', serif" }) {
     const d = data
     const allSkills = [
         ...(d.skills?.languages || []),
@@ -13,9 +13,9 @@ export default function TechTwoColumn({ data }) {
         <div
             style={{
                 width: "794px",
-                height: "1123px",
+                minHeight: "1123px",
                 backgroundColor: "#FFFFFF",
-                fontFamily: "Inter, sans-serif",
+                fontFamily: fontFamily || "'Times New Roman', Times, 'Tinos', serif",
                 display: "flex",
                 flexDirection: "column",
                 overflow: "hidden",
@@ -39,10 +39,10 @@ export default function TechTwoColumn({ data }) {
                 <h1 style={{ fontSize: "28px", fontWeight: "700", color: "#FFFFFF", margin: 0, lineHeight: "34px" }}>
                     {d.personal.name?.toUpperCase() || "YOUR NAME"}
                 </h1>
-                <p style={{ fontFamily: "Inter", textTransform: "uppercase", letterSpacing: "0.1em", fontSize: "13px", fontWeight: "700", color: "#60A5FA", marginTop: "6px" }}>
+                <p style={{ fontFamily: fontFamily || "'Times New Roman', Times, 'Tinos', serif", textTransform: "uppercase", letterSpacing: "0.1em", fontSize: "13px", fontWeight: "700", color: "#60A5FA", marginTop: "6px" }}>
                     {d.personal.role || "Professional Title"}
                 </p>
-                <p style={{ fontFamily: "Inter", fontSize: "11px", color: "#CBD5E1", marginTop: "4px" }}>
+                <p style={{ fontFamily: fontFamily || "'Times New Roman', Times, 'Tinos', serif", fontSize: "11px", color: "#CBD5E1", marginTop: "4px" }}>
                     {[d.personal.email, d.personal.phone, d.personal.linkedin, d.personal.github]
                         .filter(Boolean)
                         .join("  •  ")}

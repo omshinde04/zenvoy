@@ -1,25 +1,19 @@
 "use client"
+
 import Image from "next/image"
 import Link from "next/link"
-import { useAuth } from "@/lib/AuthContext"
 import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { HiHome, HiSparkles } from "react-icons/hi"
-import { FaLayerGroup } from "react-icons/fa"
+import { FaLayerGroup, FaBolt } from "react-icons/fa"
 import { LuLayoutTemplate } from "react-icons/lu"
 
 export default function Navbar() {
-    const { user, logout } = useAuth()
     const router = useRouter()
     const [menuOpen, setMenuOpen] = useState(false)
 
-    const handleLogout = async () => {
-        await logout()
-        router.push("/")
-    }
-
-    // ✅ FINAL NAV LINKS
+    // ✅ NAV LINKS
     const navLinks = [
         { name: "Home", href: "#home", icon: <HiHome /> },
         { name: "Features", href: "#features", icon: <HiSparkles /> },
@@ -33,12 +27,10 @@ export default function Navbar() {
 
         e.preventDefault()
 
-        // If already on home → scroll directly
         if (window.location.pathname === "/") {
             const el = document.querySelector(href)
             if (el) el.scrollIntoView({ behavior: "smooth" })
         } else {
-            // Navigate to home with hash
             router.push(`/${href}`)
         }
     }
@@ -93,44 +85,22 @@ export default function Navbar() {
                     ))}
                 </div>
 
-                {/* Right */}
+                {/* Right CTA */}
                 <div className="hidden md:flex items-center gap-3">
-                    {user ? (
-                        <div className="flex items-center gap-4">
-                            <span className="text-sm text-[#94A3B8]">
-                                Hey{" "}
-                                <span className="text-white font-medium">
-                                    {user.name.split(" ")[0]}
-                                </span>
-                            </span>
-
-                            <button
-                                onClick={handleLogout}
-                                className="text-sm px-4 py-1.5 rounded-lg border border-[#334155] hover:border-[#6366F1] text-[#94A3B8] hover:text-white transition"
-                            >
-                                Logout
-                            </button>
-                        </div>
-                    ) : (
-                        <>
-                            <Link href="/login" className="text-sm text-[#94A3B8] hover:text-white px-4 py-1.5">
-                                Login
-                            </Link>
-
-                            <Link
-                                href="/register"
-                                className="text-sm bg-[#6366F1] hover:bg-[#4F46E5] text-white font-semibold px-5 py-2 rounded-lg shadow-lg shadow-[#6366F1]/20"
-                            >
-                                Get Started
-                            </Link>
-                        </>
-                    )}
+                    <Link
+                        href="/templates"
+                        className="flex items-center gap-2 text-sm bg-[#6366F1] hover:bg-[#4F46E5] text-white font-semibold px-5 py-2 rounded-lg shadow-lg shadow-[#6366F1]/20 transition"
+                    >
+                        <FaBolt className="text-xs" />
+                        Start Building →
+                    </Link>
                 </div>
 
                 {/* Mobile Toggle */}
                 <button
-                    className="md:hidden text-[#94A3B8]"
+                    className="md:hidden text-[#94A3B8] p-2"
                     onClick={() => setMenuOpen(!menuOpen)}
+                    aria-label="Toggle menu"
                 >
                     ☰
                 </button>
@@ -160,20 +130,16 @@ export default function Navbar() {
                             </Link>
                         ))}
 
-                        {user ? (
-                            <button onClick={handleLogout} className="text-red-400 text-left text-sm">
-                                Logout
-                            </button>
-                        ) : (
-                            <div className="flex flex-col gap-3 pt-3">
-                                <Link href="/login" className="text-[#94A3B8] text-sm">
-                                    Login
-                                </Link>
-                                <Link href="/register" className="bg-[#6366F1] text-white text-sm font-semibold px-4 py-2 rounded-lg text-center">
-                                    Get Started
-                                </Link>
-                            </div>
-                        )}
+                        <div className="pt-2">
+                            <Link
+                                href="/templates"
+                                onClick={() => setMenuOpen(false)}
+                                className="flex items-center justify-center gap-2 bg-[#6366F1] text-white text-sm font-semibold px-4 py-2.5 rounded-lg text-center"
+                            >
+                                <FaBolt className="text-xs" />
+                                Start Building →
+                            </Link>
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>

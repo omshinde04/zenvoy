@@ -1,6 +1,6 @@
 // components/templates/tech/TechMinimal.jsx
 
-export default function TechMinimal({ data }) {
+export default function TechMinimal({ data, fontFamily = "'Times New Roman', Times, 'Tinos', serif" }) {
     const d = data
 
     return (
@@ -9,7 +9,7 @@ export default function TechMinimal({ data }) {
                 width: "794px",
                 minHeight: "1123px",
                 backgroundColor: "#FFFFFF",
-                fontFamily: "Inter, sans-serif",
+                fontFamily: fontFamily || "'Times New Roman', Times, 'Tinos', serif",
                 display: "flex",
                 flexDirection: "column",
                 WebkitFontSmoothing: "antialiased",

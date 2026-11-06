@@ -1,6 +1,6 @@
 // components/templates/tech/TechBoldHeader.jsx
 
-export default function TechBoldHeader({ data }) {
+export default function TechBoldHeader({ data, fontFamily = "'Times New Roman', Times, 'Tinos', serif" }) {
     const d = data
 
     const allSkills = [
@@ -13,9 +13,9 @@ export default function TechBoldHeader({ data }) {
     return (
         <div style={{
             width: "794px",
-            height: "1123px",
+            minHeight: "1123px",
             backgroundColor: "#FFFFFF",
-            fontFamily: "Inter, sans-serif",
+            fontFamily: fontFamily || "'Times New Roman', Times, 'Tinos', serif",
             display: "flex",
             flexDirection: "column",
             overflow: "hidden",

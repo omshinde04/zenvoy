@@ -1,6 +1,5 @@
 // app/layout.jsx
 import "./globals.css"
-import { AuthProvider } from "@/lib/AuthContext"
 import LayoutShell from "@/components/LayoutShell"
 
 // ✅ SEO METADATA
@@ -15,15 +14,15 @@ export const metadata = {
   },
 
   description:
-    "Zapiya is a modern AI-powered resume builder for developers and students. Create ATS-friendly resumes and stand out instantly.",
+    "Zapiya is a fast, free, ATS-friendly resume builder for developers and students. Create professional resumes and export instant vector PDFs with zero watermark.",
 
   keywords: [
     "resume builder",
-    "AI resume",
+    "free resume builder",
     "ATS resume",
     "developer resume",
     "Zapiya",
-    "resume maker India",
+    "resume maker",
   ],
 
   authors: [{ name: "Zapiya Team" }],
@@ -62,9 +61,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <AuthProvider>
-          <LayoutShell>{children}</LayoutShell>
-        </AuthProvider>
+        <LayoutShell>{children}</LayoutShell>
       </body>
     </html>
   )

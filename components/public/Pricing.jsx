@@ -116,10 +116,10 @@ export default function Pricing() {
                         </ul>
 
                         <Link
-                            href="/register"
+                            href="/templates"
                             className="block mt-8 text-center bg-[#6366F1] py-3 rounded-xl text-white font-semibold hover:bg-[#4F46E5] transition shadow-lg shadow-[#6366F1]/20"
                         >
-                            Start Free Trial →
+                            Start Building Now →
                         </Link>
                     </motion.div>
 
