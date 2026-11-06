@@ -31,7 +31,7 @@ export default function TechBoldHeader({ data, fontFamily = "'Times New Roman', 
                 alignItems: "center",
                 width: "100%",
                 backgroundColor: "#1E3A5F",
-                padding: "28px 40px",
+                padding: "24px 36px",
                 flexShrink: 0,
             }}>
                 <h1 style={{
@@ -66,10 +66,10 @@ export default function TechBoldHeader({ data, fontFamily = "'Times New Roman', 
             {/* ── Body ─────────────────────────────────────────── */}
             <div style={{
                 flex: 1,
-                padding: "28px 40px 0 40px",
+                padding: "20px 36px 0 36px",
                 display: "flex",
                 flexDirection: "column",
-                gap: "20px",
+                gap: "14px",
                 overflow: "hidden",
             }}>
 

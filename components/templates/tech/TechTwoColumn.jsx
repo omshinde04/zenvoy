@@ -60,9 +60,9 @@ export default function TechTwoColumn({ data, fontFamily = "'Times New Roman', T
                         borderRight: "1px solid #CBD5E1",
                         display: "flex",
                         flexDirection: "column",
-                        paddingTop: "28px",
-                        paddingLeft: "24px",
-                        paddingRight: "24px",
+                        paddingTop: "20px",
+                        paddingLeft: "20px",
+                        paddingRight: "20px",
                         flexShrink: 0,
                         overflowY: "hidden",
                     }}
@@ -146,14 +146,14 @@ export default function TechTwoColumn({ data, fontFamily = "'Times New Roman', T
                     style={{
                         flex: 1,
                         backgroundColor: "#FFFFFF",
-                        paddingTop: "28px",
-                        paddingLeft: "32px",
-                        paddingRight: "32px",
-                        paddingBottom: "28px",
+                        paddingTop: "20px",
+                        paddingLeft: "28px",
+                        paddingRight: "28px",
+                        paddingBottom: "20px",
                         overflow: "hidden",
                         display: "flex",
                         flexDirection: "column",
-                        gap: "20px",
+                        gap: "14px",
                     }}
                 >
                     {/* Projects */}

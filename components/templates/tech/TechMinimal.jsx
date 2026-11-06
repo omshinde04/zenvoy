@@ -18,7 +18,7 @@ export default function TechMinimal({ data, fontFamily = "'Times New Roman', Tim
             {/* Header */}
             <div
                 style={{
-                    padding: "40px 40px 16px 40px",
+                    padding: "28px 36px 14px 36px",
                     borderBottom: "1px solid #E5E7EB",
                 }}
             >
@@ -81,7 +81,7 @@ export default function TechMinimal({ data, fontFamily = "'Times New Roman', Tim
             </div>
 
             {/* Body */}
-            <div style={{ padding: "24px 40px 40px 40px", display: "flex", flexDirection: "column", gap: "20px" }}>
+            <div style={{ padding: "18px 36px 24px 36px", display: "flex", flexDirection: "column", gap: "14px" }}>
 
                 {/* Technical Skills */}
                 {(d.skills?.languages?.length > 0 || d.skills?.frameworks?.length > 0 || d.skills?.tools?.length > 0) && (

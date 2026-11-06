@@ -1,5 +1,5 @@
 // components/templates/tech/ClassicATS.jsx
-// Production-Grade Classic ATS Template (Standard Software Engineer Format)
+// Production-Grade Classic ATS Template (Standard Harvard / Software Engineer Format)
 
 // Formats inline **bold** text in bullets
 function formatText(text = "") {
@@ -14,33 +14,63 @@ function formatText(text = "") {
     })
 }
 
-// Ultra-compact bullet item matching exact document line spacing
+// Compact bullet item matching exact document line spacing
 function BulletItem({ children, style }) {
     return (
         <div
             style={{
                 display: "flex",
                 alignItems: "flex-start",
-                marginBottom: "0px",
-                lineHeight: 1.22,
+                marginBottom: "1px",
+                lineHeight: 1.28,
+                fontSize: "10.5px",
+                color: "#111827",
                 ...style,
             }}
         >
             <span
                 style={{
                     display: "inline-block",
-                    width: "11px",
+                    width: "12px",
                     flexShrink: 0,
-                    fontSize: "11px",
-                    lineHeight: "1.22",
+                    fontSize: "10.5px",
+                    lineHeight: "1.28",
                     color: "#000000",
                 }}
             >
                 •
             </span>
-            <div style={{ flex: 1, fontSize: "11px", lineHeight: 1.22 }}>
+            <div style={{ flex: 1, fontSize: "10.5px", lineHeight: 1.28 }}>
                 {children}
             </div>
+        </div>
+    )
+}
+
+// Clean ATS Section Title with single underline anchored directly under the title
+function SectionTitle({ title }) {
+    return (
+        <div
+            style={{
+                borderBottom: "1.2px solid #000000",
+                paddingBottom: "2px",
+                marginTop: "10px",
+                marginBottom: "6px",
+            }}
+        >
+            <h2
+                style={{
+                    fontSize: "12px",
+                    fontWeight: "700",
+                    letterSpacing: "0.06em",
+                    textTransform: "uppercase",
+                    color: "#000000",
+                    margin: 0,
+                    lineHeight: 1.2,
+                }}
+            >
+                {title}
+            </h2>
         </div>
     )
 }
@@ -70,8 +100,8 @@ export default function ClassicATS({ data, fontFamily = "'Times New Roman', Time
         { label: "Backend", items: skills.backend },
         { label: "Frontend", items: skills.frontend || skills.frameworks },
         { label: "Databases", items: skills.databases },
-        { label: "AI / ML & Search Systems", items: skills.ai },
-        { label: "Tools & Technologies", items: skills.tools },
+        { label: "AI / ML & Search", items: skills.ai },
+        { label: "Tools & DevOps", items: skills.tools },
         { label: "Other", items: skills.other },
     ].filter(cat => Array.isArray(cat.items) && cat.items.length > 0)
 
@@ -81,10 +111,6 @@ export default function ClassicATS({ data, fontFamily = "'Times New Roman', Time
         return `https://${url}`
     }
 
-    const divider = (
-        <div style={{ borderBottom: "1px solid #000000", marginTop: "4px", marginBottom: "5px" }} />
-    )
-
     return (
         <div
             style={{
@@ -93,7 +119,7 @@ export default function ClassicATS({ data, fontFamily = "'Times New Roman', Time
                 backgroundColor: "#FFFFFF",
                 fontFamily: fontFamily || "'Times New Roman', Times, 'Tinos', serif",
                 color: "#000000",
-                padding: "32px 42px 36px 42px",
+                padding: "26px 36px 28px 36px",
                 boxSizing: "border-box",
                 display: "flex",
                 flexDirection: "column",
@@ -102,37 +128,38 @@ export default function ClassicATS({ data, fontFamily = "'Times New Roman', Time
             }}
         >
             {/* ── HEADER ────────────────────────────────────────── */}
-            <header style={{ textAlign: "center", marginBottom: "2px" }}>
+            <header style={{ textAlign: "center", marginBottom: "4px" }}>
                 <h1
                     style={{
-                        fontSize: "22px",
+                        fontSize: "24px",
                         fontWeight: "700",
-                        letterSpacing: "0.01em",
+                        letterSpacing: "0.03em",
                         color: "#000000",
-                        margin: "0 0 2px 0",
+                        margin: "0 0 4px 0",
                         lineHeight: 1.15,
+                        textTransform: "uppercase",
                     }}
                 >
                     {p.name || "YOUR NAME"}
                 </h1>
 
-                {/* Contact details: Location | Phone | Email */}
+                {/* Contact details: Location  •  Phone  •  Email */}
                 {contactItems.length > 0 && (
-                    <div style={{ fontSize: "11px", color: "#000000", marginBottom: "2px" }}>
+                    <div style={{ fontSize: "10.5px", color: "#111827", marginBottom: "3px" }}>
                         {contactItems.map((item, idx) => (
                             <span key={idx}>
                                 {item}
                                 {idx < contactItems.length - 1 && (
-                                    <span style={{ margin: "0 5px" }}>|</span>
+                                    <span style={{ margin: "0 6px", color: "#6B7280" }}>•</span>
                                 )}
                             </span>
                         ))}
                     </div>
                 )}
 
-                {/* Links: Portfolio | LinkedIn | GitHub */}
+                {/* Links: Portfolio  •  LinkedIn  •  GitHub */}
                 {linkItems.length > 0 && (
-                    <div style={{ fontSize: "11px" }}>
+                    <div style={{ fontSize: "10.5px" }}>
                         {linkItems.map((item, idx) => (
                             <span key={idx}>
                                 <a
@@ -140,15 +167,15 @@ export default function ClassicATS({ data, fontFamily = "'Times New Roman', Time
                                     target="_blank"
                                     rel="noreferrer"
                                     style={{
-                                        color: "#0044CC",
+                                        color: "#0A2540",
                                         textDecoration: "underline",
-                                        fontWeight: "500",
+                                        fontWeight: "600",
                                     }}
                                 >
                                     {item.label}
                                 </a>
                                 {idx < linkItems.length - 1 && (
-                                    <span style={{ margin: "0 5px", color: "#000000", textDecoration: "none" }}>|</span>
+                                    <span style={{ margin: "0 6px", color: "#6B7280", textDecoration: "none" }}>•</span>
                                 )}
                             </span>
                         ))}
@@ -156,65 +183,74 @@ export default function ClassicATS({ data, fontFamily = "'Times New Roman', Time
                 )}
             </header>
 
-            {/* Header End Line */}
-            {divider}
-
             {/* ── PROFESSIONAL SUMMARY ─────────────────────────── */}
             {d.summary && (
                 <section>
-                    <h2 style={{ fontSize: "13px", fontWeight: "700", color: "#000000", margin: "0 0 2px 0" }}>
-                        Professional Summary
-                    </h2>
-                    <p style={{ fontSize: "11px", color: "#000000", lineHeight: 1.28, margin: 0, textAlign: "justify" }}>
+                    <SectionTitle title="Professional Summary" />
+                    <p style={{ fontSize: "10.5px", color: "#000000", lineHeight: 1.32, margin: 0, textAlign: "justify" }}>
                         {d.summary}
                     </p>
-                    {divider}
                 </section>
             )}
 
             {/* ── EDUCATION ────────────────────────────────────── */}
             {Array.isArray(d.education) && d.education.length > 0 && (
                 <section>
-                    <h2 style={{ fontSize: "13px", fontWeight: "700", color: "#000000", margin: "0 0 2px 0" }}>
-                        Education
-                    </h2>
-                    <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                    <SectionTitle title="Education" />
+                    <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
                         {d.education.map((edu, idx) => (
-                            <div key={edu.id || idx} style={{ fontSize: "11px", color: "#000000", lineHeight: 1.25 }}>
-                                <strong>{edu.degree}</strong> – {edu.institution}
-                                {(edu.startYear || edu.endYear) && (
-                                    <> | {edu.startYear ? `${edu.startYear}–` : ""}{edu.endYear}</>
-                                )}
-                                {edu.cgpa && (
-                                    <> | {edu.cgpa.startsWith("SGPA") || edu.cgpa.startsWith("CGPA") ? edu.cgpa : `SGPA: ${edu.cgpa}`}</>
-                                )}
+                            <div key={edu.id || idx}>
+                                {/* Row 1: Institution (Left) & Dates (Right) */}
+                                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: "11px", lineHeight: 1.25 }}>
+                                    <strong style={{ color: "#000000" }}>{edu.institution}</strong>
+                                    {(edu.startYear || edu.endYear) && (
+                                        <span style={{ fontSize: "10.5px", color: "#000000", fontWeight: "600" }}>
+                                            {edu.startYear ? `${edu.startYear} – ` : ""}{edu.endYear}
+                                        </span>
+                                    )}
+                                </div>
+                                {/* Row 2: Degree (Left) & CGPA (Right) */}
+                                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: "10.5px", color: "#111827", lineHeight: 1.25 }}>
+                                    <span style={{ fontStyle: "italic" }}>{edu.degree}</span>
+                                    {edu.cgpa && (
+                                        <span style={{ fontSize: "10.5px", color: "#000000" }}>
+                                            {edu.cgpa.startsWith("SGPA") || edu.cgpa.startsWith("CGPA") || edu.cgpa.startsWith("GPA") ? edu.cgpa : `GPA: ${edu.cgpa}`}
+                                        </span>
+                                    )}
+                                </div>
                             </div>
                         ))}
                     </div>
-                    {divider}
                 </section>
             )}
 
             {/* ── EXPERIENCE ───────────────────────────────────── */}
             {Array.isArray(d.experience) && d.experience.length > 0 && (
                 <section>
-                    <h2 style={{ fontSize: "13px", fontWeight: "700", color: "#000000", margin: "0 0 2px 0" }}>
-                        Experience
-                    </h2>
-                    <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                    <SectionTitle title="Professional Experience" />
+                    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
                         {d.experience.map((exp, idx) => (
                             <div key={exp.id || idx}>
-                                {/* Role — Company | Dates */}
-                                <div style={{ fontSize: "11.2px", color: "#000000", marginBottom: "1px" }}>
-                                    <strong>{exp.role}</strong> — {exp.company}
+                                {/* Row 1: Role (Left) & Dates (Right) */}
+                                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: "11.2px", lineHeight: 1.25 }}>
+                                    <strong style={{ color: "#000000" }}>{exp.role}</strong>
                                     {(exp.startDate || exp.endDate) && (
-                                        <> | {exp.startDate} – {exp.current ? "Present" : exp.endDate}</>
+                                        <span style={{ fontSize: "10.5px", color: "#000000", fontWeight: "600" }}>
+                                            {exp.startDate ? `${exp.startDate} – ` : ""}{exp.current ? "Present" : exp.endDate}
+                                        </span>
+                                    )}
+                                </div>
+                                {/* Row 2: Company (Left) & Location (Right) */}
+                                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: "10.5px", color: "#111827", lineHeight: 1.25, marginBottom: "3px" }}>
+                                    <span style={{ fontStyle: "italic" }}>{exp.company}</span>
+                                    {exp.location && (
+                                        <span style={{ fontStyle: "italic", color: "#000000" }}>{exp.location}</span>
                                     )}
                                 </div>
 
-                                {/* Compact Bullets with 8px indent and 0px margin */}
+                                {/* Compact Bullets with 4px indent and 0px margin */}
                                 {Array.isArray(exp.bullets) && exp.bullets.length > 0 && (
-                                    <div style={{ paddingLeft: "8px" }}>
+                                    <div style={{ paddingLeft: "4px" }}>
                                         {exp.bullets.filter(Boolean).map((bullet, bIdx) => (
                                             <BulletItem key={bIdx}>
                                                 {formatText(bullet)}
@@ -225,82 +261,89 @@ export default function ClassicATS({ data, fontFamily = "'Times New Roman', Time
                             </div>
                         ))}
                     </div>
-                    {divider}
                 </section>
             )}
 
             {/* ── TECHNICAL SKILLS ─────────────────────────────── */}
             {skillCategories.length > 0 && (
                 <section>
-                    <h2 style={{ fontSize: "13px", fontWeight: "700", color: "#000000", margin: "0 0 2px 0" }}>
-                        Technical Skills
-                    </h2>
-                    <div style={{ paddingLeft: "8px" }}>
+                    <SectionTitle title="Technical Skills" />
+                    <div style={{ display: "flex", flexDirection: "column", gap: "2px", fontSize: "10.5px", lineHeight: 1.32 }}>
                         {skillCategories.map((cat, idx) => (
-                            <BulletItem key={idx}>
-                                <strong>{cat.label}:</strong> {cat.items.join(", ")}
-                            </BulletItem>
+                            <div key={idx} style={{ display: "flex", alignItems: "flex-start" }}>
+                                <span style={{ fontWeight: "700", color: "#000000", minWidth: "95px", flexShrink: 0 }}>
+                                    {cat.label}:
+                                </span>
+                                <span style={{ color: "#111827" }}>
+                                    {cat.items.join(", ")}
+                                </span>
+                            </div>
                         ))}
                     </div>
-                    {divider}
                 </section>
             )}
 
             {/* ── PROJECTS ─────────────────────────────────────── */}
             {Array.isArray(d.projects) && d.projects.length > 0 && (
                 <section>
-                    <h2 style={{ fontSize: "13px", fontWeight: "700", color: "#000000", margin: "0 0 2px 0" }}>
-                        Projects
-                    </h2>
-                    <div style={{ display: "flex", flexDirection: "column" }}>
+                    <SectionTitle title="Projects" />
+                    <div style={{ display: "flex", flexDirection: "column", gap: "7px" }}>
                         {d.projects.map((proj, idx) => (
                             <div key={proj.id || idx}>
-                                {idx > 0 && divider}
-                                {/* Project Header */}
-                                <div style={{ fontSize: "11.2px", color: "#000000", marginBottom: "1px" }}>
-                                    <strong>{proj.name}</strong>
-                                    {proj.link && (
-                                        <a
-                                            href={formatUrl(proj.link)}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            style={{
-                                                color: "#0044CC",
-                                                textDecoration: "underline",
-                                                fontWeight: "500",
-                                                marginLeft: "4px",
-                                            }}
-                                        >
-                                            ({proj.link === "live" ? "live" : "link"})
-                                        </a>
-                                    )}
-                                    {proj.github && (
-                                        <a
-                                            href={formatUrl(proj.github)}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            style={{
-                                                color: "#0044CC",
-                                                textDecoration: "underline",
-                                                fontWeight: "500",
-                                                marginLeft: "4px",
-                                            }}
-                                        >
-                                            (code)
-                                        </a>
+                                {/* Row 1: Project Name & Links (Left) & Tech Stack (Right) */}
+                                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: "11.2px", lineHeight: 1.25 }}>
+                                    <div>
+                                        <strong style={{ color: "#000000" }}>{proj.name}</strong>
+                                        {proj.link && (
+                                            <a
+                                                href={formatUrl(proj.link)}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                style={{
+                                                    color: "#0A2540",
+                                                    textDecoration: "underline",
+                                                    fontWeight: "600",
+                                                    marginLeft: "6px",
+                                                    fontSize: "10px",
+                                                }}
+                                            >
+                                                [{proj.link === "live" ? "Live" : "Demo"}]
+                                            </a>
+                                        )}
+                                        {proj.github && (
+                                            <a
+                                                href={formatUrl(proj.github)}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                style={{
+                                                    color: "#0A2540",
+                                                    textDecoration: "underline",
+                                                    fontWeight: "600",
+                                                    marginLeft: "4px",
+                                                    fontSize: "10px",
+                                                }}
+                                            >
+                                                [Code]
+                                            </a>
+                                        )}
+                                    </div>
+                                    {proj.techStack && (
+                                        <span style={{ fontSize: "10px", color: "#374151", fontStyle: "italic" }}>
+                                            {proj.techStack}
+                                        </span>
                                     )}
                                 </div>
 
                                 {/* Description if any */}
                                 {proj.description && (
-                                    <p style={{ fontSize: "10.8px", color: "#374151", margin: "0 0 1px 0", fontStyle: "italic" }}>
+                                    <p style={{ fontSize: "10.5px", color: "#374151", margin: "1px 0 2px 0", fontStyle: "italic", lineHeight: 1.25 }}>
                                         {proj.description}
                                     </p>
                                 )}
 
-                                {/* Compact Bullets with 8px indent and 0px margin */}
+                                {/* Compact Bullets with 4px indent */}
                                 {Array.isArray(proj.bullets) && proj.bullets.length > 0 && (
-                                    <div style={{ paddingLeft: "8px" }}>
+                                    <div style={{ paddingLeft: "4px" }}>
                                         {proj.bullets.filter(Boolean).map((bullet, bIdx) => (
                                             <BulletItem key={bIdx}>
                                                 {formatText(bullet)}
@@ -311,34 +354,28 @@ export default function ClassicATS({ data, fontFamily = "'Times New Roman', Time
                             </div>
                         ))}
                     </div>
-                    {divider}
                 </section>
             )}
 
             {/* ── ACHIEVEMENTS (Optional) ───────────────────────── */}
             {Array.isArray(d.achievements) && d.achievements.filter(Boolean).length > 0 && (
                 <section>
-                    <h2 style={{ fontSize: "13px", fontWeight: "700", color: "#000000", margin: "0 0 2px 0" }}>
-                        Achievements
-                    </h2>
-                    <div style={{ paddingLeft: "8px" }}>
+                    <SectionTitle title="Achievements" />
+                    <div style={{ paddingLeft: "4px" }}>
                         {d.achievements.filter(Boolean).map((item, idx) => (
                             <BulletItem key={idx}>
                                 {formatText(item)}
                             </BulletItem>
                         ))}
                     </div>
-                    {divider}
                 </section>
             )}
 
             {/* ── CERTIFICATIONS (Optional) ────────────────────── */}
             {Array.isArray(d.certifications) && d.certifications.filter(c => c && c.name).length > 0 && (
                 <section>
-                    <h2 style={{ fontSize: "13px", fontWeight: "700", color: "#000000", margin: "0 0 2px 0" }}>
-                        Certifications
-                    </h2>
-                    <div style={{ paddingLeft: "8px" }}>
+                    <SectionTitle title="Certifications" />
+                    <div style={{ paddingLeft: "4px" }}>
                         {d.certifications.filter(c => c && c.name).map((cert, idx) => (
                             <BulletItem key={idx}>
                                 <strong>{cert.name}</strong>{cert.issuer ? ` – ${cert.issuer}` : ""}{cert.year ? ` (${cert.year})` : ""}
