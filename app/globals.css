@@ -1,9 +1,39 @@
-/* Google Fonts — Comfortaa (Aesthetic Brand & Headings), Inter, Tinos (Times Roman Equivalent) */
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&family=Tinos:wght@400;700&display=swap');
+/* Google Fonts — Comfortaa (Brand), Inter, and full Tinos (Times Roman Web-Safe Equivalent: Regular, Bold, Italic, Bold-Italic) */
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Universal Times New Roman Font-Face Aliases (Guarantees true Times Roman rendering everywhere) */
+@font-face {
+  font-family: 'Times New Roman';
+  src: local('Times New Roman'), local('TimesNewRomanPSMT'), url('https://fonts.gstatic.com/s/tinos/v24/bu3vpoG2EvMm0mw5b_eYwQ.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Times New Roman';
+  src: local('Times New Roman Bold'), local('TimesNewRomanPS-BoldMT'), url('https://fonts.gstatic.com/s/tinos/v24/bu3ypoG2EvMm0mw5Ydu-61f4.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Times New Roman';
+  src: local('Times New Roman Italic'), local('TimesNewRomanPS-ItalicMT'), url('https://fonts.gstatic.com/s/tinos/v24/bu3xpoG2EvMm0mw5ba-y0V3f4w.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Times New Roman';
+  src: local('Times New Roman Bold Italic'), local('TimesNewRomanPS-BoldItalicMT'), url('https://fonts.gstatic.com/s/tinos/v24/bu3wpoG2EvMm0mw5ba_17kXy78jU.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
 
 .font-comfortaa {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -68,10 +98,22 @@ body {
 
 /* =========================================================
    UNIVERSAL RESUME TYPOGRAPHY — TIMES NEW ROMAN EVERYWHERE
-   (Preserves 100% ATS score for all generated resumes)
+   (Preserves 100% Times Roman for all preview & print elements)
    ========================================================= */
 #resume-preview-container,
 #resume-preview-container *,
+#resume-preview-container p,
+#resume-preview-container span,
+#resume-preview-container div,
+#resume-preview-container a,
+#resume-preview-container strong,
+#resume-preview-container em,
+#resume-preview-container i,
+#resume-preview-container h1,
+#resume-preview-container h2,
+#resume-preview-container h3,
+#resume-preview-container ul,
+#resume-preview-container li,
 .a4-page,
 .a4-page * {
   font-family: "Times New Roman", Times, "Tinos", serif !important;
@@ -117,7 +159,21 @@ body {
   }
 
   #resume-preview-container,
-  #resume-preview-container * {
+  #resume-preview-container *,
+  #resume-preview-container p,
+  #resume-preview-container span,
+  #resume-preview-container div,
+  #resume-preview-container a,
+  #resume-preview-container strong,
+  #resume-preview-container em,
+  #resume-preview-container i,
+  #resume-preview-container h1,
+  #resume-preview-container h2,
+  #resume-preview-container h3,
+  #resume-preview-container ul,
+  #resume-preview-container li,
+  .a4-page,
+  .a4-page * {
     visibility: visible !important;
     font-family: "Times New Roman", Times, "Tinos", serif !important;
   }
