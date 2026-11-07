@@ -155,8 +155,10 @@ export default function BuilderPage() {
         })
 
         const rawName = (data.personal?.name || "resume")
+            .trim()
+            .replace(/[^a-zA-Z0-9\s-]/g, "")
             .replace(/\s+/g, "-")
-            .replace(/[^a-zA-Z0-9-]/g, "")
+            .replace(/-+/g, "-")
             .toLowerCase()
             .slice(0, 60) || "resume"
         const filename = `${rawName}-resume.pdf`
