@@ -77,6 +77,57 @@ const addBtn = {
     transition: "all 0.15s ease",
 }
 
+// ── Word-Style Bold Helper ────────────────────────────────────
+function toggleBoldSelection(inputEl, currentValue = "", onChange) {
+    if (!inputEl) return
+    const start = inputEl.selectionStart ?? 0
+    const end = inputEl.selectionEnd ?? 0
+    const val = currentValue || ""
+
+    if (start === end) {
+        // No selection: insert **bold text** template and select inner text
+        const insert = "**bold text**"
+        const nextVal = val.slice(0, start) + insert + val.slice(end)
+        onChange(nextVal)
+        setTimeout(() => {
+            inputEl.focus()
+            inputEl.setSelectionRange(start + 2, start + insert.length - 2)
+        }, 15)
+        return
+    }
+
+    const selected = val.slice(start, end)
+    let nextVal, newStart, newEnd
+
+    // Check if already bolded with **
+    if (selected.startsWith("**") && selected.endsWith("**") && selected.length >= 4) {
+        const unbolded = selected.slice(2, -2)
+        nextVal = val.slice(0, start) + unbolded + val.slice(end)
+        newStart = start
+        newEnd = start + unbolded.length
+    } else if (
+        start >= 2 &&
+        end <= val.length - 2 &&
+        val.slice(start - 2, start) === "**" &&
+        val.slice(end, end + 2) === "**"
+    ) {
+        nextVal = val.slice(0, start - 2) + selected + val.slice(end + 2)
+        newStart = start - 2
+        newEnd = end - 2
+    } else {
+        const bolded = `**${selected}**`
+        nextVal = val.slice(0, start) + bolded + val.slice(end)
+        newStart = start
+        newEnd = start + bolded.length
+    }
+
+    onChange(nextVal)
+    setTimeout(() => {
+        inputEl.focus()
+        inputEl.setSelectionRange(newStart, newEnd)
+    }, 15)
+}
+
 // ── Field ────────────────────────────────────────────────────
 function Field({ label, value, onChange, placeholder, type = "text", half }) {
     const [focused, setFocused] = useState(false)
@@ -87,6 +138,12 @@ function Field({ label, value, onChange, placeholder, type = "text", half }) {
                 type={type}
                 value={value || ""}
                 onChange={e => onChange(e.target.value)}
+                onKeyDown={e => {
+                    if ((e.metaKey || e.ctrlKey) && (e.key === "b" || e.key === "B")) {
+                        e.preventDefault()
+                        toggleBoldSelection(e.target, value || "", onChange)
+                    }
+                }}
                 placeholder={placeholder || ""}
                 style={{
                     ...input,
@@ -194,15 +251,30 @@ function BulletList({ bullets = [], onChange }) {
     const remove = (i) => onChange(bullets.filter((_, idx) => idx !== i))
 
     return (
-        <div style={{ marginBottom: "6px" }}>
-            <label style={lbl}>Bullet Points (ATS Impact statements)</label>
+        <div style={{ marginBottom: "8px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "5px" }}>
+                <label style={{ ...lbl, marginBottom: 0 }}>Bullet Points (bullets one below one)</label>
+                <span style={{ fontSize: "10.5px", color: C.textMuted, display: "flex", alignItems: "center", gap: "3px" }}>
+                    <kbd style={{ backgroundColor: "#F1F5F9", border: "1px solid #CBD5E1", borderRadius: "3px", padding: "1px 4px", fontSize: "9.5px", fontWeight: "700" }}>
+                        Ctrl+B
+                    </kbd>
+                    <span>to Bold</span>
+                </span>
+            </div>
             <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
                 {bullets.map((b, i) => (
                     <div key={i} style={{ display: "flex", gap: "6px", alignItems: "center" }}>
                         <span style={{ color: C.indigo, fontSize: "14px", flexShrink: 0, fontWeight: "700" }}>•</span>
                         <input
+                            id={`bullet_input_${i}`}
                             value={b}
                             onChange={e => update(i, e.target.value)}
+                            onKeyDown={e => {
+                                if ((e.metaKey || e.ctrlKey) && (e.key === "b" || e.key === "B")) {
+                                    e.preventDefault()
+                                    toggleBoldSelection(e.target, b, val => update(i, val))
+                                }
+                            }}
                             placeholder="Action verb + task + quantified result (e.g., Reduced latency by 45%)..."
                             style={{ ...input, flex: 1 }}
                             onFocus={e => {
@@ -216,6 +288,39 @@ function BulletList({ bullets = [], onChange }) {
                                 e.target.style.boxShadow = "none"
                             }}
                         />
+                        <button
+                            type="button"
+                            onClick={() => {
+                                const el = document.getElementById(`bullet_input_${i}`)
+                                toggleBoldSelection(el, b, val => update(i, val))
+                            }}
+                            title="Bold selected text (Ctrl+B / Cmd+B)"
+                            style={{
+                                border: `1px solid ${C.border}`,
+                                backgroundColor: "#FFFFFF",
+                                color: C.text,
+                                cursor: "pointer",
+                                fontSize: "11.5px",
+                                fontWeight: "700",
+                                padding: "6px 9px",
+                                borderRadius: "6px",
+                                lineHeight: 1,
+                                flexShrink: 0,
+                                transition: "all 0.15s ease",
+                            }}
+                            onMouseEnter={e => {
+                                e.currentTarget.style.borderColor = C.indigo
+                                e.currentTarget.style.backgroundColor = C.indigoLight
+                                e.currentTarget.style.color = C.indigo
+                            }}
+                            onMouseLeave={e => {
+                                e.currentTarget.style.borderColor = C.border
+                                e.currentTarget.style.backgroundColor = "#FFFFFF"
+                                e.currentTarget.style.color = C.text
+                            }}
+                        >
+                            B
+                        </button>
                         <button
                             type="button"
                             onClick={() => remove(i)}
@@ -299,10 +404,58 @@ function PersonalSection({ data, onChange, onSummaryChange }) {
             <Field label="Role / Title" value={data.personal?.role} onChange={set("role")} placeholder="Senior Systems Architect" />
             
             <div style={{ display: "flex", flexDirection: "column", marginBottom: "12px" }}>
-                <label style={lbl}>Professional Summary</label>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "5px" }}>
+                    <label style={{ ...lbl, marginBottom: 0 }}>Professional Summary</label>
+                    <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                        <button
+                            type="button"
+                            onClick={() => {
+                                const el = document.getElementById("summary_textarea")
+                                toggleBoldSelection(el, data.summary || "", onSummaryChange)
+                            }}
+                            title="Bold selected text (Ctrl+B / Cmd+B)"
+                            style={{
+                                border: `1px solid ${C.border}`,
+                                backgroundColor: "#FFFFFF",
+                                color: C.text,
+                                cursor: "pointer",
+                                fontSize: "11.5px",
+                                fontWeight: "700",
+                                padding: "3px 8px",
+                                borderRadius: "5px",
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "3px",
+                                transition: "all 0.15s ease",
+                            }}
+                            onMouseEnter={e => {
+                                e.currentTarget.style.borderColor = C.indigo
+                                e.currentTarget.style.backgroundColor = C.indigoLight
+                                e.currentTarget.style.color = C.indigo
+                            }}
+                            onMouseLeave={e => {
+                                e.currentTarget.style.borderColor = C.border
+                                e.currentTarget.style.backgroundColor = "#FFFFFF"
+                                e.currentTarget.style.color = C.text
+                            }}
+                        >
+                            <strong>B</strong> Bold
+                        </button>
+                        <span style={{ fontSize: "10.5px", color: C.textMuted }}>
+                            (Ctrl+B)
+                        </span>
+                    </div>
+                </div>
                 <textarea
+                    id="summary_textarea"
                     value={data.summary || ""}
                     onChange={e => onSummaryChange(e.target.value)}
+                    onKeyDown={e => {
+                        if ((e.metaKey || e.ctrlKey) && (e.key === "b" || e.key === "B")) {
+                            e.preventDefault()
+                            toggleBoldSelection(e.target, data.summary || "", onSummaryChange)
+                        }
+                    }}
                     placeholder="Brief overview of your background, tech stack, and engineering impact..."
                     rows={3}
                     style={{
@@ -424,8 +577,7 @@ function ExperienceSection({ data, onChange }) {
 
 function ProjectsSection({ data, onChange }) {
     const add = () => onChange([...data.projects, {
-        id: `proj_${Date.now()}`, name: "", techStack: "",
-        description: "", link: "", github: "", bullets: [""],
+        id: `proj_${Date.now()}`, name: "", link: "", github: "", bullets: [""],
     }])
     const update = (i, field, val) => {
         const u = [...data.projects]; u[i] = { ...u[i], [field]: val }; onChange(u)
@@ -441,12 +593,10 @@ function ProjectsSection({ data, onChange }) {
                         exit={{ opacity: 0, height: 0 }} style={card}
                     >
                         <CardHeader title={proj.name || `Project #${i + 1}`} onRemove={() => remove(i)} />
-                        <Field label="Project Name" value={proj.name} onChange={v => update(i, "name", v)} placeholder="Lumina Analytics Dashboard" />
-                        <Field label="Tech Stack" value={proj.techStack} onChange={v => update(i, "techStack", v)} placeholder="React, Node.js, PostgreSQL, Redis" />
-                        <Field label="Short Description" value={proj.description} onChange={v => update(i, "description", v)} placeholder="Real-time data visualization platform" />
+                        <Field label="Project Name" value={proj.name} onChange={v => update(i, "name", v)} placeholder="Phishing Detection System" />
                         <Grid2>
-                            <Field label="GitHub URL" value={proj.github} onChange={v => update(i, "github", v)} placeholder="github.com/you/project" />
-                            <Field label="Live URL" value={proj.link} onChange={v => update(i, "link", v)} placeholder="project.vercel.app" />
+                            <Field label="Project Link / Demo (Optional)" value={proj.link} onChange={v => update(i, "link", v)} placeholder="https://demo.app or 'live'" />
+                            <Field label="GitHub URL (Optional)" value={proj.github} onChange={v => update(i, "github", v)} placeholder="https://github.com/you/project" />
                         </Grid2>
                         <BulletList bullets={proj.bullets} onChange={v => update(i, "bullets", v)} />
                     </motion.div>
@@ -518,10 +668,14 @@ function AchievementsSection({ data, onChange }) {
             <div style={{
                 backgroundColor: C.indigoLight, border: `1px solid #C7D2FE`,
                 borderRadius: "10px", padding: "10px 14px", marginBottom: "14px",
+                display: "flex", justifyContent: "space-between", alignItems: "center",
             }}>
                 <p style={{ fontSize: "11px", color: "#3730A3", margin: 0, lineHeight: "1.6", fontWeight: "500" }}>
-                    🏆 Hackathons, scholarships, open-source milestones, patents, and top-performer awards.
+                    🏆 Hackathons, scholarships, open-source milestones, patents, and awards.
                 </p>
+                <span style={{ fontSize: "10px", color: "#4F46E5", fontWeight: "700" }}>
+                    Ctrl+B to Bold
+                </span>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
                 {data.achievements.map((a, i) => (
@@ -530,8 +684,15 @@ function AchievementsSection({ data, onChange }) {
                     >
                         <span style={{ color: C.indigo, fontSize: "13px", flexShrink: 0 }}>✦</span>
                         <input
+                            id={`ach_input_${i}`}
                             value={a}
                             onChange={e => update(i, e.target.value)}
+                            onKeyDown={e => {
+                                if ((e.metaKey || e.ctrlKey) && (e.key === "b" || e.key === "B")) {
+                                    e.preventDefault()
+                                    toggleBoldSelection(e.target, a, val => update(i, val))
+                                }
+                            }}
                             placeholder="Awarded Engineer of the Year at TechNova for cloud architecture..."
                             style={{ ...input, flex: 1 }}
                             onFocus={e => {
@@ -545,6 +706,39 @@ function AchievementsSection({ data, onChange }) {
                                 e.target.style.boxShadow = "none"
                             }}
                         />
+                        <button
+                            type="button"
+                            onClick={() => {
+                                const el = document.getElementById(`ach_input_${i}`)
+                                toggleBoldSelection(el, a, val => update(i, val))
+                            }}
+                            title="Bold selected text (Ctrl+B / Cmd+B)"
+                            style={{
+                                border: `1px solid ${C.border}`,
+                                backgroundColor: "#FFFFFF",
+                                color: C.text,
+                                cursor: "pointer",
+                                fontSize: "11.5px",
+                                fontWeight: "700",
+                                padding: "6px 9px",
+                                borderRadius: "6px",
+                                lineHeight: 1,
+                                flexShrink: 0,
+                                transition: "all 0.15s ease",
+                            }}
+                            onMouseEnter={e => {
+                                e.currentTarget.style.borderColor = C.indigo
+                                e.currentTarget.style.backgroundColor = C.indigoLight
+                                e.currentTarget.style.color = C.indigo
+                            }}
+                            onMouseLeave={e => {
+                                e.currentTarget.style.borderColor = C.border
+                                e.currentTarget.style.backgroundColor = "#FFFFFF"
+                                e.currentTarget.style.color = C.text
+                            }}
+                        >
+                            B
+                        </button>
                         <button
                             type="button"
                             onClick={() => remove(i)}

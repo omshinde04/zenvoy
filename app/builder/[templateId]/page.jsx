@@ -57,6 +57,8 @@ export default function BuilderPage() {
     const [isSaved, setIsSaved] = useState(true)
     const [isMobile, setIsMobile] = useState(false)
     const [mobileTab, setMobileTab] = useState("editor") // "editor" | "preview"
+    const [docFontSize, setDocFontSize] = useState(11)
+    const [docSpacing, setDocSpacing] = useState("normal")
 
     const DRAFT_KEY = `zenvoy_resume_draft`
 
@@ -88,10 +90,28 @@ export default function BuilderPage() {
                     setData(parsed)
                 }
             }
+            const savedFs = localStorage.getItem("zenvoy_doc_font_size")
+            if (savedFs) setDocFontSize(parseFloat(savedFs))
+            const savedSp = localStorage.getItem("zenvoy_doc_spacing")
+            if (savedSp) setDocSpacing(savedSp)
         } catch (e) {
             console.error("Could not load local draft:", e)
         }
     }, [])
+
+    const handleSetFontSize = (updater) => {
+        setDocFontSize(prev => {
+            const next = typeof updater === "function" ? updater(prev) : updater
+            const clamped = Math.max(9.0, Math.min(13.0, +(Math.round(next * 10) / 10).toFixed(1)))
+            try { localStorage.setItem("zenvoy_doc_font_size", String(clamped)) } catch {}
+            return clamped
+        })
+    }
+
+    const handleSetSpacing = (preset) => {
+        setDocSpacing(preset)
+        try { localStorage.setItem("zenvoy_doc_spacing", preset) } catch {}
+    }
 
     const hasTrackedEditRef = useRef(false)
     const isInitialMountRef = useRef(true)
@@ -525,6 +545,199 @@ export default function BuilderPage() {
                             </div>
                         </div>
 
+                        {/* Word-style Document Formatting Toolbar */}
+                        <div style={{
+                            width: "100%",
+                            maxWidth: "880px",
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            marginBottom: "14px",
+                            flexShrink: 0,
+                            gap: "10px",
+                            flexWrap: "wrap",
+                            backgroundColor: "#FFFFFF",
+                            border: "1px solid #E2E8F0",
+                            borderRadius: "12px",
+                            padding: "8px 14px",
+                            boxShadow: "0 2px 10px rgba(15, 23, 42, 0.04)",
+                        }}>
+                            {/* Font Size & Spacing Controls */}
+                            <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
+                                <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+                                    <span style={{ fontSize: "11.5px", fontWeight: "700", color: "#334155" }}>
+                                        Font Size:
+                                    </span>
+                                    <div style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        backgroundColor: "#F8FAFC",
+                                        border: "1px solid #CBD5E1",
+                                        borderRadius: "7px",
+                                        overflow: "hidden",
+                                    }}>
+                                        <button
+                                            type="button"
+                                            onClick={() => handleSetFontSize(s => Math.max(9.0, s - 0.5))}
+                                            title="Decrease font size (A-)"
+                                            style={{
+                                                padding: "4px 9px",
+                                                backgroundColor: "#FFFFFF",
+                                                border: "none",
+                                                borderRight: "1px solid #CBD5E1",
+                                                cursor: "pointer",
+                                                fontSize: "12px",
+                                                fontWeight: "700",
+                                                color: "#334155",
+                                            }}
+                                            onMouseEnter={e => e.currentTarget.style.backgroundColor = "#F1F5F9"}
+                                            onMouseLeave={e => e.currentTarget.style.backgroundColor = "#FFFFFF"}
+                                        >
+                                            A⁻
+                                        </button>
+                                        <span style={{
+                                            fontSize: "12px",
+                                            fontWeight: "700",
+                                            color: "#0F172A",
+                                            minWidth: "44px",
+                                            textAlign: "center",
+                                            padding: "0 4px",
+                                        }}>
+                                            {docFontSize}pt
+                                        </span>
+                                        <button
+                                            type="button"
+                                            onClick={() => handleSetFontSize(s => Math.min(13.0, s + 0.5))}
+                                            title="Increase font size (A+)"
+                                            style={{
+                                                padding: "4px 9px",
+                                                backgroundColor: "#FFFFFF",
+                                                border: "none",
+                                                borderLeft: "1px solid #CBD5E1",
+                                                cursor: "pointer",
+                                                fontSize: "12px",
+                                                fontWeight: "700",
+                                                color: "#334155",
+                                            }}
+                                            onMouseEnter={e => e.currentTarget.style.backgroundColor = "#F1F5F9"}
+                                            onMouseLeave={e => e.currentTarget.style.backgroundColor = "#FFFFFF"}
+                                        >
+                                            A⁺
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div style={{ width: "1px", height: "18px", backgroundColor: "#E2E8F0", margin: "0 4px" }} />
+
+                                {/* Spacing Presets */}
+                                <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                                    <span style={{ fontSize: "11.5px", fontWeight: "700", color: "#334155" }}>
+                                        Spacing:
+                                    </span>
+                                    <div style={{ display: "flex", backgroundColor: "#F1F5F9", padding: "2px", borderRadius: "8px", border: "1px solid #E2E8F0", gap: "2px" }}>
+                                        {[
+                                            { id: "compact", label: "Compact", tip: "Tight margins (fits heavy resumes onto 1 page)" },
+                                            { id: "normal", label: "Normal", tip: "Standard balanced ATS margins" },
+                                            { id: "relaxed", label: "Relaxed", tip: "Roomy margins (eliminates bottom empty space)" },
+                                        ].map(preset => {
+                                            const active = docSpacing === preset.id
+                                            return (
+                                                <button
+                                                    key={preset.id}
+                                                    type="button"
+                                                    onClick={() => handleSetSpacing(preset.id)}
+                                                    title={preset.tip}
+                                                    style={{
+                                                        padding: "4px 10px",
+                                                        fontSize: "11px",
+                                                        fontWeight: active ? "700" : "500",
+                                                        borderRadius: "6px",
+                                                        border: active ? "1px solid #CBD5E1" : "1px solid transparent",
+                                                        backgroundColor: active ? "#FFFFFF" : "transparent",
+                                                        color: active ? "#4F46E5" : "#64748B",
+                                                        boxShadow: active ? "0 1px 3px rgba(0,0,0,0.06)" : "none",
+                                                        cursor: "pointer",
+                                                        transition: "all 0.15s ease",
+                                                    }}
+                                                >
+                                                    {preset.label}
+                                                </button>
+                                            )
+                                        })}
+                                    </div>
+                                </div>
+
+                                <div style={{ width: "1px", height: "18px", backgroundColor: "#E2E8F0", margin: "0 4px" }} />
+
+                                {/* Auto Fit 1 Page */}
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        const expB = (data.experience || []).reduce((a, e) => a + (e.bullets?.filter(Boolean).length || 0), 0)
+                                        const projB = (data.projects || []).reduce((a, p) => a + (p.bullets?.filter(Boolean).length || 0), 0)
+                                        const achB = (data.achievements || []).filter(Boolean).length
+                                        const totalB = expB + projB + achB
+                                        if (totalB >= 14) {
+                                            handleSetFontSize(10.5)
+                                            handleSetSpacing("compact")
+                                        } else if (totalB <= 7) {
+                                            handleSetFontSize(11.5)
+                                            handleSetSpacing("relaxed")
+                                        } else {
+                                            handleSetFontSize(11)
+                                            handleSetSpacing("normal")
+                                        }
+                                    }}
+                                    title="Auto-balance font size & margins to fill 1 page cleanly"
+                                    style={{
+                                        padding: "4px 11px",
+                                        borderRadius: "7px",
+                                        fontSize: "11.5px",
+                                        fontWeight: "700",
+                                        backgroundColor: "#EEF2FF",
+                                        color: "#4F46E5",
+                                        border: "1px solid #C7D2FE",
+                                        cursor: "pointer",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        gap: "4px",
+                                        transition: "all 0.15s ease",
+                                    }}
+                                    onMouseEnter={e => e.currentTarget.style.backgroundColor = "#E0E7FF"}
+                                    onMouseLeave={e => e.currentTarget.style.backgroundColor = "#EEF2FF"}
+                                >
+                                    <span>⚡</span> Fit 1 Page
+                                </button>
+                            </div>
+
+                            {/* Word Document Badge & Keyboard Tip */}
+                            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                                <span style={{
+                                    fontSize: "11px",
+                                    color: "#64748B",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: "4px",
+                                }}>
+                                    <kbd style={{ backgroundColor: "#F1F5F9", border: "1px solid #CBD5E1", borderRadius: "4px", padding: "1px 4px", fontSize: "10px", fontWeight: "700" }}>
+                                        Ctrl+B
+                                    </kbd>
+                                    <span>to Bold anywhere</span>
+                                </span>
+                                <span style={{
+                                    fontSize: "10.5px",
+                                    fontWeight: "700",
+                                    padding: "2px 8px",
+                                    borderRadius: "6px",
+                                    backgroundColor: "#F1F5F9",
+                                    color: "#334155",
+                                    border: "1px solid #E2E8F0",
+                                }}>
+                                    Times New Roman 100%
+                                </span>
+                            </div>
+                        </div>
+
                         {/* A4 Canvas Container */}
                         <div
                             id="resume-preview-container"
@@ -541,6 +754,8 @@ export default function BuilderPage() {
                         >
                             <TemplateComponent
                                 data={data}
+                                fontSize={docFontSize}
+                                spacing={docSpacing}
                                 fontFamily="'Times New Roman', Times, 'Tinos', serif"
                             />
 

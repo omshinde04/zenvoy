@@ -1,13 +1,14 @@
 // components/templates/tech/ClassicATS.jsx
-// Production-Grade Classic ATS Template (Heading: 12px Bold, Other Text: 11px Normal, 100% Times New Roman, Balanced Margins)
+// Production-Grade Classic ATS Template (Word-like Font Sizing & Spacing, 100% Times New Roman)
 
 const TIMES_FONT = "'Times New Roman', Times, 'Tinos', serif"
 
-// Formats inline **bold** text in bullets
+// Formats inline **bold**, <b>bold</b>, or <strong>bold</strong> text
 function formatText(text = "") {
     if (!text || typeof text !== "string") return text
-    if (!text.includes("**")) return text
-    const parts = text.split(/(\*\*[^*]+\*\*)/g)
+    const normalized = text.replace(/<\/?(b|strong)>/gi, "**")
+    if (!normalized.includes("**")) return normalized
+    const parts = normalized.split(/(\*\*[^*]+\*\*)/g)
     return parts.map((part, i) => {
         if (part.startsWith("**") && part.endsWith("**")) {
             return (
@@ -27,8 +28,8 @@ function formatText(text = "") {
     })
 }
 
-// Compact bullet item: 11px normal font
-function BulletItem({ children, lineHeight = 1.28, marginBottom = "2px", style }) {
+// Compact bullet item: dynamically sized
+function BulletItem({ children, fontSize = "11px", lineHeight = 1.28, marginBottom = "2px", style }) {
     return (
         <div
             style={{
@@ -36,7 +37,7 @@ function BulletItem({ children, lineHeight = 1.28, marginBottom = "2px", style }
                 alignItems: "flex-start",
                 marginBottom,
                 lineHeight,
-                fontSize: "11px",
+                fontSize,
                 fontWeight: "400",
                 color: "#000000",
                 fontFamily: TIMES_FONT,
@@ -48,7 +49,7 @@ function BulletItem({ children, lineHeight = 1.28, marginBottom = "2px", style }
                     display: "inline-block",
                     width: "13px",
                     flexShrink: 0,
-                    fontSize: "11px",
+                    fontSize,
                     lineHeight,
                     color: "#000000",
                     fontFamily: TIMES_FONT,
@@ -59,7 +60,7 @@ function BulletItem({ children, lineHeight = 1.28, marginBottom = "2px", style }
             <div
                 style={{
                     flex: 1,
-                    fontSize: "11px",
+                    fontSize,
                     fontWeight: "400",
                     lineHeight,
                     color: "#000000",
@@ -72,12 +73,12 @@ function BulletItem({ children, lineHeight = 1.28, marginBottom = "2px", style }
     )
 }
 
-// Section Heading: 12px Bold
-function SectionHeading({ title }) {
+// Section Heading: base + 1, Bold
+function SectionHeading({ title, fontSize = "12px" }) {
     return (
         <h2
             style={{
-                fontSize: "12px",
+                fontSize,
                 fontWeight: "700",
                 color: "#000000",
                 margin: "0 0 3px 0",
@@ -106,7 +107,12 @@ function SectionDivider({ marginY = "8px", style }) {
     )
 }
 
-export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
+export default function ClassicATS({
+    data,
+    fontFamily = TIMES_FONT,
+    fontSize = 11,
+    spacing = "normal",
+}) {
     const d = data || {}
     const p = d.personal || {}
     const skills = d.skills || {}
@@ -145,20 +151,49 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
     const hasAchievements = Array.isArray(d.achievements) && d.achievements.filter(Boolean).length > 0
     const hasCertifications = Array.isArray(d.certifications) && d.certifications.filter(c => c && c.name).length > 0
 
-    // Dynamic Density Balancing: Automatically adjusts vertical spacing so content fills A4 page with equal top and bottom gaps
+    // Font Sizing Scale (Word-like controls)
+    const baseFs = typeof fontSize === "number" ? fontSize : 11
+    const headingFs = `${baseFs + 1}px`
+    const bodyFs = `${baseFs}px`
+    const nameFs = `${baseFs + 10}px`
+
+    // Spacing configuration (Compact, Normal, Relaxed)
+    const spacingPresets = {
+        compact: {
+            paddingY: "34px",
+            dividerMargin: "6px",
+            itemGap: "5px",
+            bulletMargin: "1.5px",
+            lineHeight: 1.25,
+        },
+        normal: {
+            paddingY: "42px",
+            dividerMargin: "8px",
+            itemGap: "7px",
+            bulletMargin: "2px",
+            lineHeight: 1.29,
+        },
+        relaxed: {
+            paddingY: "48px",
+            dividerMargin: "11px",
+            itemGap: "10px",
+            bulletMargin: "3.5px",
+            lineHeight: 1.34,
+        },
+    }
+
+    // Auto-detect density if normal
     const expBullets = (d.experience || []).reduce((acc, e) => acc + (e.bullets?.filter(Boolean).length || 0), 0)
     const projBullets = (d.projects || []).reduce((acc, p) => acc + (p.bullets?.filter(Boolean).length || 0), 0)
-    const achBullets = (d.achievements || []).filter(Boolean).length
-    const totalBullets = expBullets + projBullets + achBullets
+    const totalBullets = expBullets + projBullets + (d.achievements?.filter(Boolean).length || 0)
 
-    const isVeryDense = totalBullets >= 14
-    const isRelaxed = totalBullets <= 8
+    let chosenPreset = spacingPresets[spacing] || spacingPresets.normal
+    if (spacing === "normal") {
+        if (totalBullets >= 14) chosenPreset = spacingPresets.compact
+        else if (totalBullets <= 7) chosenPreset = spacingPresets.relaxed
+    }
 
-    const paddingY = isVeryDense ? "36px" : isRelaxed ? "48px" : "42px"
-    const dividerMargin = isVeryDense ? "6px" : isRelaxed ? "11px" : "8px"
-    const itemGap = isVeryDense ? "5px" : isRelaxed ? "10px" : "7px"
-    const bulletMargin = isVeryDense ? "1.5px" : isRelaxed ? "3.5px" : "2px"
-    const lh = isVeryDense ? 1.26 : isRelaxed ? 1.33 : 1.29
+    const { paddingY, dividerMargin, itemGap, bulletMargin, lineHeight } = chosenPreset
 
     return (
         <div
@@ -173,14 +208,14 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
                 display: "flex",
                 flexDirection: "column",
                 WebkitFontSmoothing: "antialiased",
-                lineHeight: lh,
+                lineHeight,
             }}
         >
             {/* ── 1. HEADER (name and all) ───────────────────────── */}
             <header style={{ textAlign: "center", marginBottom: "0px", fontFamily: TIMES_FONT }}>
                 <h1
                     style={{
-                        fontSize: "21px",
+                        fontSize: nameFs,
                         fontWeight: "700",
                         letterSpacing: "0.01em",
                         color: "#000000",
@@ -189,12 +224,12 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
                         fontFamily: TIMES_FONT,
                     }}
                 >
-                    {p.name || "Your Name"}
+                    {formatText(p.name || "Your Name")}
                 </h1>
 
                 {/* Contacts: 11px normal */}
                 {contactItems.length > 0 && (
-                    <div style={{ fontSize: "11px", fontWeight: "400", color: "#000000", marginBottom: "2px", fontFamily: TIMES_FONT }}>
+                    <div style={{ fontSize: bodyFs, fontWeight: "400", color: "#000000", marginBottom: "2px", fontFamily: TIMES_FONT }}>
                         {contactItems.map((item, idx) => (
                             <span key={idx} style={{ fontFamily: TIMES_FONT }}>
                                 {item}
@@ -208,7 +243,7 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
 
                 {/* Links: 11px normal */}
                 {linkItems.length > 0 && (
-                    <div style={{ fontSize: "11px", fontWeight: "400", fontFamily: TIMES_FONT }}>
+                    <div style={{ fontSize: bodyFs, fontWeight: "400", fontFamily: TIMES_FONT }}>
                         {linkItems.map((item, idx) => (
                             <span key={idx} style={{ fontFamily: TIMES_FONT }}>
                                 <a
@@ -238,17 +273,17 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
             {/* ── 2. PROFESSIONAL SUMMARY ───────────────────────── */}
             {d.summary && (
                 <section style={{ fontFamily: TIMES_FONT }}>
-                    <SectionHeading title="Professional Summary" />
+                    <SectionHeading title="Professional Summary" fontSize={headingFs} />
                     <p style={{
-                        fontSize: "11px",
+                        fontSize: bodyFs,
                         fontWeight: "400",
                         color: "#000000",
-                        lineHeight: lh,
+                        lineHeight,
                         margin: 0,
                         textAlign: "justify",
                         fontFamily: TIMES_FONT,
                     }}>
-                        {d.summary}
+                        {formatText(d.summary)}
                     </p>
                     <SectionDivider marginY={dividerMargin} />
                 </section>
@@ -257,8 +292,8 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
             {/* ── 3. EDUCATION ──────────────────────────────────── */}
             {Array.isArray(d.education) && d.education.length > 0 && (
                 <section style={{ fontFamily: TIMES_FONT }}>
-                    <SectionHeading title="Education" />
-                    <div style={{ display: "flex", flexDirection: "column", gap: isRelaxed ? "5px" : "2px", fontFamily: TIMES_FONT }}>
+                    <SectionHeading title="Education" fontSize={headingFs} />
+                    <div style={{ display: "flex", flexDirection: "column", gap: spacing === "relaxed" ? "5px" : "2px", fontFamily: TIMES_FONT }}>
                         {d.education.map((edu, idx) => {
                             const dates = (edu.startYear || edu.endYear)
                                 ? `${edu.startYear ? `${edu.startYear}–` : ""}${edu.endYear}`
@@ -272,9 +307,9 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
                             const locText = edu.location ? `, ${edu.location}` : ""
 
                             return (
-                                <div key={edu.id || idx} style={{ fontSize: "11px", fontWeight: "400", lineHeight: lh, color: "#000000", fontFamily: TIMES_FONT }}>
-                                    <strong style={{ color: "#000000", fontWeight: "700", fontFamily: TIMES_FONT }}>{degreeText}</strong>
-                                    {instText && <span style={{ fontFamily: TIMES_FONT }}> – {instText}{locText}</span>}
+                                <div key={edu.id || idx} style={{ fontSize: bodyFs, fontWeight: "400", lineHeight, color: "#000000", fontFamily: TIMES_FONT }}>
+                                    <strong style={{ color: "#000000", fontWeight: "700", fontFamily: TIMES_FONT }}>{formatText(degreeText)}</strong>
+                                    {instText && <span style={{ fontFamily: TIMES_FONT }}> – {formatText(instText)}{locText}</span>}
                                     {dates && <span style={{ fontFamily: TIMES_FONT }}> | {dates}</span>}
                                     {cgpa && <span style={{ fontFamily: TIMES_FONT }}> | {cgpa}</span>}
                                 </div>
@@ -288,7 +323,7 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
             {/* ── 4. EXPERIENCE ─────────────────────────────────── */}
             {Array.isArray(d.experience) && d.experience.length > 0 && (
                 <section style={{ fontFamily: TIMES_FONT }}>
-                    <SectionHeading title="Experience" />
+                    <SectionHeading title="Experience" fontSize={headingFs} />
                     <div style={{ display: "flex", flexDirection: "column", gap: itemGap, fontFamily: TIMES_FONT }}>
                         {d.experience.map((exp, idx) => {
                             const dates = (exp.startDate || exp.endDate)
@@ -296,9 +331,9 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
                                 : ""
                             return (
                                 <div key={exp.id || idx} style={{ fontFamily: TIMES_FONT }}>
-                                    <div style={{ fontSize: "11px", lineHeight: 1.25, marginBottom: "2px", color: "#000000", fontFamily: TIMES_FONT }}>
-                                        <strong style={{ color: "#000000", fontWeight: "700", fontFamily: TIMES_FONT }}>{exp.role}</strong>
-                                        {exp.company && <span style={{ fontFamily: TIMES_FONT }}> — {exp.company}</span>}
+                                    <div style={{ fontSize: bodyFs, lineHeight: 1.25, marginBottom: "2px", color: "#000000", fontFamily: TIMES_FONT }}>
+                                        <strong style={{ color: "#000000", fontWeight: "700", fontFamily: TIMES_FONT }}>{formatText(exp.role)}</strong>
+                                        {exp.company && <span style={{ fontFamily: TIMES_FONT }}> — {formatText(exp.company)}</span>}
                                         {dates && <span style={{ fontFamily: TIMES_FONT }}> | {dates}</span>}
                                         {exp.location && <span style={{ fontFamily: TIMES_FONT }}> | {exp.location}</span>}
                                     </div>
@@ -307,7 +342,7 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
                                     {Array.isArray(exp.bullets) && exp.bullets.length > 0 && (
                                         <div style={{ paddingLeft: "4px", fontFamily: TIMES_FONT }}>
                                             {exp.bullets.filter(Boolean).map((bullet, bIdx) => (
-                                                <BulletItem key={bIdx} lineHeight={lh} marginBottom={bulletMargin}>
+                                                <BulletItem key={bIdx} fontSize={bodyFs} lineHeight={lineHeight} marginBottom={bulletMargin}>
                                                     {formatText(bullet)}
                                                 </BulletItem>
                                             ))}
@@ -324,10 +359,10 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
             {/* ── 5. TECHNICAL SKILLS ───────────────────────────── */}
             {skillCategories.length > 0 && (
                 <section style={{ fontFamily: TIMES_FONT }}>
-                    <SectionHeading title="Technical Skills" />
-                    <div style={{ display: "flex", flexDirection: "column", gap: isRelaxed ? "4px" : "2px", paddingLeft: "4px", fontFamily: TIMES_FONT }}>
+                    <SectionHeading title="Technical Skills" fontSize={headingFs} />
+                    <div style={{ display: "flex", flexDirection: "column", gap: spacing === "relaxed" ? "4px" : "2px", paddingLeft: "4px", fontFamily: TIMES_FONT }}>
                         {skillCategories.map((cat, idx) => (
-                            <div key={idx} style={{ display: "flex", alignItems: "flex-start", fontSize: "11px", fontWeight: "400", lineHeight: lh, color: "#000000", fontFamily: TIMES_FONT }}>
+                            <div key={idx} style={{ display: "flex", alignItems: "flex-start", fontSize: bodyFs, fontWeight: "400", lineHeight, color: "#000000", fontFamily: TIMES_FONT }}>
                                 <span style={{ width: "13px", flexShrink: 0, color: "#000000", fontFamily: TIMES_FONT }}>•</span>
                                 <div style={{ flex: 1, color: "#000000", fontFamily: TIMES_FONT }}>
                                     <strong style={{ color: "#000000", fontWeight: "700", fontFamily: TIMES_FONT }}>{cat.label}: </strong>
@@ -340,76 +375,74 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
                 </section>
             )}
 
-            {/* ── 6. PROJECTS ───────────────────────────────────── */}
+            {/* ── 6. PROJECTS (name - link, bullets one below one) ─ */}
             {Array.isArray(d.projects) && d.projects.length > 0 && (
                 <section style={{ fontFamily: TIMES_FONT }}>
-                    <SectionHeading title="Projects" />
+                    <SectionHeading title="Projects" fontSize={headingFs} />
                     <div style={{ display: "flex", flexDirection: "column", gap: itemGap, fontFamily: TIMES_FONT }}>
-                        {d.projects.map((proj, idx) => (
-                            <div key={proj.id || idx} style={{ fontFamily: TIMES_FONT }}>
-                                <div style={{ fontSize: "11px", lineHeight: 1.25, marginBottom: "2px", color: "#000000", fontFamily: TIMES_FONT }}>
-                                    <strong style={{ color: "#000000", fontWeight: "700", fontFamily: TIMES_FONT }}>{proj.name}</strong>
-                                    {proj.link && (
-                                        <a
-                                            href={formatUrl(proj.link)}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            style={{
-                                                color: "#0000EE",
-                                                textDecoration: "underline",
-                                                marginLeft: "5px",
-                                                fontSize: "11px",
-                                                fontFamily: TIMES_FONT,
-                                            }}
-                                        >
-                                            ({proj.link === "live" ? "live" : "demo"})
-                                        </a>
-                                    )}
-                                    {proj.github && (
-                                        <a
-                                            href={formatUrl(proj.github)}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            style={{
-                                                color: "#0000EE",
-                                                textDecoration: "underline",
-                                                marginLeft: "5px",
-                                                fontSize: "11px",
-                                                fontFamily: TIMES_FONT,
-                                            }}
-                                        >
-                                            (code)
-                                        </a>
-                                    )}
-                                    {proj.techStack && (
-                                        <span style={{ fontSize: "11px", color: "#000000", marginLeft: "6px", fontFamily: TIMES_FONT }}>
-                                            | {proj.techStack}
-                                        </span>
+                        {d.projects.map((proj, idx) => {
+                            const linkUrl = proj.link ? formatUrl(proj.link) : proj.github ? formatUrl(proj.github) : null
+                            let linkLabel = "Link"
+                            if (proj.link) {
+                                const lower = proj.link.toLowerCase()
+                                if (lower === "live" || lower.includes("vercel") || lower.includes("demo")) linkLabel = "Live"
+                                else if (lower.includes("github")) linkLabel = "Code"
+                                else linkLabel = "Link"
+                            } else if (proj.github) {
+                                linkLabel = "Code"
+                            }
+
+                            return (
+                                <div key={proj.id || idx} style={{ fontFamily: TIMES_FONT }}>
+                                    {/* Line 1: Project Name – Link */}
+                                    <div style={{ fontSize: bodyFs, lineHeight: 1.25, marginBottom: "2px", color: "#000000", fontFamily: TIMES_FONT }}>
+                                        <strong style={{ color: "#000000", fontWeight: "700", fontFamily: TIMES_FONT }}>
+                                            {formatText(proj.name)}
+                                        </strong>
+                                        {linkUrl && (
+                                            <span style={{ fontFamily: TIMES_FONT }}>
+                                                {" – "}
+                                                <a
+                                                    href={linkUrl}
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                    style={{
+                                                        color: "#0000EE",
+                                                        textDecoration: "underline",
+                                                        fontFamily: TIMES_FONT,
+                                                        fontWeight: "400",
+                                                    }}
+                                                >
+                                                    ({linkLabel})
+                                                </a>
+                                            </span>
+                                        )}
+                                    </div>
+
+                                    {/* Bullets points directly one below one */}
+                                    {Array.isArray(proj.bullets) && proj.bullets.length > 0 ? (
+                                        <div style={{ paddingLeft: "4px", fontFamily: TIMES_FONT }}>
+                                            {proj.bullets.filter(Boolean).map((bullet, bIdx) => (
+                                                <BulletItem key={bIdx} fontSize={bodyFs} lineHeight={lineHeight} marginBottom={bulletMargin}>
+                                                    {formatText(bullet)}
+                                                </BulletItem>
+                                            ))}
+                                        </div>
+                                    ) : proj.description ? (
+                                        <div style={{ paddingLeft: "4px", fontFamily: TIMES_FONT }}>
+                                            <BulletItem fontSize={bodyFs} lineHeight={lineHeight} marginBottom={bulletMargin}>
+                                                {formatText(proj.description)}
+                                            </BulletItem>
+                                        </div>
+                                    ) : null}
+
+                                    {/* Divider between project items if no achievements/certifications follow */}
+                                    {!hasAchievements && !hasCertifications && idx < d.projects.length - 1 && (
+                                        <SectionDivider marginY={dividerMargin} />
                                     )}
                                 </div>
-
-                                {proj.description && (
-                                    <div style={{ fontSize: "11px", fontWeight: "400", color: "#000000", marginBottom: "2px", lineHeight: lh, fontFamily: TIMES_FONT }}>
-                                        {proj.description}
-                                    </div>
-                                )}
-
-                                {Array.isArray(proj.bullets) && proj.bullets.length > 0 && (
-                                    <div style={{ paddingLeft: "4px", fontFamily: TIMES_FONT }}>
-                                        {proj.bullets.filter(Boolean).map((bullet, bIdx) => (
-                                            <BulletItem key={bIdx} lineHeight={lh} marginBottom={bulletMargin}>
-                                                {formatText(bullet)}
-                                            </BulletItem>
-                                        ))}
-                                    </div>
-                                )}
-
-                                {/* Divider between project items if no achievements/certifications follow */}
-                                {!hasAchievements && !hasCertifications && idx < d.projects.length - 1 && (
-                                    <SectionDivider marginY={dividerMargin} />
-                                )}
-                            </div>
-                        ))}
+                            )
+                        })}
                     </div>
                     {(hasAchievements || hasCertifications) && <SectionDivider marginY={dividerMargin} />}
                 </section>
@@ -418,10 +451,10 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
             {/* ── 7. ACHIEVEMENTS (Optional) ─────────────────────── */}
             {hasAchievements && (
                 <section style={{ fontFamily: TIMES_FONT }}>
-                    <SectionHeading title="Achievements" />
+                    <SectionHeading title="Achievements" fontSize={headingFs} />
                     <div style={{ paddingLeft: "4px", fontFamily: TIMES_FONT }}>
                         {d.achievements.filter(Boolean).map((item, idx) => (
-                            <BulletItem key={idx} lineHeight={lh} marginBottom={bulletMargin}>
+                            <BulletItem key={idx} fontSize={bodyFs} lineHeight={lineHeight} marginBottom={bulletMargin}>
                                 {formatText(item)}
                             </BulletItem>
                         ))}
@@ -433,11 +466,11 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
             {/* ── 8. CERTIFICATIONS (Optional) ──────────────────── */}
             {hasCertifications && (
                 <section style={{ fontFamily: TIMES_FONT }}>
-                    <SectionHeading title="Certifications" />
+                    <SectionHeading title="Certifications" fontSize={headingFs} />
                     <div style={{ paddingLeft: "4px", fontFamily: TIMES_FONT }}>
                         {d.certifications.filter(c => c && c.name).map((cert, idx) => (
-                            <BulletItem key={idx} lineHeight={lh} marginBottom={bulletMargin}>
-                                <strong style={{ color: "#000000", fontWeight: "700", fontFamily: TIMES_FONT }}>{cert.name}</strong>
+                            <BulletItem key={idx} fontSize={bodyFs} lineHeight={lineHeight} marginBottom={bulletMargin}>
+                                <strong style={{ color: "#000000", fontWeight: "700", fontFamily: TIMES_FONT }}>{formatText(cert.name)}</strong>
                                 {cert.issuer ? ` – ${cert.issuer}` : ""}
                                 {cert.year ? ` (${cert.year})` : ""}
                             </BulletItem>
