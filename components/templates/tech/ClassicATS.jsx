@@ -1,5 +1,5 @@
 // components/templates/tech/ClassicATS.jsx
-// Production-Grade Classic ATS Template (Heading: 12px Bold, Other Text: 11px Normal, 100% Times New Roman)
+// Production-Grade Classic ATS Template (Heading: 12px Bold, Other Text: 11px Normal, 100% Times New Roman, Balanced Margins)
 
 const TIMES_FONT = "'Times New Roman', Times, 'Tinos', serif"
 
@@ -28,14 +28,14 @@ function formatText(text = "") {
 }
 
 // Compact bullet item: 11px normal font
-function BulletItem({ children, style }) {
+function BulletItem({ children, lineHeight = 1.28, marginBottom = "2px", style }) {
     return (
         <div
             style={{
                 display: "flex",
                 alignItems: "flex-start",
-                marginBottom: "1.5px",
-                lineHeight: 1.28,
+                marginBottom,
+                lineHeight,
                 fontSize: "11px",
                 fontWeight: "400",
                 color: "#000000",
@@ -49,7 +49,7 @@ function BulletItem({ children, style }) {
                     width: "13px",
                     flexShrink: 0,
                     fontSize: "11px",
-                    lineHeight: "1.28",
+                    lineHeight,
                     color: "#000000",
                     fontFamily: TIMES_FONT,
                 }}
@@ -61,7 +61,7 @@ function BulletItem({ children, style }) {
                     flex: 1,
                     fontSize: "11px",
                     fontWeight: "400",
-                    lineHeight: 1.28,
+                    lineHeight,
                     color: "#000000",
                     fontFamily: TIMES_FONT,
                 }}
@@ -92,13 +92,13 @@ function SectionHeading({ title }) {
 }
 
 // Clean horizontal rule separating completed sections
-function SectionDivider({ style }) {
+function SectionDivider({ marginY = "8px", style }) {
     return (
         <div
             style={{
                 borderBottom: "1px solid #000000",
-                marginTop: "6px",
-                marginBottom: "7px",
+                marginTop: marginY,
+                marginBottom: marginY,
                 width: "100%",
                 ...style,
             }}
@@ -145,6 +145,21 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
     const hasAchievements = Array.isArray(d.achievements) && d.achievements.filter(Boolean).length > 0
     const hasCertifications = Array.isArray(d.certifications) && d.certifications.filter(c => c && c.name).length > 0
 
+    // Dynamic Density Balancing: Automatically adjusts vertical spacing so content fills A4 page with equal top and bottom gaps
+    const expBullets = (d.experience || []).reduce((acc, e) => acc + (e.bullets?.filter(Boolean).length || 0), 0)
+    const projBullets = (d.projects || []).reduce((acc, p) => acc + (p.bullets?.filter(Boolean).length || 0), 0)
+    const achBullets = (d.achievements || []).filter(Boolean).length
+    const totalBullets = expBullets + projBullets + achBullets
+
+    const isVeryDense = totalBullets >= 14
+    const isRelaxed = totalBullets <= 8
+
+    const paddingY = isVeryDense ? "36px" : isRelaxed ? "48px" : "42px"
+    const dividerMargin = isVeryDense ? "6px" : isRelaxed ? "11px" : "8px"
+    const itemGap = isVeryDense ? "5px" : isRelaxed ? "10px" : "7px"
+    const bulletMargin = isVeryDense ? "1.5px" : isRelaxed ? "3.5px" : "2px"
+    const lh = isVeryDense ? 1.26 : isRelaxed ? 1.33 : 1.29
+
     return (
         <div
             style={{
@@ -153,12 +168,12 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
                 backgroundColor: "#FFFFFF",
                 fontFamily: TIMES_FONT,
                 color: "#000000",
-                padding: "40px 42px 40px 42px",
+                padding: `${paddingY} 44px ${paddingY} 44px`,
                 boxSizing: "border-box",
                 display: "flex",
                 flexDirection: "column",
                 WebkitFontSmoothing: "antialiased",
-                lineHeight: 1.28,
+                lineHeight: lh,
             }}
         >
             {/* ── 1. HEADER (name and all) ───────────────────────── */}
@@ -218,7 +233,7 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
             </header>
 
             {/* Line under header */}
-            <SectionDivider />
+            <SectionDivider marginY={dividerMargin} />
 
             {/* ── 2. PROFESSIONAL SUMMARY ───────────────────────── */}
             {d.summary && (
@@ -228,14 +243,14 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
                         fontSize: "11px",
                         fontWeight: "400",
                         color: "#000000",
-                        lineHeight: 1.30,
+                        lineHeight: lh,
                         margin: 0,
                         textAlign: "justify",
                         fontFamily: TIMES_FONT,
                     }}>
                         {d.summary}
                     </p>
-                    <SectionDivider />
+                    <SectionDivider marginY={dividerMargin} />
                 </section>
             )}
 
@@ -243,7 +258,7 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
             {Array.isArray(d.education) && d.education.length > 0 && (
                 <section style={{ fontFamily: TIMES_FONT }}>
                     <SectionHeading title="Education" />
-                    <div style={{ display: "flex", flexDirection: "column", gap: "2px", fontFamily: TIMES_FONT }}>
+                    <div style={{ display: "flex", flexDirection: "column", gap: isRelaxed ? "5px" : "2px", fontFamily: TIMES_FONT }}>
                         {d.education.map((edu, idx) => {
                             const dates = (edu.startYear || edu.endYear)
                                 ? `${edu.startYear ? `${edu.startYear}–` : ""}${edu.endYear}`
@@ -257,7 +272,7 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
                             const locText = edu.location ? `, ${edu.location}` : ""
 
                             return (
-                                <div key={edu.id || idx} style={{ fontSize: "11px", fontWeight: "400", lineHeight: 1.28, color: "#000000", fontFamily: TIMES_FONT }}>
+                                <div key={edu.id || idx} style={{ fontSize: "11px", fontWeight: "400", lineHeight: lh, color: "#000000", fontFamily: TIMES_FONT }}>
                                     <strong style={{ color: "#000000", fontWeight: "700", fontFamily: TIMES_FONT }}>{degreeText}</strong>
                                     {instText && <span style={{ fontFamily: TIMES_FONT }}> – {instText}{locText}</span>}
                                     {dates && <span style={{ fontFamily: TIMES_FONT }}> | {dates}</span>}
@@ -266,7 +281,7 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
                             )
                         })}
                     </div>
-                    <SectionDivider />
+                    <SectionDivider marginY={dividerMargin} />
                 </section>
             )}
 
@@ -274,7 +289,7 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
             {Array.isArray(d.experience) && d.experience.length > 0 && (
                 <section style={{ fontFamily: TIMES_FONT }}>
                     <SectionHeading title="Experience" />
-                    <div style={{ display: "flex", flexDirection: "column", gap: "6px", fontFamily: TIMES_FONT }}>
+                    <div style={{ display: "flex", flexDirection: "column", gap: itemGap, fontFamily: TIMES_FONT }}>
                         {d.experience.map((exp, idx) => {
                             const dates = (exp.startDate || exp.endDate)
                                 ? `${exp.startDate ? `${exp.startDate} – ` : ""}${exp.current ? "Present" : exp.endDate}`
@@ -292,7 +307,7 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
                                     {Array.isArray(exp.bullets) && exp.bullets.length > 0 && (
                                         <div style={{ paddingLeft: "4px", fontFamily: TIMES_FONT }}>
                                             {exp.bullets.filter(Boolean).map((bullet, bIdx) => (
-                                                <BulletItem key={bIdx}>
+                                                <BulletItem key={bIdx} lineHeight={lh} marginBottom={bulletMargin}>
                                                     {formatText(bullet)}
                                                 </BulletItem>
                                             ))}
@@ -302,7 +317,7 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
                             )
                         })}
                     </div>
-                    <SectionDivider />
+                    <SectionDivider marginY={dividerMargin} />
                 </section>
             )}
 
@@ -310,9 +325,9 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
             {skillCategories.length > 0 && (
                 <section style={{ fontFamily: TIMES_FONT }}>
                     <SectionHeading title="Technical Skills" />
-                    <div style={{ display: "flex", flexDirection: "column", gap: "2px", paddingLeft: "4px", fontFamily: TIMES_FONT }}>
+                    <div style={{ display: "flex", flexDirection: "column", gap: isRelaxed ? "4px" : "2px", paddingLeft: "4px", fontFamily: TIMES_FONT }}>
                         {skillCategories.map((cat, idx) => (
-                            <div key={idx} style={{ display: "flex", alignItems: "flex-start", fontSize: "11px", fontWeight: "400", lineHeight: 1.28, color: "#000000", fontFamily: TIMES_FONT }}>
+                            <div key={idx} style={{ display: "flex", alignItems: "flex-start", fontSize: "11px", fontWeight: "400", lineHeight: lh, color: "#000000", fontFamily: TIMES_FONT }}>
                                 <span style={{ width: "13px", flexShrink: 0, color: "#000000", fontFamily: TIMES_FONT }}>•</span>
                                 <div style={{ flex: 1, color: "#000000", fontFamily: TIMES_FONT }}>
                                     <strong style={{ color: "#000000", fontWeight: "700", fontFamily: TIMES_FONT }}>{cat.label}: </strong>
@@ -321,7 +336,7 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
                             </div>
                         ))}
                     </div>
-                    <SectionDivider />
+                    <SectionDivider marginY={dividerMargin} />
                 </section>
             )}
 
@@ -329,7 +344,7 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
             {Array.isArray(d.projects) && d.projects.length > 0 && (
                 <section style={{ fontFamily: TIMES_FONT }}>
                     <SectionHeading title="Projects" />
-                    <div style={{ display: "flex", flexDirection: "column", gap: "6px", fontFamily: TIMES_FONT }}>
+                    <div style={{ display: "flex", flexDirection: "column", gap: itemGap, fontFamily: TIMES_FONT }}>
                         {d.projects.map((proj, idx) => (
                             <div key={proj.id || idx} style={{ fontFamily: TIMES_FONT }}>
                                 <div style={{ fontSize: "11px", lineHeight: 1.25, marginBottom: "2px", color: "#000000", fontFamily: TIMES_FONT }}>
@@ -374,7 +389,7 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
                                 </div>
 
                                 {proj.description && (
-                                    <div style={{ fontSize: "11px", fontWeight: "400", color: "#000000", marginBottom: "2px", lineHeight: 1.28, fontFamily: TIMES_FONT }}>
+                                    <div style={{ fontSize: "11px", fontWeight: "400", color: "#000000", marginBottom: "2px", lineHeight: lh, fontFamily: TIMES_FONT }}>
                                         {proj.description}
                                     </div>
                                 )}
@@ -382,7 +397,7 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
                                 {Array.isArray(proj.bullets) && proj.bullets.length > 0 && (
                                     <div style={{ paddingLeft: "4px", fontFamily: TIMES_FONT }}>
                                         {proj.bullets.filter(Boolean).map((bullet, bIdx) => (
-                                            <BulletItem key={bIdx}>
+                                            <BulletItem key={bIdx} lineHeight={lh} marginBottom={bulletMargin}>
                                                 {formatText(bullet)}
                                             </BulletItem>
                                         ))}
@@ -391,12 +406,12 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
 
                                 {/* Divider between project items if no achievements/certifications follow */}
                                 {!hasAchievements && !hasCertifications && idx < d.projects.length - 1 && (
-                                    <SectionDivider style={{ marginTop: "6px", marginBottom: "7px" }} />
+                                    <SectionDivider marginY={dividerMargin} />
                                 )}
                             </div>
                         ))}
                     </div>
-                    {(hasAchievements || hasCertifications) && <SectionDivider />}
+                    {(hasAchievements || hasCertifications) && <SectionDivider marginY={dividerMargin} />}
                 </section>
             )}
 
@@ -406,12 +421,12 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
                     <SectionHeading title="Achievements" />
                     <div style={{ paddingLeft: "4px", fontFamily: TIMES_FONT }}>
                         {d.achievements.filter(Boolean).map((item, idx) => (
-                            <BulletItem key={idx}>
+                            <BulletItem key={idx} lineHeight={lh} marginBottom={bulletMargin}>
                                 {formatText(item)}
                             </BulletItem>
                         ))}
                     </div>
-                    {hasCertifications && <SectionDivider />}
+                    {hasCertifications && <SectionDivider marginY={dividerMargin} />}
                 </section>
             )}
 
@@ -421,7 +436,7 @@ export default function ClassicATS({ data, fontFamily = TIMES_FONT }) {
                     <SectionHeading title="Certifications" />
                     <div style={{ paddingLeft: "4px", fontFamily: TIMES_FONT }}>
                         {d.certifications.filter(c => c && c.name).map((cert, idx) => (
-                            <BulletItem key={idx}>
+                            <BulletItem key={idx} lineHeight={lh} marginBottom={bulletMargin}>
                                 <strong style={{ color: "#000000", fontWeight: "700", fontFamily: TIMES_FONT }}>{cert.name}</strong>
                                 {cert.issuer ? ` – ${cert.issuer}` : ""}
                                 {cert.year ? ` (${cert.year})` : ""}

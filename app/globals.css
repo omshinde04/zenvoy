@@ -190,6 +190,11 @@ body {
     background: #ffffff !important;
   }
 
+  #resume-preview-container > div {
+    width: 210mm !important;
+    box-sizing: border-box !important;
+  }
+
   .editor-seam,
   .no-print {
     display: none !important;
