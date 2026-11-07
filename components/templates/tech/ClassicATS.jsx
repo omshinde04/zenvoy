@@ -1,5 +1,5 @@
 // components/templates/tech/ClassicATS.jsx
-// Production-Grade Classic ATS Template (Standard Harvard / Software Engineer Format)
+// Production-Grade Classic ATS Template (Standard 1-Page Software Engineer Format)
 
 // Formats inline **bold** text in bullets
 function formatText(text = "") {
@@ -8,7 +8,7 @@ function formatText(text = "") {
     const parts = text.split(/(\*\*[^*]+\*\*)/g)
     return parts.map((part, i) => {
         if (part.startsWith("**") && part.endsWith("**")) {
-            return <strong key={i}>{part.slice(2, -2)}</strong>
+            return <strong key={i} style={{ color: "#000000", fontWeight: "700" }}>{part.slice(2, -2)}</strong>
         }
         return part
     })
@@ -21,10 +21,10 @@ function BulletItem({ children, style }) {
             style={{
                 display: "flex",
                 alignItems: "flex-start",
-                marginBottom: "1px",
-                lineHeight: 1.28,
+                marginBottom: "0.5px",
+                lineHeight: 1.24,
                 fontSize: "10.5px",
-                color: "#111827",
+                color: "#000000",
                 ...style,
             }}
         >
@@ -34,44 +34,48 @@ function BulletItem({ children, style }) {
                     width: "12px",
                     flexShrink: 0,
                     fontSize: "10.5px",
-                    lineHeight: "1.28",
+                    lineHeight: "1.24",
                     color: "#000000",
                 }}
             >
                 •
             </span>
-            <div style={{ flex: 1, fontSize: "10.5px", lineHeight: 1.28 }}>
+            <div style={{ flex: 1, fontSize: "10.5px", lineHeight: 1.24, color: "#000000" }}>
                 {children}
             </div>
         </div>
     )
 }
 
-// Clean ATS Section Title with single underline anchored directly under the title
-function SectionTitle({ title }) {
+// Section Heading without underline directly underneath (separators are section-bounded)
+function SectionHeading({ title }) {
+    return (
+        <h2
+            style={{
+                fontSize: "12px",
+                fontWeight: "700",
+                color: "#000000",
+                margin: "0 0 3px 0",
+                lineHeight: 1.22,
+                textTransform: "none",
+            }}
+        >
+            {title}
+        </h2>
+    )
+}
+
+// Clean horizontal rule separating completed sections
+function SectionDivider() {
     return (
         <div
             style={{
-                borderBottom: "1.2px solid #000000",
-                paddingBottom: "2px",
-                marginTop: "10px",
+                borderBottom: "1px solid #000000",
+                marginTop: "6px",
                 marginBottom: "6px",
+                width: "100%",
             }}
-        >
-            <h2
-                style={{
-                    fontSize: "12px",
-                    fontWeight: "700",
-                    letterSpacing: "0.06em",
-                    textTransform: "uppercase",
-                    color: "#000000",
-                    margin: 0,
-                    lineHeight: 1.2,
-                }}
-            >
-                {title}
-            </h2>
-        </div>
+        />
     )
 }
 
@@ -100,8 +104,8 @@ export default function ClassicATS({ data, fontFamily = "'Times New Roman', Time
         { label: "Backend", items: skills.backend },
         { label: "Frontend", items: skills.frontend || skills.frameworks },
         { label: "Databases", items: skills.databases },
-        { label: "AI / ML & Search", items: skills.ai },
-        { label: "Tools & DevOps", items: skills.tools },
+        { label: "AI / ML & Search Systems", items: skills.ai },
+        { label: "Tools & Technologies", items: skills.tools },
         { label: "Other", items: skills.other },
     ].filter(cat => Array.isArray(cat.items) && cat.items.length > 0)
 
@@ -111,6 +115,9 @@ export default function ClassicATS({ data, fontFamily = "'Times New Roman', Time
         return `https://${url}`
     }
 
+    const hasAchievements = Array.isArray(d.achievements) && d.achievements.filter(Boolean).length > 0
+    const hasCertifications = Array.isArray(d.certifications) && d.certifications.filter(c => c && c.name).length > 0
+
     return (
         <div
             style={{
@@ -119,45 +126,44 @@ export default function ClassicATS({ data, fontFamily = "'Times New Roman', Time
                 backgroundColor: "#FFFFFF",
                 fontFamily: fontFamily || "'Times New Roman', Times, 'Tinos', serif",
                 color: "#000000",
-                padding: "26px 36px 28px 36px",
+                padding: "24px 34px 24px 34px",
                 boxSizing: "border-box",
                 display: "flex",
                 flexDirection: "column",
                 WebkitFontSmoothing: "antialiased",
-                lineHeight: 1.26,
+                lineHeight: 1.25,
             }}
         >
-            {/* ── HEADER ────────────────────────────────────────── */}
-            <header style={{ textAlign: "center", marginBottom: "4px" }}>
+            {/* ── 1. HEADER (name and all) ───────────────────────── */}
+            <header style={{ textAlign: "center", marginBottom: "0px" }}>
                 <h1
                     style={{
-                        fontSize: "24px",
+                        fontSize: "20px",
                         fontWeight: "700",
-                        letterSpacing: "0.03em",
+                        letterSpacing: "0.01em",
                         color: "#000000",
-                        margin: "0 0 4px 0",
-                        lineHeight: 1.15,
-                        textTransform: "uppercase",
+                        margin: "0 0 3px 0",
+                        lineHeight: 1.18,
                     }}
                 >
-                    {p.name || "YOUR NAME"}
+                    {p.name || "Your Name"}
                 </h1>
 
-                {/* Contact details: Location  •  Phone  •  Email */}
+                {/* Contacts: Location | Phone | Email */}
                 {contactItems.length > 0 && (
-                    <div style={{ fontSize: "10.5px", color: "#111827", marginBottom: "3px" }}>
+                    <div style={{ fontSize: "10.5px", color: "#000000", marginBottom: "2px" }}>
                         {contactItems.map((item, idx) => (
                             <span key={idx}>
                                 {item}
                                 {idx < contactItems.length - 1 && (
-                                    <span style={{ margin: "0 6px", color: "#6B7280" }}>•</span>
+                                    <span style={{ margin: "0 5px", color: "#000000" }}>|</span>
                                 )}
                             </span>
                         ))}
                     </div>
                 )}
 
-                {/* Links: Portfolio  •  LinkedIn  •  GitHub */}
+                {/* Links: Portfolio | LinkedIn | GitHub */}
                 {linkItems.length > 0 && (
                     <div style={{ fontSize: "10.5px" }}>
                         {linkItems.map((item, idx) => (
@@ -167,15 +173,14 @@ export default function ClassicATS({ data, fontFamily = "'Times New Roman', Time
                                     target="_blank"
                                     rel="noreferrer"
                                     style={{
-                                        color: "#0A2540",
+                                        color: "#0000EE",
                                         textDecoration: "underline",
-                                        fontWeight: "600",
                                     }}
                                 >
                                     {item.label}
                                 </a>
                                 {idx < linkItems.length - 1 && (
-                                    <span style={{ margin: "0 6px", color: "#6B7280", textDecoration: "none" }}>•</span>
+                                    <span style={{ margin: "0 5px", color: "#000000", textDecoration: "none" }}>|</span>
                                 )}
                             </span>
                         ))}
@@ -183,165 +188,164 @@ export default function ClassicATS({ data, fontFamily = "'Times New Roman', Time
                 )}
             </header>
 
-            {/* ── PROFESSIONAL SUMMARY ─────────────────────────── */}
+            {/* Line under header */}
+            <SectionDivider />
+
+            {/* ── 2. PROFESSIONAL SUMMARY ───────────────────────── */}
             {d.summary && (
                 <section>
-                    <SectionTitle title="Professional Summary" />
-                    <p style={{ fontSize: "10.5px", color: "#000000", lineHeight: 1.32, margin: 0, textAlign: "justify" }}>
+                    <SectionHeading title="Professional Summary" />
+                    <p style={{
+                        fontSize: "10.5px",
+                        color: "#000000",
+                        lineHeight: 1.28,
+                        margin: 0,
+                        textAlign: "justify",
+                    }}>
                         {d.summary}
                     </p>
+                    <SectionDivider />
                 </section>
             )}
 
-            {/* ── EDUCATION ────────────────────────────────────── */}
+            {/* ── 3. EDUCATION ──────────────────────────────────── */}
             {Array.isArray(d.education) && d.education.length > 0 && (
                 <section>
-                    <SectionTitle title="Education" />
-                    <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                        {d.education.map((edu, idx) => (
-                            <div key={edu.id || idx}>
-                                {/* Row 1: Institution (Left) & Dates (Right) */}
-                                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: "11px", lineHeight: 1.25 }}>
-                                    <strong style={{ color: "#000000" }}>{edu.institution}</strong>
-                                    {(edu.startYear || edu.endYear) && (
-                                        <span style={{ fontSize: "10.5px", color: "#000000", fontWeight: "600" }}>
-                                            {edu.startYear ? `${edu.startYear} – ` : ""}{edu.endYear}
-                                        </span>
-                                    )}
+                    <SectionHeading title="Education" />
+                    <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                        {d.education.map((edu, idx) => {
+                            const dates = (edu.startYear || edu.endYear)
+                                ? `${edu.startYear ? `${edu.startYear}–` : ""}${edu.endYear}`
+                                : ""
+                            const cgpa = edu.cgpa
+                                ? (edu.cgpa.startsWith("SGPA") || edu.cgpa.startsWith("CGPA") || edu.cgpa.startsWith("GPA") ? edu.cgpa : `GPA: ${edu.cgpa}`)
+                                : ""
+
+                            const degreeText = edu.degree || ""
+                            const instText = edu.institution || ""
+                            const locText = edu.location ? `, ${edu.location}` : ""
+
+                            return (
+                                <div key={edu.id || idx} style={{ fontSize: "10.5px", lineHeight: 1.26 }}>
+                                    <strong>{degreeText}</strong>
+                                    {instText && <span> – {instText}{locText}</span>}
+                                    {dates && <span> | {dates}</span>}
+                                    {cgpa && <span> | {cgpa}</span>}
                                 </div>
-                                {/* Row 2: Degree (Left) & CGPA (Right) */}
-                                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: "10.5px", color: "#111827", lineHeight: 1.25 }}>
-                                    <span style={{ fontStyle: "italic" }}>{edu.degree}</span>
-                                    {edu.cgpa && (
-                                        <span style={{ fontSize: "10.5px", color: "#000000" }}>
-                                            {edu.cgpa.startsWith("SGPA") || edu.cgpa.startsWith("CGPA") || edu.cgpa.startsWith("GPA") ? edu.cgpa : `GPA: ${edu.cgpa}`}
-                                        </span>
-                                    )}
-                                </div>
-                            </div>
-                        ))}
+                            )
+                        })}
                     </div>
+                    <SectionDivider />
                 </section>
             )}
 
-            {/* ── EXPERIENCE ───────────────────────────────────── */}
+            {/* ── 4. EXPERIENCE ─────────────────────────────────── */}
             {Array.isArray(d.experience) && d.experience.length > 0 && (
                 <section>
-                    <SectionTitle title="Professional Experience" />
-                    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                        {d.experience.map((exp, idx) => (
-                            <div key={exp.id || idx}>
-                                {/* Row 1: Role (Left) & Dates (Right) */}
-                                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: "11.2px", lineHeight: 1.25 }}>
-                                    <strong style={{ color: "#000000" }}>{exp.role}</strong>
-                                    {(exp.startDate || exp.endDate) && (
-                                        <span style={{ fontSize: "10.5px", color: "#000000", fontWeight: "600" }}>
-                                            {exp.startDate ? `${exp.startDate} – ` : ""}{exp.current ? "Present" : exp.endDate}
-                                        </span>
-                                    )}
-                                </div>
-                                {/* Row 2: Company (Left) & Location (Right) */}
-                                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: "10.5px", color: "#111827", lineHeight: 1.25, marginBottom: "3px" }}>
-                                    <span style={{ fontStyle: "italic" }}>{exp.company}</span>
-                                    {exp.location && (
-                                        <span style={{ fontStyle: "italic", color: "#000000" }}>{exp.location}</span>
-                                    )}
-                                </div>
-
-                                {/* Compact Bullets with 4px indent and 0px margin */}
-                                {Array.isArray(exp.bullets) && exp.bullets.length > 0 && (
-                                    <div style={{ paddingLeft: "4px" }}>
-                                        {exp.bullets.filter(Boolean).map((bullet, bIdx) => (
-                                            <BulletItem key={bIdx}>
-                                                {formatText(bullet)}
-                                            </BulletItem>
-                                        ))}
+                    <SectionHeading title="Experience" />
+                    <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+                        {d.experience.map((exp, idx) => {
+                            const dates = (exp.startDate || exp.endDate)
+                                ? `${exp.startDate ? `${exp.startDate} – ` : ""}${exp.current ? "Present" : exp.endDate}`
+                                : ""
+                            return (
+                                <div key={exp.id || idx}>
+                                    <div style={{ fontSize: "11px", lineHeight: 1.24, marginBottom: "2px" }}>
+                                        <strong>{exp.role}</strong>
+                                        {exp.company && <span> – {exp.company}</span>}
+                                        {dates && <span> | {dates}</span>}
+                                        {exp.location && <span> | {exp.location}</span>}
                                     </div>
-                                )}
-                            </div>
-                        ))}
+
+                                    {/* Bullets with exact spacing */}
+                                    {Array.isArray(exp.bullets) && exp.bullets.length > 0 && (
+                                        <div style={{ paddingLeft: "4px" }}>
+                                            {exp.bullets.filter(Boolean).map((bullet, bIdx) => (
+                                                <BulletItem key={bIdx}>
+                                                    {formatText(bullet)}
+                                                </BulletItem>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            )
+                        })}
                     </div>
+                    <SectionDivider />
                 </section>
             )}
 
-            {/* ── TECHNICAL SKILLS ─────────────────────────────── */}
+            {/* ── 5. TECHNICAL SKILLS ───────────────────────────── */}
             {skillCategories.length > 0 && (
                 <section>
-                    <SectionTitle title="Technical Skills" />
-                    <div style={{ display: "flex", flexDirection: "column", gap: "2px", fontSize: "10.5px", lineHeight: 1.32 }}>
+                    <SectionHeading title="Technical Skills" />
+                    <div style={{ display: "flex", flexDirection: "column", gap: "1px", paddingLeft: "4px" }}>
                         {skillCategories.map((cat, idx) => (
-                            <div key={idx} style={{ display: "flex", alignItems: "flex-start" }}>
-                                <span style={{ fontWeight: "700", color: "#000000", minWidth: "95px", flexShrink: 0 }}>
-                                    {cat.label}:
-                                </span>
-                                <span style={{ color: "#111827" }}>
-                                    {cat.items.join(", ")}
-                                </span>
+                            <div key={idx} style={{ display: "flex", alignItems: "flex-start", fontSize: "10.5px", lineHeight: 1.26 }}>
+                                <span style={{ width: "12px", flexShrink: 0, color: "#000000" }}>•</span>
+                                <div style={{ flex: 1 }}>
+                                    <strong style={{ color: "#000000" }}>{cat.label}: </strong>
+                                    <span style={{ color: "#000000" }}>{cat.items.join(", ")}</span>
+                                </div>
                             </div>
                         ))}
                     </div>
+                    <SectionDivider />
                 </section>
             )}
 
-            {/* ── PROJECTS ─────────────────────────────────────── */}
+            {/* ── 6. PROJECTS ───────────────────────────────────── */}
             {Array.isArray(d.projects) && d.projects.length > 0 && (
                 <section>
-                    <SectionTitle title="Projects" />
-                    <div style={{ display: "flex", flexDirection: "column", gap: "7px" }}>
+                    <SectionHeading title="Projects" />
+                    <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
                         {d.projects.map((proj, idx) => (
                             <div key={proj.id || idx}>
-                                {/* Row 1: Project Name & Links (Left) & Tech Stack (Right) */}
-                                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontSize: "11.2px", lineHeight: 1.25 }}>
-                                    <div>
-                                        <strong style={{ color: "#000000" }}>{proj.name}</strong>
-                                        {proj.link && (
-                                            <a
-                                                href={formatUrl(proj.link)}
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                style={{
-                                                    color: "#0A2540",
-                                                    textDecoration: "underline",
-                                                    fontWeight: "600",
-                                                    marginLeft: "6px",
-                                                    fontSize: "10px",
-                                                }}
-                                            >
-                                                [{proj.link === "live" ? "Live" : "Demo"}]
-                                            </a>
-                                        )}
-                                        {proj.github && (
-                                            <a
-                                                href={formatUrl(proj.github)}
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                style={{
-                                                    color: "#0A2540",
-                                                    textDecoration: "underline",
-                                                    fontWeight: "600",
-                                                    marginLeft: "4px",
-                                                    fontSize: "10px",
-                                                }}
-                                            >
-                                                [Code]
-                                            </a>
-                                        )}
-                                    </div>
+                                <div style={{ fontSize: "11px", lineHeight: 1.25, marginBottom: "2px" }}>
+                                    <strong>{proj.name}</strong>
+                                    {proj.link && (
+                                        <a
+                                            href={formatUrl(proj.link)}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            style={{
+                                                color: "#0000EE",
+                                                textDecoration: "underline",
+                                                marginLeft: "4px",
+                                                fontSize: "10px",
+                                            }}
+                                        >
+                                            ({proj.link === "live" ? "live" : "demo"})
+                                        </a>
+                                    )}
+                                    {proj.github && (
+                                        <a
+                                            href={formatUrl(proj.github)}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            style={{
+                                                color: "#0000EE",
+                                                textDecoration: "underline",
+                                                marginLeft: "4px",
+                                                fontSize: "10px",
+                                            }}
+                                        >
+                                            (code)
+                                        </a>
+                                    )}
                                     {proj.techStack && (
-                                        <span style={{ fontSize: "10px", color: "#374151", fontStyle: "italic" }}>
-                                            {proj.techStack}
+                                        <span style={{ fontStyle: "italic", fontSize: "10px", color: "#374151", marginLeft: "6px" }}>
+                                            [{proj.techStack}]
                                         </span>
                                     )}
                                 </div>
 
-                                {/* Description if any */}
                                 {proj.description && (
-                                    <p style={{ fontSize: "10.5px", color: "#374151", margin: "1px 0 2px 0", fontStyle: "italic", lineHeight: 1.25 }}>
+                                    <div style={{ fontStyle: "italic", fontSize: "10px", color: "#374151", marginBottom: "2px" }}>
                                         {proj.description}
-                                    </p>
+                                    </div>
                                 )}
 
-                                {/* Compact Bullets with 4px indent */}
                                 {Array.isArray(proj.bullets) && proj.bullets.length > 0 && (
                                     <div style={{ paddingLeft: "4px" }}>
                                         {proj.bullets.filter(Boolean).map((bullet, bIdx) => (
@@ -354,13 +358,14 @@ export default function ClassicATS({ data, fontFamily = "'Times New Roman', Time
                             </div>
                         ))}
                     </div>
+                    {(hasAchievements || hasCertifications) && <SectionDivider />}
                 </section>
             )}
 
-            {/* ── ACHIEVEMENTS (Optional) ───────────────────────── */}
-            {Array.isArray(d.achievements) && d.achievements.filter(Boolean).length > 0 && (
+            {/* ── 7. ACHIEVEMENTS (Optional) ─────────────────────── */}
+            {hasAchievements && (
                 <section>
-                    <SectionTitle title="Achievements" />
+                    <SectionHeading title="Achievements" />
                     <div style={{ paddingLeft: "4px" }}>
                         {d.achievements.filter(Boolean).map((item, idx) => (
                             <BulletItem key={idx}>
@@ -368,13 +373,14 @@ export default function ClassicATS({ data, fontFamily = "'Times New Roman', Time
                             </BulletItem>
                         ))}
                     </div>
+                    {hasCertifications && <SectionDivider />}
                 </section>
             )}
 
-            {/* ── CERTIFICATIONS (Optional) ────────────────────── */}
-            {Array.isArray(d.certifications) && d.certifications.filter(c => c && c.name).length > 0 && (
+            {/* ── 8. CERTIFICATIONS (Optional) ──────────────────── */}
+            {hasCertifications && (
                 <section>
-                    <SectionTitle title="Certifications" />
+                    <SectionHeading title="Certifications" />
                     <div style={{ paddingLeft: "4px" }}>
                         {d.certifications.filter(c => c && c.name).map((cert, idx) => (
                             <BulletItem key={idx}>
