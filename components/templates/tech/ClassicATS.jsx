@@ -204,9 +204,6 @@ export default function ClassicATS({
 
     const { paddingY, dividerMargin, itemGap, bulletMargin, lineHeight } = chosenPreset
 
-    // When content is 1 page (<= 19 bullets), distribute sections evenly so top and bottom margins match!
-    const isSinglePage = totalBullets <= 19
-
     return (
         <div
             style={{
@@ -219,291 +216,275 @@ export default function ClassicATS({
                 boxSizing: "border-box",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: isSinglePage ? "space-between" : "flex-start",
+                justifyContent: "flex-start",
                 WebkitFontSmoothing: "antialiased",
                 lineHeight,
             }}
         >
             {/* ── 1. HEADER (name and all) ───────────────────────── */}
-            <div style={{ width: "100%", fontFamily: TIMES_FONT }}>
-                <header style={{ textAlign: "center", marginBottom: "0px", fontFamily: TIMES_FONT }}>
-                    <h1
-                        style={{
-                            fontSize: nameFs,
-                            fontWeight: "700",
-                            letterSpacing: "0.01em",
-                            color: "#000000",
-                            margin: "0 0 3px 0",
-                            lineHeight: 1.2,
-                            fontFamily: TIMES_FONT,
-                        }}
-                    >
-                        {formatText(p.name || "Your Name")}
-                    </h1>
+            <header style={{ textAlign: "center", marginBottom: "0px", fontFamily: TIMES_FONT }}>
+                <h1
+                    style={{
+                        fontSize: nameFs,
+                        fontWeight: "700",
+                        letterSpacing: "0.01em",
+                        color: "#000000",
+                        margin: "0 0 3px 0",
+                        lineHeight: 1.2,
+                        fontFamily: TIMES_FONT,
+                    }}
+                >
+                    {formatText(p.name || "Your Name")}
+                </h1>
 
-                    {/* Contacts */}
-                    {contactItems.length > 0 && (
-                        <div style={{ fontSize: bodyFs, fontWeight: "400", color: "#000000", marginBottom: "2px", fontFamily: TIMES_FONT }}>
-                            {contactItems.map((item, idx) => (
-                                <span key={idx} style={{ fontFamily: TIMES_FONT }}>
-                                    {item}
-                                    {idx < contactItems.length - 1 && (
-                                        <span style={{ margin: "0 5px", color: "#000000", fontFamily: TIMES_FONT }}>|</span>
-                                    )}
-                                </span>
-                            ))}
-                        </div>
-                    )}
+                {/* Contacts */}
+                {contactItems.length > 0 && (
+                    <div style={{ fontSize: bodyFs, fontWeight: "400", color: "#000000", marginBottom: "2px", fontFamily: TIMES_FONT }}>
+                        {contactItems.map((item, idx) => (
+                            <span key={idx} style={{ fontFamily: TIMES_FONT }}>
+                                {item}
+                                {idx < contactItems.length - 1 && (
+                                    <span style={{ margin: "0 5px", color: "#000000", fontFamily: TIMES_FONT }}>|</span>
+                                )}
+                            </span>
+                        ))}
+                    </div>
+                )}
 
-                    {/* Links */}
-                    {linkItems.length > 0 && (
-                        <div style={{ fontSize: bodyFs, fontWeight: "400", fontFamily: TIMES_FONT }}>
-                            {linkItems.map((item, idx) => (
-                                <span key={idx} style={{ fontFamily: TIMES_FONT }}>
-                                    <a
-                                        href={formatUrl(item.url)}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        style={{
-                                            color: "#0000EE",
-                                            textDecoration: "underline",
-                                            fontFamily: TIMES_FONT,
-                                        }}
-                                    >
-                                        {item.label}
-                                    </a>
-                                    {idx < linkItems.length - 1 && (
-                                        <span style={{ margin: "0 5px", color: "#000000", textDecoration: "none", fontFamily: TIMES_FONT }}>|</span>
-                                    )}
-                                </span>
-                            ))}
-                        </div>
-                    )}
-                </header>
-                <SectionDivider marginY={dividerMargin} />
-            </div>
+                {/* Links */}
+                {linkItems.length > 0 && (
+                    <div style={{ fontSize: bodyFs, fontWeight: "400", fontFamily: TIMES_FONT }}>
+                        {linkItems.map((item, idx) => (
+                            <span key={idx} style={{ fontFamily: TIMES_FONT }}>
+                                <a
+                                    href={formatUrl(item.url)}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    style={{
+                                        color: "#0000EE",
+                                        textDecoration: "underline",
+                                        fontFamily: TIMES_FONT,
+                                    }}
+                                >
+                                    {item.label}
+                                </a>
+                                {idx < linkItems.length - 1 && (
+                                    <span style={{ margin: "0 5px", color: "#000000", textDecoration: "none", fontFamily: TIMES_FONT }}>|</span>
+                                )}
+                            </span>
+                        ))}
+                    </div>
+                )}
+            </header>
+            <SectionDivider marginY={dividerMargin} />
 
             {/* ── 2. PROFESSIONAL SUMMARY ───────────────────────── */}
             {d.summary && (
-                <div style={{ width: "100%", fontFamily: TIMES_FONT }}>
-                    <section style={{ fontFamily: TIMES_FONT }}>
-                        <SectionHeading title="Professional Summary" fontSize={headingFs} />
-                        <p style={{
-                            fontSize: bodyFs,
-                            fontWeight: "400",
-                            color: "#000000",
-                            lineHeight,
-                            margin: 0,
-                            textAlign: "justify",
-                            fontFamily: TIMES_FONT,
-                        }}>
-                            {formatText(d.summary)}
-                        </p>
-                    </section>
+                <section style={{ fontFamily: TIMES_FONT }}>
+                    <SectionHeading title="Professional Summary" fontSize={headingFs} />
+                    <p style={{
+                        fontSize: bodyFs,
+                        fontWeight: "400",
+                        color: "#000000",
+                        lineHeight,
+                        margin: 0,
+                        textAlign: "justify",
+                        fontFamily: TIMES_FONT,
+                    }}>
+                        {formatText(d.summary)}
+                    </p>
                     <SectionDivider marginY={dividerMargin} />
-                </div>
+                </section>
             )}
 
             {/* ── 3. EDUCATION ──────────────────────────────────── */}
             {hasEducation && (
-                <div style={{ width: "100%", fontFamily: TIMES_FONT }}>
-                    <section style={{ fontFamily: TIMES_FONT }}>
-                        <SectionHeading title="Education" fontSize={headingFs} />
-                        <div style={{ display: "flex", flexDirection: "column", gap: spacing === "relaxed" ? "5px" : "2px", fontFamily: TIMES_FONT }}>
-                            {d.education.map((edu, idx) => {
-                                const dates = (edu.startYear || edu.endYear)
-                                    ? `${edu.startYear ? `${edu.startYear}–` : ""}${edu.endYear}`
-                                    : ""
-                                const cgpa = edu.cgpa
-                                    ? (edu.cgpa.startsWith("SGPA") || edu.cgpa.startsWith("CGPA") || edu.cgpa.startsWith("GPA") ? edu.cgpa : `GPA: ${edu.cgpa}`)
-                                    : ""
+                <section style={{ fontFamily: TIMES_FONT }}>
+                    <SectionHeading title="Education" fontSize={headingFs} />
+                    <div style={{ display: "flex", flexDirection: "column", gap: spacing === "relaxed" ? "5px" : "2px", fontFamily: TIMES_FONT }}>
+                        {d.education.map((edu, idx) => {
+                            const dates = (edu.startYear || edu.endYear)
+                                ? `${edu.startYear ? `${edu.startYear}–` : ""}${edu.endYear}`
+                                : ""
+                            const cgpa = edu.cgpa
+                                ? (edu.cgpa.startsWith("SGPA") || edu.cgpa.startsWith("CGPA") || edu.cgpa.startsWith("GPA") ? edu.cgpa : `GPA: ${edu.cgpa}`)
+                                : ""
 
-                                const degreeText = edu.degree || ""
-                                const instText = edu.institution || ""
-                                const locText = edu.location ? `, ${edu.location}` : ""
+                            const degreeText = edu.degree || ""
+                            const instText = edu.institution || ""
+                            const locText = edu.location ? `, ${edu.location}` : ""
 
-                                return (
-                                    <div key={edu.id || idx} style={{ fontSize: bodyFs, fontWeight: "400", lineHeight, color: "#000000", fontFamily: TIMES_FONT }}>
-                                        <strong style={{ color: "#000000", fontWeight: "700", fontFamily: TIMES_FONT }}>{formatText(degreeText)}</strong>
-                                        {instText && <span style={{ fontFamily: TIMES_FONT }}> – {formatText(instText)}{locText}</span>}
-                                        {dates && <span style={{ fontFamily: TIMES_FONT }}> | {dates}</span>}
-                                        {cgpa && <span style={{ fontFamily: TIMES_FONT }}> | {cgpa}</span>}
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </section>
+                            return (
+                                <div key={edu.id || idx} style={{ fontSize: bodyFs, fontWeight: "400", lineHeight, color: "#000000", fontFamily: TIMES_FONT }}>
+                                    <strong style={{ color: "#000000", fontWeight: "700", fontFamily: TIMES_FONT }}>{formatText(degreeText)}</strong>
+                                    {instText && <span style={{ fontFamily: TIMES_FONT }}> – {formatText(instText)}{locText}</span>}
+                                    {dates && <span style={{ fontFamily: TIMES_FONT }}> | {dates}</span>}
+                                    {cgpa && <span style={{ fontFamily: TIMES_FONT }}> | {cgpa}</span>}
+                                </div>
+                            )
+                        })}
+                    </div>
                     <SectionDivider marginY={dividerMargin} />
-                </div>
+                </section>
             )}
 
             {/* ── 4. EXPERIENCE ─────────────────────────────────── */}
             {hasExperience && (
-                <div style={{ width: "100%", fontFamily: TIMES_FONT }}>
-                    <section style={{ fontFamily: TIMES_FONT }}>
-                        <SectionHeading title="Experience" fontSize={headingFs} />
-                        <div style={{ display: "flex", flexDirection: "column", gap: itemGap, fontFamily: TIMES_FONT }}>
-                            {d.experience.map((exp, idx) => {
-                                const dates = (exp.startDate || exp.endDate)
-                                    ? `${exp.startDate ? `${exp.startDate} – ` : ""}${exp.current ? "Present" : exp.endDate}`
-                                    : ""
-                                return (
-                                    <div key={exp.id || idx} style={{ fontFamily: TIMES_FONT }}>
-                                        <div style={{ fontSize: bodyFs, lineHeight: 1.25, marginBottom: "2px", color: "#000000", fontFamily: TIMES_FONT }}>
-                                            <strong style={{ color: "#000000", fontWeight: "700", fontFamily: TIMES_FONT }}>{formatText(exp.role)}</strong>
-                                            {exp.company && <span style={{ fontFamily: TIMES_FONT }}> — {formatText(exp.company)}</span>}
-                                            {dates && <span style={{ fontFamily: TIMES_FONT }}> | {dates}</span>}
-                                            {exp.location && <span style={{ fontFamily: TIMES_FONT }}> | {exp.location}</span>}
-                                        </div>
-
-                                        {/* Bullets */}
-                                        {Array.isArray(exp.bullets) && exp.bullets.length > 0 && (
-                                            <div style={{ paddingLeft: "4px", fontFamily: TIMES_FONT }}>
-                                                {exp.bullets.filter(Boolean).map((bullet, bIdx) => (
-                                                    <BulletItem key={bIdx} fontSize={bodyFs} lineHeight={lineHeight} marginBottom={bulletMargin}>
-                                                        {formatText(bullet)}
-                                                    </BulletItem>
-                                                ))}
-                                            </div>
-                                        )}
+                <section style={{ fontFamily: TIMES_FONT }}>
+                    <SectionHeading title="Experience" fontSize={headingFs} />
+                    <div style={{ display: "flex", flexDirection: "column", gap: itemGap, fontFamily: TIMES_FONT }}>
+                        {d.experience.map((exp, idx) => {
+                            const dates = (exp.startDate || exp.endDate)
+                                ? `${exp.startDate ? `${exp.startDate} – ` : ""}${exp.current ? "Present" : exp.endDate}`
+                                : ""
+                            return (
+                                <div key={exp.id || idx} style={{ fontFamily: TIMES_FONT }}>
+                                    <div style={{ fontSize: bodyFs, lineHeight: 1.25, marginBottom: "2px", color: "#000000", fontFamily: TIMES_FONT }}>
+                                        <strong style={{ color: "#000000", fontWeight: "700", fontFamily: TIMES_FONT }}>{formatText(exp.role)}</strong>
+                                        {exp.company && <span style={{ fontFamily: TIMES_FONT }}> — {formatText(exp.company)}</span>}
+                                        {dates && <span style={{ fontFamily: TIMES_FONT }}> | {dates}</span>}
+                                        {exp.location && <span style={{ fontFamily: TIMES_FONT }}> | {exp.location}</span>}
                                     </div>
-                                )
-                            })}
-                        </div>
-                    </section>
+
+                                    {/* Bullets */}
+                                    {Array.isArray(exp.bullets) && exp.bullets.length > 0 && (
+                                        <div style={{ paddingLeft: "4px", fontFamily: TIMES_FONT }}>
+                                            {exp.bullets.filter(Boolean).map((bullet, bIdx) => (
+                                                <BulletItem key={bIdx} fontSize={bodyFs} lineHeight={lineHeight} marginBottom={bulletMargin}>
+                                                    {formatText(bullet)}
+                                                </BulletItem>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            )
+                        })}
+                    </div>
                     <SectionDivider marginY={dividerMargin} />
-                </div>
+                </section>
             )}
 
             {/* ── 5. TECHNICAL SKILLS ───────────────────────────── */}
             {hasSkills && (
-                <div style={{ width: "100%", fontFamily: TIMES_FONT }}>
-                    <section style={{ fontFamily: TIMES_FONT }}>
-                        <SectionHeading title="Technical Skills" fontSize={headingFs} />
-                        <div style={{ display: "flex", flexDirection: "column", gap: spacing === "relaxed" ? "4px" : "2px", paddingLeft: "4px", fontFamily: TIMES_FONT }}>
-                            {skillCategories.map((cat, idx) => (
-                                <div key={idx} style={{ display: "flex", alignItems: "flex-start", fontSize: bodyFs, fontWeight: "400", lineHeight, color: "#000000", fontFamily: TIMES_FONT }}>
-                                    <span style={{ width: "13px", flexShrink: 0, color: "#000000", fontFamily: TIMES_FONT }}>•</span>
-                                    <div style={{ flex: 1, color: "#000000", fontFamily: TIMES_FONT }}>
-                                        <strong style={{ color: "#000000", fontWeight: "700", fontFamily: TIMES_FONT }}>{cat.label}: </strong>
-                                        <span style={{ color: "#000000", fontFamily: TIMES_FONT }}>{cat.items.join(", ")}</span>
-                                    </div>
+                <section style={{ fontFamily: TIMES_FONT }}>
+                    <SectionHeading title="Technical Skills" fontSize={headingFs} />
+                    <div style={{ display: "flex", flexDirection: "column", gap: spacing === "relaxed" ? "4px" : "2px", paddingLeft: "4px", fontFamily: TIMES_FONT }}>
+                        {skillCategories.map((cat, idx) => (
+                            <div key={idx} style={{ display: "flex", alignItems: "flex-start", fontSize: bodyFs, fontWeight: "400", lineHeight, color: "#000000", fontFamily: TIMES_FONT }}>
+                                <span style={{ width: "13px", flexShrink: 0, color: "#000000", fontFamily: TIMES_FONT }}>•</span>
+                                <div style={{ flex: 1, color: "#000000", fontFamily: TIMES_FONT }}>
+                                    <strong style={{ color: "#000000", fontWeight: "700", fontFamily: TIMES_FONT }}>{cat.label}: </strong>
+                                    <span style={{ color: "#000000", fontFamily: TIMES_FONT }}>{cat.items.join(", ")}</span>
                                 </div>
-                            ))}
-                        </div>
-                    </section>
+                            </div>
+                        ))}
+                    </div>
                     <SectionDivider marginY={dividerMargin} />
-                </div>
+                </section>
             )}
 
             {/* ── 6. PROJECTS (name - link, bullets one below one) ─ */}
             {hasProjects && (
-                <div style={{ width: "100%", fontFamily: TIMES_FONT }}>
-                    <section style={{ fontFamily: TIMES_FONT }}>
-                        <SectionHeading title="Projects" fontSize={headingFs} />
-                        <div style={{ display: "flex", flexDirection: "column", gap: itemGap, fontFamily: TIMES_FONT }}>
-                            {d.projects.map((proj, idx) => {
-                                const linkUrl = proj.link ? formatUrl(proj.link) : proj.github ? formatUrl(proj.github) : null
-                                let linkLabel = "Link"
-                                if (proj.link) {
-                                    const lower = proj.link.toLowerCase()
-                                    if (lower === "live" || lower.includes("vercel") || lower.includes("demo")) linkLabel = "Live"
-                                    else if (lower.includes("github")) linkLabel = "Code"
-                                    else linkLabel = "Link"
-                                } else if (proj.github) {
-                                    linkLabel = "Code"
-                                }
+                <section style={{ fontFamily: TIMES_FONT }}>
+                    <SectionHeading title="Projects" fontSize={headingFs} />
+                    <div style={{ display: "flex", flexDirection: "column", gap: itemGap, fontFamily: TIMES_FONT }}>
+                        {d.projects.map((proj, idx) => {
+                            const linkUrl = proj.link ? formatUrl(proj.link) : proj.github ? formatUrl(proj.github) : null
+                            let linkLabel = "Link"
+                            if (proj.link) {
+                                const lower = proj.link.toLowerCase()
+                                if (lower === "live" || lower.includes("vercel") || lower.includes("demo")) linkLabel = "Live"
+                                else if (lower.includes("github")) linkLabel = "Code"
+                                else linkLabel = "Link"
+                            } else if (proj.github) {
+                                linkLabel = "Code"
+                            }
 
-                                return (
-                                    <div key={proj.id || idx} style={{ fontFamily: TIMES_FONT }}>
-                                        {/* Line 1: Project Name – Link */}
-                                        <div style={{ fontSize: bodyFs, lineHeight: 1.25, marginBottom: "2px", color: "#000000", fontFamily: TIMES_FONT }}>
-                                            <strong style={{ color: "#000000", fontWeight: "700", fontFamily: TIMES_FONT }}>
-                                                {formatText(proj.name)}
-                                            </strong>
-                                            {linkUrl && (
-                                                <span style={{ fontFamily: TIMES_FONT }}>
-                                                    {" – "}
-                                                    <a
-                                                        href={linkUrl}
-                                                        target="_blank"
-                                                        rel="noreferrer"
-                                                        style={{
-                                                            color: "#0000EE",
-                                                            textDecoration: "underline",
-                                                            fontFamily: TIMES_FONT,
-                                                            fontWeight: "400",
-                                                        }}
-                                                    >
-                                                        ({linkLabel})
-                                                    </a>
-                                                </span>
-                                            )}
-                                        </div>
-
-                                        {/* Bullets points directly one below one */}
-                                        {Array.isArray(proj.bullets) && proj.bullets.length > 0 ? (
-                                            <div style={{ paddingLeft: "4px", fontFamily: TIMES_FONT }}>
-                                                {proj.bullets.filter(Boolean).map((bullet, bIdx) => (
-                                                    <BulletItem key={bIdx} fontSize={bodyFs} lineHeight={lineHeight} marginBottom={bulletMargin}>
-                                                        {formatText(bullet)}
-                                                    </BulletItem>
-                                                ))}
-                                            </div>
-                                        ) : proj.description ? (
-                                            <div style={{ paddingLeft: "4px", fontFamily: TIMES_FONT }}>
-                                                <BulletItem fontSize={bodyFs} lineHeight={lineHeight} marginBottom={bulletMargin}>
-                                                    {formatText(proj.description)}
-                                                </BulletItem>
-                                            </div>
-                                        ) : null}
-
-                                        {/* Divider between project items if no achievements/certifications follow */}
-                                        {!hasAchievements && !hasCertifications && idx < d.projects.length - 1 && (
-                                            <SectionDivider marginY={dividerMargin} />
+                            return (
+                                <div key={proj.id || idx} style={{ fontFamily: TIMES_FONT }}>
+                                    {/* Line 1: Project Name – Link */}
+                                    <div style={{ fontSize: bodyFs, lineHeight: 1.25, marginBottom: "2px", color: "#000000", fontFamily: TIMES_FONT }}>
+                                        <strong style={{ color: "#000000", fontWeight: "700", fontFamily: TIMES_FONT }}>
+                                            {formatText(proj.name)}
+                                        </strong>
+                                        {linkUrl && (
+                                            <span style={{ fontFamily: TIMES_FONT }}>
+                                                {" – "}
+                                                <a
+                                                    href={linkUrl}
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                    style={{
+                                                        color: "#0000EE",
+                                                        textDecoration: "underline",
+                                                        fontFamily: TIMES_FONT,
+                                                        fontWeight: "400",
+                                                    }}
+                                                >
+                                                    ({linkLabel})
+                                                </a>
+                                            </span>
                                         )}
                                     </div>
-                                )
-                            })}
-                        </div>
-                    </section>
+
+                                    {/* Bullets points directly one below one */}
+                                    {Array.isArray(proj.bullets) && proj.bullets.length > 0 ? (
+                                        <div style={{ paddingLeft: "4px", fontFamily: TIMES_FONT }}>
+                                            {proj.bullets.filter(Boolean).map((bullet, bIdx) => (
+                                                <BulletItem key={bIdx} fontSize={bodyFs} lineHeight={lineHeight} marginBottom={bulletMargin}>
+                                                    {formatText(bullet)}
+                                                </BulletItem>
+                                            ))}
+                                        </div>
+                                    ) : proj.description ? (
+                                        <div style={{ paddingLeft: "4px", fontFamily: TIMES_FONT }}>
+                                            <BulletItem fontSize={bodyFs} lineHeight={lineHeight} marginBottom={bulletMargin}>
+                                                {formatText(proj.description)}
+                                            </BulletItem>
+                                        </div>
+                                    ) : null}
+
+                                    {/* Divider between project items if no achievements/certifications follow */}
+                                    {!hasAchievements && !hasCertifications && idx < d.projects.length - 1 && (
+                                        <SectionDivider marginY={dividerMargin} />
+                                    )}
+                                </div>
+                            )
+                        })}
+                    </div>
                     {(hasAchievements || hasCertifications) && <SectionDivider marginY={dividerMargin} />}
-                </div>
+                </section>
             )}
 
             {/* ── 7. ACHIEVEMENTS (Optional) ─────────────────────── */}
             {hasAchievements && (
-                <div style={{ width: "100%", fontFamily: TIMES_FONT }}>
-                    <section style={{ fontFamily: TIMES_FONT }}>
-                        <SectionHeading title="Achievements" fontSize={headingFs} />
-                        <div style={{ paddingLeft: "4px", fontFamily: TIMES_FONT }}>
-                            {d.achievements.filter(Boolean).map((item, idx) => (
-                                <BulletItem key={idx} fontSize={bodyFs} lineHeight={lineHeight} marginBottom={bulletMargin}>
-                                    {formatText(item)}
-                                </BulletItem>
-                            ))}
-                        </div>
-                    </section>
+                <section style={{ fontFamily: TIMES_FONT }}>
+                    <SectionHeading title="Achievements" fontSize={headingFs} />
+                    <div style={{ paddingLeft: "4px", fontFamily: TIMES_FONT }}>
+                        {d.achievements.filter(Boolean).map((item, idx) => (
+                            <BulletItem key={idx} fontSize={bodyFs} lineHeight={lineHeight} marginBottom={bulletMargin}>
+                                {formatText(item)}
+                            </BulletItem>
+                        ))}
+                    </div>
                     {hasCertifications && <SectionDivider marginY={dividerMargin} />}
-                </div>
+                </section>
             )}
 
             {/* ── 8. CERTIFICATIONS (Optional) ──────────────────── */}
             {hasCertifications && (
-                <div style={{ width: "100%", fontFamily: TIMES_FONT }}>
-                    <section style={{ fontFamily: TIMES_FONT }}>
-                        <SectionHeading title="Certifications" fontSize={headingFs} />
-                        <div style={{ paddingLeft: "4px", fontFamily: TIMES_FONT }}>
-                            {d.certifications.filter(c => c && c.name).map((cert, idx) => (
-                                <BulletItem key={idx} fontSize={bodyFs} lineHeight={lineHeight} marginBottom={bulletMargin}>
-                                    <strong style={{ color: "#000000", fontWeight: "700", fontFamily: TIMES_FONT }}>{formatText(cert.name)}</strong>
-                                    {cert.issuer ? ` – ${cert.issuer}` : ""}
-                                    {cert.year ? ` (${cert.year})` : ""}
-                                </BulletItem>
-                            ))}
-                        </div>
-                    </section>
-                </div>
+                <section style={{ fontFamily: TIMES_FONT }}>
+                    <SectionHeading title="Certifications" fontSize={headingFs} />
+                    <div style={{ paddingLeft: "4px", fontFamily: TIMES_FONT }}>
+                        {d.certifications.filter(c => c && c.name).map((cert, idx) => (
+                            <BulletItem key={idx} fontSize={bodyFs} lineHeight={lineHeight} marginBottom={bulletMargin}>
+                                <strong style={{ color: "#000000", fontWeight: "700", fontFamily: TIMES_FONT }}>{formatText(cert.name)}</strong>
+                                {cert.issuer ? ` – ${cert.issuer}` : ""}
+                                {cert.year ? ` (${cert.year})` : ""}
+                            </BulletItem>
+                        ))}
+                    </div>
+                </section>
             )}
         </div>
     )
