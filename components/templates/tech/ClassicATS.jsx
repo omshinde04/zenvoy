@@ -21,8 +21,8 @@ function BulletItem({ children, style }) {
             style={{
                 display: "flex",
                 alignItems: "flex-start",
-                marginBottom: "0.5px",
-                lineHeight: 1.24,
+                marginBottom: "2px",
+                lineHeight: 1.30,
                 fontSize: "10.5px",
                 color: "#000000",
                 ...style,
@@ -31,16 +31,16 @@ function BulletItem({ children, style }) {
             <span
                 style={{
                     display: "inline-block",
-                    width: "12px",
+                    width: "13px",
                     flexShrink: 0,
                     fontSize: "10.5px",
-                    lineHeight: "1.24",
+                    lineHeight: "1.30",
                     color: "#000000",
                 }}
             >
                 •
             </span>
-            <div style={{ flex: 1, fontSize: "10.5px", lineHeight: 1.24, color: "#000000" }}>
+            <div style={{ flex: 1, fontSize: "10.5px", lineHeight: 1.30, color: "#000000" }}>
                 {children}
             </div>
         </div>
@@ -55,8 +55,8 @@ function SectionHeading({ title }) {
                 fontSize: "12px",
                 fontWeight: "700",
                 color: "#000000",
-                margin: "0 0 3px 0",
-                lineHeight: 1.22,
+                margin: "0 0 4px 0",
+                lineHeight: 1.25,
                 textTransform: "none",
             }}
         >
@@ -66,14 +66,15 @@ function SectionHeading({ title }) {
 }
 
 // Clean horizontal rule separating completed sections
-function SectionDivider() {
+function SectionDivider({ style }) {
     return (
         <div
             style={{
                 borderBottom: "1px solid #000000",
-                marginTop: "6px",
-                marginBottom: "6px",
+                marginTop: "7px",
+                marginBottom: "8px",
                 width: "100%",
+                ...style,
             }}
         />
     )
@@ -126,24 +127,24 @@ export default function ClassicATS({ data, fontFamily = "'Times New Roman', Time
                 backgroundColor: "#FFFFFF",
                 fontFamily: fontFamily || "'Times New Roman', Times, 'Tinos', serif",
                 color: "#000000",
-                padding: "24px 34px 24px 34px",
+                padding: "44px 44px 44px 44px",
                 boxSizing: "border-box",
                 display: "flex",
                 flexDirection: "column",
                 WebkitFontSmoothing: "antialiased",
-                lineHeight: 1.25,
+                lineHeight: 1.30,
             }}
         >
             {/* ── 1. HEADER (name and all) ───────────────────────── */}
             <header style={{ textAlign: "center", marginBottom: "0px" }}>
                 <h1
                     style={{
-                        fontSize: "20px",
+                        fontSize: "21px",
                         fontWeight: "700",
                         letterSpacing: "0.01em",
                         color: "#000000",
                         margin: "0 0 3px 0",
-                        lineHeight: 1.18,
+                        lineHeight: 1.2,
                     }}
                 >
                     {p.name || "Your Name"}
@@ -151,7 +152,7 @@ export default function ClassicATS({ data, fontFamily = "'Times New Roman', Time
 
                 {/* Contacts: Location | Phone | Email */}
                 {contactItems.length > 0 && (
-                    <div style={{ fontSize: "10.5px", color: "#000000", marginBottom: "2px" }}>
+                    <div style={{ fontSize: "10.5px", color: "#000000", marginBottom: "3px" }}>
                         {contactItems.map((item, idx) => (
                             <span key={idx}>
                                 {item}
@@ -198,7 +199,7 @@ export default function ClassicATS({ data, fontFamily = "'Times New Roman', Time
                     <p style={{
                         fontSize: "10.5px",
                         color: "#000000",
-                        lineHeight: 1.28,
+                        lineHeight: 1.32,
                         margin: 0,
                         textAlign: "justify",
                     }}>
@@ -226,7 +227,7 @@ export default function ClassicATS({ data, fontFamily = "'Times New Roman', Time
                             const locText = edu.location ? `, ${edu.location}` : ""
 
                             return (
-                                <div key={edu.id || idx} style={{ fontSize: "10.5px", lineHeight: 1.26 }}>
+                                <div key={edu.id || idx} style={{ fontSize: "10.5px", lineHeight: 1.30 }}>
                                     <strong>{degreeText}</strong>
                                     {instText && <span> – {instText}{locText}</span>}
                                     {dates && <span> | {dates}</span>}
@@ -243,16 +244,16 @@ export default function ClassicATS({ data, fontFamily = "'Times New Roman', Time
             {Array.isArray(d.experience) && d.experience.length > 0 && (
                 <section>
                     <SectionHeading title="Experience" />
-                    <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
                         {d.experience.map((exp, idx) => {
                             const dates = (exp.startDate || exp.endDate)
                                 ? `${exp.startDate ? `${exp.startDate} – ` : ""}${exp.current ? "Present" : exp.endDate}`
                                 : ""
                             return (
                                 <div key={exp.id || idx}>
-                                    <div style={{ fontSize: "11px", lineHeight: 1.24, marginBottom: "2px" }}>
+                                    <div style={{ fontSize: "11px", lineHeight: 1.26, marginBottom: "2px" }}>
                                         <strong>{exp.role}</strong>
-                                        {exp.company && <span> – {exp.company}</span>}
+                                        {exp.company && <span> — {exp.company}</span>}
                                         {dates && <span> | {dates}</span>}
                                         {exp.location && <span> | {exp.location}</span>}
                                     </div>
@@ -279,10 +280,10 @@ export default function ClassicATS({ data, fontFamily = "'Times New Roman', Time
             {skillCategories.length > 0 && (
                 <section>
                     <SectionHeading title="Technical Skills" />
-                    <div style={{ display: "flex", flexDirection: "column", gap: "1px", paddingLeft: "4px" }}>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "2px", paddingLeft: "4px" }}>
                         {skillCategories.map((cat, idx) => (
-                            <div key={idx} style={{ display: "flex", alignItems: "flex-start", fontSize: "10.5px", lineHeight: 1.26 }}>
-                                <span style={{ width: "12px", flexShrink: 0, color: "#000000" }}>•</span>
+                            <div key={idx} style={{ display: "flex", alignItems: "flex-start", fontSize: "10.5px", lineHeight: 1.30 }}>
+                                <span style={{ width: "13px", flexShrink: 0, color: "#000000" }}>•</span>
                                 <div style={{ flex: 1 }}>
                                     <strong style={{ color: "#000000" }}>{cat.label}: </strong>
                                     <span style={{ color: "#000000" }}>{cat.items.join(", ")}</span>
@@ -354,6 +355,11 @@ export default function ClassicATS({ data, fontFamily = "'Times New Roman', Time
                                             </BulletItem>
                                         ))}
                                     </div>
+                                )}
+
+                                {/* Divider between project items if no achievements/certifications follow, exactly matching original resume */}
+                                {!hasAchievements && !hasCertifications && idx < d.projects.length - 1 && (
+                                    <SectionDivider style={{ marginTop: "7px", marginBottom: "7px" }} />
                                 )}
                             </div>
                         ))}
