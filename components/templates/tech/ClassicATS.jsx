@@ -167,18 +167,18 @@ export default function ClassicATS({
     // Spacing configuration (Compact, Normal, Relaxed)
     const spacingPresets = {
         compact: {
-            paddingY: "36px",
-            dividerMargin: "6px",
-            itemGap: "5px",
-            bulletMargin: "1.5px",
-            lineHeight: 1.25,
+            paddingY: "40px",
+            dividerMargin: "7.5px",
+            itemGap: "6.5px",
+            bulletMargin: "2px",
+            lineHeight: 1.28,
         },
         normal: {
-            paddingY: "44px",
-            dividerMargin: "8px",
-            itemGap: "7px",
-            bulletMargin: "2px",
-            lineHeight: 1.29,
+            paddingY: "46px",
+            dividerMargin: "9px",
+            itemGap: "8px",
+            bulletMargin: "2.5px",
+            lineHeight: 1.315,
         },
         relaxed: {
             paddingY: "48px",
@@ -189,19 +189,7 @@ export default function ClassicATS({
         },
     }
 
-    // Auto-detect density & 1-page vertical balancing
-    const expBullets = (d.experience || []).reduce((acc, e) => acc + (e.bullets?.filter(Boolean).length || 0), 0)
-    const projBullets = (d.projects || []).reduce((acc, p) => acc + (p.bullets?.filter(Boolean).length || 0), 0)
-    const achBullets = (d.achievements || []).filter(Boolean).length
-    const certCount = (d.certifications || []).filter(c => c && c.name).length
-    const totalBullets = expBullets + projBullets + achBullets + certCount
-
-    let chosenPreset = spacingPresets[spacing] || spacingPresets.normal
-    if (spacing === "normal") {
-        if (totalBullets >= 20) chosenPreset = spacingPresets.compact
-        else if (totalBullets <= 10) chosenPreset = spacingPresets.relaxed
-    }
-
+    const chosenPreset = spacingPresets[spacing] || spacingPresets.normal
     const { paddingY, dividerMargin, itemGap, bulletMargin, lineHeight } = chosenPreset
 
     return (
