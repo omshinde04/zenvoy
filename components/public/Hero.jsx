@@ -39,7 +39,7 @@ export default function Hero() {
                     transition={{ duration: 0.5 }}
                     className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-slate-900 tracking-[-0.03em] leading-[1.1] font-sans"
                 >
-                    The 100% Free ATS Resume Builder That{" "}
+                    Zapiya – The 100% Free ATS Resume Builder That{" "}
                     <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-800 bg-clip-text text-transparent">
                         Gets You Shortlisted.
                     </span>
@@ -52,8 +52,8 @@ export default function Hero() {
                     transition={{ delay: 0.15, duration: 0.5 }}
                     className="mt-6 text-slate-600 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed font-sans"
                 >
-                    Engineered for software engineers, developers &amp; college students.
-                    Create recruiter-approved, Harvard-standard resumes with universal Times New Roman formatting and instant vector PDF export.
+                    Zapiya is engineered for software engineers, developers &amp; students.
+                    Create recruiter-approved, Harvard-standard ATS resumes with universal Times New Roman formatting and instant vector PDF export. 100% free with zero paywalls.
                 </motion.p>
 
                 {/* CTA Buttons */}

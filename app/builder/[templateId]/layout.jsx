@@ -2,20 +2,20 @@
 
 const TEMPLATE_TITLES = {
   "classic-ats": {
-    title: "Classic ATS Resume Builder – 100% Free Harvard Format",
-    desc: "Build a high-scoring single-column Harvard/Jake's ATS resume. 100% free, zero signup, no watermark, universal Times New Roman typography.",
+    title: "Classic ATS Resume Builder – Free Harvard Format (100% Free, No Signup)",
+    desc: "Build a high-scoring single-column Harvard/Jake's ATS resume on Zapiya. 100% free, zero signup, no watermark, universal Times New Roman typography, and 1-click vector PDF download.",
   },
   "tech-minimal": {
-    title: "Tech Minimal Resume Builder – 100% Free ATS Template",
-    desc: "Clean single-column resume template designed for software engineers and developers. Instant vector PDF download with zero watermarks.",
+    title: "Tech Minimal Resume Builder – Free Software Engineer ATS Template",
+    desc: "Clean single-column resume template designed for software engineers and full-stack developers. Instant vector PDF download with zero watermarks on Zapiya.",
   },
   "tech-two-column": {
     title: "Tech Pro Resume Builder – Free Two-Column ATS Format",
-    desc: "Two-column resume layout tailored for product companies and senior engineers. 100% free with local auto-save.",
+    desc: "Two-column resume layout tailored for product companies, technical architects, and senior engineers. 100% free with local auto-save on Zapiya.",
   },
   "tech-bold-header": {
-    title: "Tech Bold Header Resume Builder – Free ATS Template",
-    desc: "High-impact bold header resume template for experienced developers. 100% free vector PDF export.",
+    title: "Tech Bold Header Resume Builder – Free Developer ATS Template",
+    desc: "High-impact bold header resume template for experienced developers and tech leaders. 100% free vector PDF export on Zapiya.",
   },
 }
 

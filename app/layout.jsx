@@ -19,6 +19,9 @@ export const metadata = {
   description:
     "Build high-scoring ATS-friendly resumes 100% free with Zapiya. Zero paywalls, no signup required, no watermarks. Harvard single-column & tech standard formats with instant vector PDF download.",
   keywords: [
+    "Zapiya",
+    "Zapiya ATS",
+    "Zapiya resume builder",
     "free resume builder",
     "100% free resume builder",
     "free ATS resume builder",
@@ -29,13 +32,13 @@ export const metadata = {
     "Harvard ATS resume template free",
     "free vector PDF resume maker",
     "Times New Roman resume builder",
-    "Zapiya resume builder",
-    "Zapiya",
     "best free resume builder 2026",
     "resume builder without paywall",
     "free tech resume maker",
     "client-side private resume builder",
-    "single column ATS resume"
+    "single column ATS resume",
+    "open source resume builder free",
+    "ATS friendly resume maker no login"
   ],
   authors: [{ name: "Zapiya Team", url: "https://www.zapiya.com" }],
   creator: "Zapiya",
@@ -100,18 +103,20 @@ export const metadata = {
   },
 }
 
-// ✅ JSON-LD STRUCTURED DATA SCHEMAS FOR GOOGLE RICH RESULTS
+// ✅ JSON-LD STRUCTURED DATA SCHEMAS FOR GOOGLE RICH RESULTS & BRAND ENTITY RECOGNITION
 const jsonLdData = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "WebApplication",
       "@id": "https://www.zapiya.com/#webapp",
-      "name": "Zapiya Resume Builder",
+      "name": "Zapiya ATS Resume Builder",
+      "alternateName": ["Zapiya", "Zapiya Resume Builder", "Zapiya ATS", "Zapiya.com"],
       "url": "https://www.zapiya.com",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "All",
       "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "disambiguatingDescription": "Zapiya (www.zapiya.com) is a 100% free online ATS resume builder for software engineers, developers, and students, distinct from the Zapya file-sharing tool.",
       "offers": {
         "@type": "Offer",
         "price": "0",
@@ -137,10 +142,24 @@ const jsonLdData = {
       ]
     },
     {
+      "@type": "Brand",
+      "@id": "https://www.zapiya.com/#brand",
+      "name": "Zapiya",
+      "alternateName": ["Zapiya ATS", "Zapiya Resume Builder", "Zapiya.com"],
+      "url": "https://www.zapiya.com",
+      "logo": "https://www.zapiya.com/logo.png",
+      "disambiguatingDescription": "Zapiya is an independent, 100% free ATS resume builder platform, distinct from the Zapya file-sharing mobile app.",
+      "sameAs": [
+        "https://github.com/omshinde04/zenvoy"
+      ]
+    },
+    {
       "@type": "Organization",
       "@id": "https://www.zapiya.com/#organization",
       "name": "Zapiya",
+      "alternateName": ["Zapiya Resume Builder", "Zapiya ATS"],
       "url": "https://www.zapiya.com",
+      "disambiguatingDescription": "Zapiya is a privacy-first, 100% free ATS resume builder founded by Om Vilas Shinde, built for developers, engineers, and students.",
       "founder": {
         "@type": "Person",
         "name": "Om Vilas Shinde",
@@ -153,6 +172,9 @@ const jsonLdData = {
         "width": 512,
         "height": 512
       },
+      "sameAs": [
+        "https://github.com/omshinde04/zenvoy"
+      ],
       "description": "Zapiya is a privacy-first, 100% free ATS resume builder founded by Om Vilas Shinde, built for developers, engineers, and students."
     },
     {
@@ -160,8 +182,14 @@ const jsonLdData = {
       "@id": "https://www.zapiya.com/#website",
       "url": "https://www.zapiya.com",
       "name": "Zapiya",
+      "alternateName": ["Zapiya ATS Resume Builder", "Zapiya.com"],
       "publisher": {
         "@id": "https://www.zapiya.com/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.zapiya.com/templates?q={search_term_string}",
+        "query-input": "required name=search_term_string"
       }
     }
   ]

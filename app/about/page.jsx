@@ -10,9 +10,55 @@ export const metadata = {
   },
 }
 
+const aboutJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "AboutPage",
+      "@id": "https://www.zapiya.com/about#webpage",
+      "name": "About Zapiya ATS Resume Builder",
+      "url": "https://www.zapiya.com/about",
+      "description": "Learn about Zapiya's mission: providing honest, 100% free, ATS-compliant resume building tools for developers and students with zero paywalls.",
+      "mainEntity": {
+        "@type": "Organization",
+        "name": "Zapiya",
+        "url": "https://www.zapiya.com",
+        "founder": {
+          "@type": "Person",
+          "name": "Om Vilas Shinde",
+          "jobTitle": "Founder & Lead Engineer",
+          "url": "https://www.zapiya.com/about"
+        }
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.zapiya.com/about#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.zapiya.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "About",
+          "item": "https://www.zapiya.com/about"
+        }
+      ]
+    }
+  ]
+}
+
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-slate-50/50 py-16 px-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutJsonLd) }}
+      />
       <div className="max-w-4xl mx-auto">
         
         {/* Header */}
@@ -75,6 +121,15 @@ export default function AboutPage() {
             </h2>
             <p>
               Zapiya operates primarily client-side in your web browser. Your resume edits are saved directly to your browser&apos;s local storage and can be backed up as an encrypted JSON file on your machine. When you generate a PDF, your browser renders a pure, selectable-text vector PDF directly.
+            </p>
+          </section>
+
+          <section className="pt-6 border-t border-slate-100">
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 font-comfortaa mb-3">
+              Brand Identity &amp; Platform Distinction
+            </h2>
+            <p>
+              <strong>Zapiya (www.zapiya.com)</strong> is an independent, specialized online ATS resume builder engineered for software developers, engineers, and students. We are completely independent and distinct from any file-sharing or mobile utility apps with similar names (such as the Zapya P2P file transfer app). Our sole focus is empowering candidates with recruiter-approved, single-column resume templates that score 95+ on enterprise Applicant Tracking Systems (Workday, Greenhouse, Taleo, and Lever).
             </p>
           </section>
 
