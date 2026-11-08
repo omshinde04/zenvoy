@@ -21,10 +21,11 @@ const TEMPLATE_MAP = {
 }
 
 const TEMPLATE_META = {
-    "classic-ats": { name: "Classic ATS", segment: "tech" },
-    "tech-minimal": { name: "Tech Minimal", segment: "tech" },
-    "tech-two-column": { name: "Tech Pro", segment: "tech" },
-    "tech-bold-header": { name: "Tech Bold", segment: "tech" },
+    "classic-ats": { name: "Classic ATS (Harvard Standard)", segment: "tech" },
+    // Temporarily hidden while ongoing enhancements are completed:
+    // "tech-minimal": { name: "Tech Minimal", segment: "tech" },
+    // "tech-two-column": { name: "Tech Pro", segment: "tech" },
+    // "tech-bold-header": { name: "Tech Bold", segment: "tech" },
 }
 
 const C = {
@@ -50,7 +51,7 @@ export default function BuilderPage() {
 
     const [data, setData] = useState(() => (templateId === "classic-ats" ? omShindeResumeData : defaultResumeData))
     const [activeSection, setActiveSection] = useState("personal")
-    const [activeTemplateId, setActiveTemplateId] = useState(templateId || "tech-minimal")
+    const [activeTemplateId, setActiveTemplateId] = useState(templateId || "classic-ats")
     const [downloading, setDownloading] = useState(false)
     const [downloadToast, setDownloadToast] = useState(null)
     const [zoom, setZoom] = useState(0.72)

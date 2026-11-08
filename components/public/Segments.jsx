@@ -7,7 +7,7 @@ import { FaLaptopCode, FaChartLine, FaPalette, FaArrowRight } from "react-icons/
 const templates = [
     {
         label: "Tech & Engineering",
-        desc: "Single-column ATS formats optimized for software developers, backend, frontend, devops & data engineers.",
+        desc: "Single-column Harvard ATS format optimized for software developers, backend, frontend, devops & data engineers.",
         icon: <FaLaptopCode />,
         color: "text-blue-600",
         bg: "bg-blue-50 border-blue-100",
@@ -15,19 +15,19 @@ const templates = [
     },
     {
         label: "MBA & Finance",
-        desc: "High-density executive structures tailored for consulting, investment banking, and product leadership.",
+        desc: "High-density executive single-column structure tailored for consulting, finance, and technical management.",
         icon: <FaChartLine />,
         color: "text-emerald-600",
         bg: "bg-emerald-50 border-emerald-100",
-        templateId: "tech-minimal",
+        templateId: "classic-ats",
     },
     {
         label: "Design & Product",
-        desc: "Balanced professional hierarchy tailored for UI/UX designers, design leads, and creative technologists.",
+        desc: "Clean ATS hierarchy tailored for UI/UX designers, product managers, and technical leads.",
         icon: <FaPalette />,
         color: "text-violet-600",
         bg: "bg-violet-50 border-violet-100",
-        templateId: "tech-two-column",
+        templateId: "classic-ats",
     },
 ]
 

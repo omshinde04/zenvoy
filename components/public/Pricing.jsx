@@ -61,7 +61,8 @@ export default function Pricing() {
 
                             <ul className="mt-8 space-y-3.5 text-sm">
                                 {[
-                                    "All ATS templates (Classic ATS, Tech Minimal, Tech Pro, Tech Bold)",
+                                    "Harvard-standard Classic ATS template with 100% parser pass rate",
+                                    "Compact, Normal, and Relaxed spacing controls for 1-page perfection",
                                     "Unlimited resume builds & live edits",
                                     "High-resolution vector PDF export",
                                     "100% watermark-free forever",
