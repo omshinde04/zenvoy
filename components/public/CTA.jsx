@@ -2,73 +2,85 @@
 
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { FaBolt, FaArrowRight } from "react-icons/fa"
+import { FaArrowRight, FaShieldAlt, FaCheckCircle, FaBolt } from "react-icons/fa"
 
 export default function CTA() {
     return (
-        <section className="relative px-6 py-24 bg-white text-center overflow-hidden border-t border-slate-200/60">
-            <div className="max-w-4xl mx-auto">
+        <section className="relative px-4 py-24 sm:px-6 bg-white text-center overflow-hidden border-t border-slate-200/70">
+            <div className="max-w-5xl mx-auto">
 
                 {/* Card Container */}
-                <div className="relative bg-gradient-to-r from-indigo-600 via-indigo-700 to-violet-700 rounded-3xl p-8 sm:p-14 text-white shadow-xl shadow-indigo-500/15 overflow-hidden">
+                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-900 p-8 sm:p-14 text-white shadow-2xl shadow-indigo-950/20">
                     
                     {/* Background glow circle */}
-                    <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-2xl -z-0 pointer-events-none" />
+                    <div className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full bg-violet-500/20 blur-3xl" />
+                    <div className="pointer-events-none absolute -bottom-20 -left-20 h-80 w-80 rounded-full bg-indigo-500/20 blur-3xl" />
 
-                    <div className="relative z-10">
-                        {/* Flow Icons */}
-                        <div className="flex items-center justify-center mb-8 gap-4 sm:gap-6 text-sm">
-                            <div className="flex flex-col items-center">
-                                <div className="w-12 h-12 bg-white/15 backdrop-blur-md rounded-2xl flex items-center justify-center text-xl border border-white/20 shadow-sm">
-                                    🎓
-                                </div>
-                                <span className="text-[11px] text-indigo-100 font-semibold mt-2 tracking-wide uppercase">Candidate</span>
+                    <div className="relative z-10 space-y-6">
+                        {/* Process Pipeline Flow */}
+                        <div className="flex items-center justify-center gap-3 sm:gap-6 text-xs font-mono font-bold text-slate-300">
+                            <div className="flex items-center gap-2 rounded-xl bg-white/10 px-3 py-1.5 backdrop-blur-md">
+                                <span className="text-base">🧑‍💻</span>
+                                <span>Input Skills</span>
                             </div>
 
-                            <span className="text-indigo-200 text-lg">→</span>
+                            <span className="text-indigo-400 font-bold">→</span>
 
-                            <div className="flex flex-col items-center">
-                                <div className="w-12 h-12 bg-white/15 backdrop-blur-md rounded-2xl flex items-center justify-center text-xl border border-white/20 shadow-sm">
-                                    📄
-                                </div>
-                                <span className="text-[11px] text-indigo-100 font-semibold mt-2 tracking-wide uppercase">ATS Resume</span>
+                            <div className="flex items-center gap-2 rounded-xl bg-white/10 px-3 py-1.5 backdrop-blur-md">
+                                <span className="text-base">🏛️</span>
+                                <span>Harvard ATS AST</span>
                             </div>
 
-                            <span className="text-indigo-200 text-lg">→</span>
+                            <span className="text-indigo-400 font-bold">→</span>
 
-                            <div className="flex flex-col items-center">
-                                <div className="w-12 h-12 bg-white/15 backdrop-blur-md rounded-2xl flex items-center justify-center text-xl border border-white/20 shadow-sm">
-                                    💼
-                                </div>
-                                <span className="text-[11px] text-indigo-100 font-semibold mt-2 tracking-wide uppercase">Shortlisted</span>
+                            <div className="flex items-center gap-2 rounded-xl bg-emerald-500/20 border border-emerald-400/30 px-3 py-1.5 text-emerald-300 backdrop-blur-md">
+                                <span className="text-base">⚡</span>
+                                <span>Interview Callback</span>
                             </div>
                         </div>
 
                         {/* Heading */}
-                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-                            From Application to Shortlist.
-                        </h2>
+                        <div className="space-y-3 max-w-2xl mx-auto">
+                            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+                                Stop Getting Filtered Out by Automated Bots.
+                            </h2>
 
-                        {/* Subtext */}
-                        <p className="mt-4 text-indigo-100 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
-                            Stop getting filtered out by automated parsers. Build your clean, Harvard-standard developer resume in minutes.
-                        </p>
+                            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                                Build your interview-ready, Harvard-standard developer resume in under 10 minutes. 100% free with zero paywalls.
+                            </p>
+                        </div>
 
-                        {/* CTA Button */}
-                        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                        {/* CTA Buttons */}
+                        <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
+                            <Link
+                                href="/builder/classic-ats"
+                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-9 py-4 rounded-2xl bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-400 hover:to-violet-500 text-white font-black shadow-xl shadow-indigo-500/30 transition hover:scale-[1.02] active:scale-[0.98] text-sm sm:text-base"
+                            >
+                                <span>Build Free on Classic ATS</span>
+                                <FaArrowRight className="text-xs" />
+                            </Link>
+
                             <Link
                                 href="/templates"
-                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-9 py-4 rounded-full bg-white text-slate-900 font-bold hover:bg-slate-50 transition shadow-xl shadow-indigo-950/20 hover:scale-[1.02] active:scale-[0.98] text-sm sm:text-base"
+                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-2xl border border-slate-700 bg-slate-800/80 hover:bg-slate-700 text-slate-200 font-bold transition text-sm sm:text-base"
                             >
-                                <span>Start Building Free</span>
-                                <FaArrowRight className="text-xs ml-1 text-slate-500" />
+                                <span>Browse Spacing Guide</span>
                             </Link>
                         </div>
 
-                        {/* Trust line */}
-                        <p className="mt-6 text-xs text-indigo-200 font-medium">
-                            100% Free Forever • Zero Paywalls • No Signup Required • Instant Vector PDF
-                        </p>
+                        {/* Trust Checklist */}
+                        <div className="pt-4 border-t border-slate-800/80 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-slate-400 font-medium">
+                            <span className="flex items-center gap-1.5 text-emerald-300 font-semibold">
+                                <FaCheckCircle className="text-emerald-400" />
+                                100% Free Forever
+                            </span>
+                            <span>•</span>
+                            <span>Zero Paywalls</span>
+                            <span>•</span>
+                            <span>No Signup Required</span>
+                            <span>•</span>
+                            <span>Pure Vector PDF</span>
+                        </div>
                     </div>
 
                 </div>
