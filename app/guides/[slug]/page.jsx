@@ -195,7 +195,7 @@ export default async function GuideDetailPage({ params }) {
         </nav>
 
         {/* Article Header */}
-        <header className="mb-12">
+        <header className="mb-10">
           <div className="flex items-center gap-3 text-xs mb-4">
             <span className="bg-indigo-50 text-indigo-600 font-semibold px-2.5 py-1 rounded-md">
               {guide.category}
@@ -213,6 +213,17 @@ export default async function GuideDetailPage({ params }) {
           <p className="mt-6 text-base sm:text-lg text-slate-600 leading-relaxed font-normal border-l-2 border-indigo-200 pl-4">
             {guide.summary}
           </p>
+
+          {guide.image && (
+            <div className="mt-8 overflow-hidden rounded-3xl border border-slate-200/90 shadow-lg shadow-slate-900/[0.04]">
+              <img
+                src={guide.image}
+                alt={guide.title}
+                className="h-64 sm:h-96 w-full object-cover"
+                loading="eager"
+              />
+            </div>
+          )}
         </header>
 
         {/* Article Body */}
