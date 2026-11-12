@@ -92,108 +92,148 @@ export default function Hero() {
 
                     </div>
 
-                    {/* RIGHT COLUMN: Candidate Hero Graphic + Floating Connected Cards */}
+                    {/* RIGHT COLUMN: Candidate Girl Graphic + Geometric Badge + Floating Connected Cards */}
                     <div className="lg:col-span-6 relative flex items-center justify-center lg:justify-end min-h-[460px] sm:min-h-[500px]">
 
-                        {/* Isolated Candidate Graphic (With Mustard Sweater, Black Arch, and Terracotta Hexagon) */}
-                        <div className="relative w-68 sm:w-76 lg:w-84 flex items-center justify-center">
-                            <img
-                                src="/hero-candidate.png"
-                                alt="Candidate Growth to Pro Level"
-                                className="w-full h-auto object-contain filter drop-shadow-md select-none pointer-events-none"
-                            />
-                        </div>
+                        {/* Geometric Backdrop Container */}
+                        <div className="relative w-72 sm:w-80 lg:w-[350px] h-[460px] sm:h-[490px] flex items-center justify-center">
 
-                        {/* FLOATING CARD 1 (Top-Left of Person): White Card with 20k+ Metric & Avatars */}
-                        <motion.div
-                            initial={{ opacity: 0, x: -16 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.2, duration: 0.4 }}
-                            className="absolute -left-2 sm:left-4 lg:left-6 top-6 sm:top-10 z-20 rounded-2xl bg-white border border-[#E5DFD3] p-4 sm:p-5 shadow-[0_12px_28px_-6px_rgba(0,0,0,0.08)] w-40 sm:w-44 text-left"
-                        >
-                            {/* Thin Hairline Connector with Diamond Node on Left */}
-                            <div className="absolute -left-6 top-1/2 -translate-y-1/2 hidden sm:flex items-center pointer-events-none">
-                                <span className="w-2 h-2 rotate-45 bg-[#D9541E]" />
-                                <span className="w-5 h-[1px] bg-[#D4CBBA]" />
+                            {/* 1. Top Arch with Topographic Contour Curves */}
+                            <div className="absolute top-2 sm:top-0 w-48 sm:w-56 h-60 rounded-t-[100px] bg-[#111111] overflow-hidden -z-0 shadow-md">
+                                <svg className="w-full h-full opacity-35" viewBox="0 0 200 240" fill="none" stroke="#FAF6EE" strokeWidth="1.2">
+                                    <path d="M 0 30 Q 100 70, 200 30" />
+                                    <path d="M 0 60 Q 100 100, 200 60" />
+                                    <path d="M 0 90 Q 100 130, 200 90" />
+                                    <path d="M 0 120 Q 100 160, 200 120" />
+                                    <path d="M 0 150 Q 100 190, 200 150" />
+                                    <path d="M 0 180 Q 100 220, 200 180" />
+                                    <path d="M 0 210 Q 100 250, 200 210" />
+                                </svg>
                             </div>
 
-                            <span className="text-2xl sm:text-[28px] font-extrabold text-[#111111] tracking-tight block leading-tight">
-                                20k+
-                            </span>
-                            <span className="text-xs text-[#66615B] font-medium block mt-0.5 mb-2.5">
-                                Happy clients
-                            </span>
-
-                            {/* Avatar Stack Row */}
-                            <div className="flex items-center -space-x-1.5">
-                                <img
-                                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80"
-                                    alt="Candidate 1"
-                                    className="w-6 h-6 rounded-full border-2 border-white object-cover"
-                                />
-                                <img
-                                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80"
-                                    alt="Candidate 2"
-                                    className="w-6 h-6 rounded-full border-2 border-white object-cover"
-                                />
-                                <img
-                                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80"
-                                    alt="Candidate 3"
-                                    className="w-6 h-6 rounded-full border-2 border-white object-cover"
-                                />
-                                <img
-                                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80"
-                                    alt="Candidate 4"
-                                    className="w-6 h-6 rounded-full border-2 border-white object-cover"
-                                />
-                                <span className="w-6 h-6 rounded-full border-2 border-white bg-[#D9541E] text-white text-[9px] font-bold flex items-center justify-center">
-                                    +
-                                </span>
-                            </div>
-                        </motion.div>
-
-                        {/* FLOATING CARD 2 (Bottom-Left of Person): Obsidian Dark Card with 99% Ring */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 16 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.3, duration: 0.4 }}
-                            className="absolute left-2 sm:left-10 lg:left-14 bottom-4 sm:bottom-6 z-20 rounded-2xl bg-[#111111] p-4 sm:p-5 shadow-[0_16px_36px_-8px_rgba(0,0,0,0.38)] w-38 sm:w-42 text-center border border-[#222222]"
-                        >
-                            {/* Circular Progress Ring in Terracotta */}
-                            <div className="relative w-16 h-16 mx-auto mb-2 flex items-center justify-center">
-                                <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
+                            {/* 2. Terracotta Rounded Hexagonal Backdrop */}
+                            <div className="absolute bottom-2 w-64 sm:w-72 h-72 sm:h-80 -z-0">
+                                <svg viewBox="0 0 200 220" className="w-full h-full filter drop-shadow-xl">
+                                    <defs>
+                                        <linearGradient id="terracottaHexGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" stopColor="#E05B22" />
+                                            <stop offset="100%" stopColor="#C94915" />
+                                        </linearGradient>
+                                    </defs>
                                     <path
-                                        className="text-[#262626]"
-                                        strokeWidth="3.5"
-                                        stroke="currentColor"
-                                        fill="none"
-                                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                                    />
-                                    <path
-                                        className="text-[#D9541E]"
-                                        strokeDasharray="99, 100"
-                                        strokeWidth="3.5"
-                                        strokeLinecap="round"
-                                        stroke="currentColor"
-                                        fill="none"
-                                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                        d="M 100 8 
+                                           L 186 54 A 14 14 0 0 1 193 66 
+                                           L 193 154 A 14 14 0 0 1 186 166 
+                                           L 100 212 A 14 14 0 0 1 93 212 
+                                           L 14 166 A 14 14 0 0 1 7 154 
+                                           L 7 66 A 14 14 0 0 1 14 54 
+                                           L 100 8 Z"
+                                        fill="url(#terracottaHexGrad)"
                                     />
                                 </svg>
-                                <span className="absolute text-sm font-black text-[#FAF6EE]">
-                                    99%
+                            </div>
+
+                            {/* 3. Girl Cutout with Megaphone & Yellow Sweater (shifted slightly right to reveal megaphone) */}
+                            <div className="relative z-10 w-full h-full flex items-end justify-center pointer-events-none select-none translate-x-3 sm:translate-x-5">
+                                <img
+                                    src="/hero-girl.png"
+                                    alt="Candidate Announcing Career Growth"
+                                    className="h-[430px] sm:h-[470px] object-contain filter drop-shadow-lg"
+                                />
+                            </div>
+
+                            {/* FLOATING CARD 1 (Top-Left): White Card with 20k+ Metric & Avatars */}
+                            <motion.div
+                                initial={{ opacity: 0, x: -16 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.2, duration: 0.4 }}
+                                className="absolute -left-10 sm:-left-8 lg:-left-12 top-4 sm:top-6 z-20 rounded-2xl bg-white border border-[#E5DFD3] p-4 sm:p-5 shadow-[0_12px_28px_-6px_rgba(0,0,0,0.08)] w-40 sm:w-44 text-left"
+                            >
+                                {/* Thin Hairline Connector with Diamond Node on Left */}
+                                <div className="absolute -left-6 top-1/2 -translate-y-1/2 hidden sm:flex items-center pointer-events-none">
+                                    <span className="w-2 h-2 rotate-45 bg-[#D9541E]" />
+                                    <span className="w-5 h-[1px] bg-[#D4CBBA]" />
+                                </div>
+
+                                <span className="text-2xl sm:text-[28px] font-extrabold text-[#111111] tracking-tight block leading-tight">
+                                    20k+
                                 </span>
-                            </div>
+                                <span className="text-xs text-[#66615B] font-medium block mt-0.5 mb-2.5">
+                                    Happy clients
+                                </span>
 
-                            <span className="text-[11px] font-medium text-[#A09A90] block">
-                                ATS Pass Rate
-                            </span>
+                                {/* Avatar Stack Row */}
+                                <div className="flex items-center -space-x-1.5">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80"
+                                        alt="User 1"
+                                        className="w-6 h-6 rounded-full border-2 border-white object-cover"
+                                    />
+                                    <img
+                                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80"
+                                        alt="User 2"
+                                        className="w-6 h-6 rounded-full border-2 border-white object-cover"
+                                    />
+                                    <img
+                                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80"
+                                        alt="User 3"
+                                        className="w-6 h-6 rounded-full border-2 border-white object-cover"
+                                    />
+                                    <img
+                                        src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80"
+                                        alt="User 4"
+                                        className="w-6 h-6 rounded-full border-2 border-white object-cover"
+                                    />
+                                    <span className="w-6 h-6 rounded-full border-2 border-white bg-[#D9541E] text-white text-[9px] font-bold flex items-center justify-center">
+                                        +
+                                    </span>
+                                </div>
+                            </motion.div>
 
-                            {/* Hairline Connector Below Dark Card with Diamond Node */}
-                            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center pointer-events-none">
-                                <span className="w-[1px] h-4 bg-[#D4CBBA]" />
-                                <span className="w-2 h-2 rotate-45 bg-[#D9541E]" />
-                            </div>
-                        </motion.div>
+                            {/* FLOATING CARD 2 (Bottom-Left): Obsidian Dark Card with 99% Ring */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 16 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.3, duration: 0.4 }}
+                                className="absolute -left-4 sm:left-0 lg:left-2 bottom-4 sm:bottom-6 z-20 rounded-2xl bg-[#111111] p-4 sm:p-5 shadow-[0_16px_36px_-8px_rgba(0,0,0,0.38)] w-38 sm:w-42 text-center border border-[#222222]"
+                            >
+                                {/* Circular Progress Ring in Terracotta */}
+                                <div className="relative w-16 h-16 mx-auto mb-2 flex items-center justify-center">
+                                    <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
+                                        <path
+                                            className="text-[#262626]"
+                                            strokeWidth="3.5"
+                                            stroke="currentColor"
+                                            fill="none"
+                                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                        />
+                                        <path
+                                            className="text-[#D9541E]"
+                                            strokeDasharray="99, 100"
+                                            strokeWidth="3.5"
+                                            strokeLinecap="round"
+                                            stroke="currentColor"
+                                            fill="none"
+                                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                        />
+                                    </svg>
+                                    <span className="absolute text-sm font-black text-[#FAF6EE]">
+                                        99%
+                                    </span>
+                                </div>
+
+                                <span className="text-[11px] font-medium text-[#A09A90] block">
+                                    ATS Pass Rate
+                                </span>
+
+                                {/* Hairline Connector Below Dark Card with Diamond Node */}
+                                <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center pointer-events-none">
+                                    <span className="w-[1px] h-4 bg-[#D4CBBA]" />
+                                    <span className="w-2 h-2 rotate-45 bg-[#D9541E]" />
+                                </div>
+                            </motion.div>
+
+                        </div>
 
                     </div>
 
