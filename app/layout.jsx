@@ -70,6 +70,9 @@ export const metadata = {
     ],
   },
   manifest: "/site.webmanifest",
+  other: {
+    "google-adsense-account": "ca-pub-7778964423995383",
+  },
   openGraph: {
     title: "Zapiya – 100% Free ATS Resume Builder | Zero Signup, Zero Watermark",
     description:

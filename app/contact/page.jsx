@@ -106,9 +106,9 @@ export default function ContactPage() {
               <div className="w-10 h-10 bg-[#FAF7F2] border border-[#E5DFD3] text-[#D9541E] rounded-lg flex items-center justify-center text-lg mb-3 shadow-xs">
                 <HiLocationMarker />
               </div>
-              <h3 className="font-bold text-[#111111] text-sm">Online Platform</h3>
+              <h3 className="font-bold text-[#111111] text-sm">Operating Headquarters</h3>
               <p className="text-xs text-[#66615B] mt-1 leading-relaxed">
-                Available globally 24/7 across modern HTML5 web browsers.
+                Pune, Maharashtra, India • Serving students and job seekers globally 24/7.
               </p>
             </div>
 

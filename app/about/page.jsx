@@ -336,7 +336,7 @@ export default function AboutPage() {
                 </span>
               </div>
               <p className="text-xs sm:text-sm text-[#66615B] leading-relaxed">
-                Software engineer and open-web advocate dedicated to building accessible, ethical digital utilities. Zapiya was created with a clear promise: to ensure no developer, college graduate, or job seeker ever has to pay a fee or enter credit card details just to download their own resume.
+                Software engineer and open-web advocate based in Pune, Maharashtra, India. Zapiya was created with a clear promise: to ensure no developer, college graduate, or job seeker ever has to pay a fee or enter credit card details just to download their own resume.
               </p>
               <div className="flex flex-wrap items-center gap-3 pt-2">
                 <a
