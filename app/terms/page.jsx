@@ -75,7 +75,7 @@ export default function TermsPage() {
                             If you have questions regarding these terms, please contact:
                         </p>
                         <p className="mt-2 font-medium text-slate-900">
-                            Email: <a href="mailto:support@zapiya.com" className="text-indigo-600 hover:underline">support@zapiya.com</a>
+                            Email: <a href="mailto:omshinde0484@gmail.com" className="text-indigo-600 hover:underline">omshinde0484@gmail.com</a>
                         </p>
                     </section>
                 </div>

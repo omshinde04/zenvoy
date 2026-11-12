@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { FaInstagram, FaLinkedin, FaXTwitter } from "react-icons/fa6"
+import { FaInstagram, FaLinkedin } from "react-icons/fa6"
 
 export default function Footer() {
     return (
@@ -42,28 +42,19 @@ export default function Footer() {
                         {/* Social */}
                         <div className="flex gap-2.5 mt-5">
                             <a
-                                href="https://linkedin.com"
+                                href="https://www.linkedin.com/in/om-shinde-892a2532a"
                                 target="_blank"
                                 rel="noreferrer"
-                                aria-label="LinkedIn"
+                                aria-label="LinkedIn - Om Shinde"
                                 className="w-8 h-8 rounded-lg bg-[#FAF7F2] border border-[#E5DFD3] flex items-center justify-center text-[#66615B] hover:text-[#D9541E] hover:border-[#D9541E]/40 transition shadow-xs"
                             >
                                 <FaLinkedin size={13} />
                             </a>
                             <a
-                                href="https://twitter.com"
+                                href="https://www.instagram.com/_omm.46_"
                                 target="_blank"
                                 rel="noreferrer"
-                                aria-label="Twitter"
-                                className="w-8 h-8 rounded-lg bg-[#FAF7F2] border border-[#E5DFD3] flex items-center justify-center text-[#66615B] hover:text-[#D9541E] hover:border-[#D9541E]/40 transition shadow-xs"
-                            >
-                                <FaXTwitter size={13} />
-                            </a>
-                            <a
-                                href="https://instagram.com"
-                                target="_blank"
-                                rel="noreferrer"
-                                aria-label="Instagram"
+                                aria-label="Instagram - Om Shinde"
                                 className="w-8 h-8 rounded-lg bg-[#FAF7F2] border border-[#E5DFD3] flex items-center justify-center text-[#66615B] hover:text-[#D9541E] hover:border-[#D9541E]/40 transition shadow-xs"
                             >
                                 <FaInstagram size={13} />
@@ -105,7 +96,7 @@ export default function Footer() {
                             <Link href="/terms" className="text-[#66615B] hover:text-[#D9541E] transition-colors">Terms of Service</Link>
                             <Link href="/cookies" className="text-[#66615B] hover:text-[#D9541E] transition-colors">Cookie Policy</Link>
                             <Link href="/disclaimer" className="text-[#66615B] hover:text-[#D9541E] transition-colors">Disclaimer</Link>
-                            <a href="mailto:support@zapiya.com" className="text-[#D9541E] font-medium hover:underline">support@zapiya.com</a>
+                            <a href="mailto:omshinde0484@gmail.com" className="text-[#D9541E] font-medium hover:underline break-all">omshinde0484@gmail.com</a>
                         </div>
                     </div>
 

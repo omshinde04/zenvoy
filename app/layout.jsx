@@ -22,14 +22,19 @@ export const metadata = {
     "Zapiya",
     "Zapiya ATS",
     "Zapiya resume builder",
-    "free resume builder",
-    "100% free resume builder",
+    "free resume builder for students",
+    "student resume builder no login",
     "free ATS resume builder",
-    "ATS resume builder without signup",
-    "free resume maker no watermark",
-    "software engineer resume builder free",
-    "developer resume builder",
+    "fresher resume maker free",
+    "internship resume builder free ats",
     "Harvard ATS resume template free",
+    "college student resume template free download",
+    "free resume maker no watermark",
+    "ATS resume builder without signup",
+    "software engineer resume builder free",
+    "engineering student resume maker",
+    "entry level developer resume builder",
+    "developer resume builder",
     "free vector PDF resume maker",
     "Times New Roman resume builder",
     "best free resume builder 2026",
@@ -164,7 +169,12 @@ const jsonLdData = {
         "@type": "Person",
         "name": "Om Vilas Shinde",
         "jobTitle": "Founder & Lead Engineer",
-        "url": "https://www.zapiya.com/about"
+        "url": "https://www.zapiya.com/about",
+        "sameAs": [
+          "https://www.linkedin.com/in/om-shinde-892a2532a",
+          "https://www.instagram.com/_omm.46_",
+          "https://github.com/omshinde04"
+        ]
       },
       "logo": {
         "@type": "ImageObject",
@@ -173,7 +183,9 @@ const jsonLdData = {
         "height": 1024
       },
       "sameAs": [
-        "https://github.com/omshinde04/zenvoy"
+        "https://github.com/omshinde04/zenvoy",
+        "https://www.linkedin.com/in/om-shinde-892a2532a",
+        "https://www.instagram.com/_omm.46_"
       ],
       "description": "Zapiya is a privacy-first, 100% free ATS resume builder founded by Om Vilas Shinde, built for developers, engineers, and students."
     },

@@ -10,6 +10,7 @@ import {
   FaCode,
   FaHeart,
 } from "react-icons/fa"
+import { FaLinkedin, FaInstagram } from "react-icons/fa6"
 
 export const metadata = {
   title: "About Zapiya | 100% Free, Privacy-First ATS Resume Builder",
@@ -39,6 +40,11 @@ const aboutJsonLd = {
           "name": "Om Vilas Shinde",
           "jobTitle": "Founder & Lead Engineer",
           "url": "https://www.zapiya.com/about",
+          "sameAs": [
+            "https://www.linkedin.com/in/om-shinde-892a2532a",
+            "https://www.instagram.com/_omm.46_",
+            "https://github.com/omshinde04"
+          ]
         },
       },
     },
@@ -332,6 +338,32 @@ export default function AboutPage() {
               <p className="text-xs sm:text-sm text-[#66615B] leading-relaxed">
                 Software engineer and open-web advocate dedicated to building accessible, ethical digital utilities. Zapiya was created with a clear promise: to ensure no developer, college graduate, or job seeker ever has to pay a fee or enter credit card details just to download their own resume.
               </p>
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <a
+                  href="https://www.linkedin.com/in/om-shinde-892a2532a"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#111111] hover:text-[#D9541E] bg-[#FAF7F2] border border-[#E5DFD3] hover:border-[#D9541E]/40 px-3 py-1.5 rounded-lg transition-colors shadow-2xs"
+                >
+                  <FaLinkedin className="text-sm text-[#0A66C2]" />
+                  <span>LinkedIn Profile</span>
+                </a>
+                <a
+                  href="https://www.instagram.com/_omm.46_"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#111111] hover:text-[#D9541E] bg-[#FAF7F2] border border-[#E5DFD3] hover:border-[#D9541E]/40 px-3 py-1.5 rounded-lg transition-colors shadow-2xs"
+                >
+                  <FaInstagram className="text-sm text-[#E4405F]" />
+                  <span>@_omm.46_</span>
+                </a>
+                <a
+                  href="mailto:omshinde0484@gmail.com"
+                  className="text-xs font-semibold text-[#D9541E] hover:underline"
+                >
+                  omshinde0484@gmail.com
+                </a>
+              </div>
             </div>
           </div>
         </div>

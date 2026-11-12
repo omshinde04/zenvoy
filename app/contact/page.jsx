@@ -49,7 +49,7 @@ export default function ContactPage() {
       setStatus({
         submitting: false,
         submitted: false,
-        error: "Network error occurred. Please check your connection or email support@zapiya.com directly.",
+        error: "Network error occurred. Please check your connection or email omshinde0484@gmail.com directly.",
       })
     }
   }
