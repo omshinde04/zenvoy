@@ -1,73 +1,60 @@
 "use client"
 
 import Link from "next/link"
-import { motion } from "framer-motion"
-import { FaBolt, FaArrowRight } from "react-icons/fa"
+import { FaArrowRight } from "react-icons/fa"
 
 export default function CTA() {
     return (
-        <section className="relative px-6 py-24 bg-white text-center overflow-hidden border-t border-slate-200/60">
+        <section className="relative px-6 py-24 bg-[#F3EEE3] text-center overflow-hidden border-t border-[#E5DFD3]">
             <div className="max-w-4xl mx-auto">
 
-                {/* Card Container */}
-                <div className="relative bg-gradient-to-r from-indigo-600 via-indigo-700 to-violet-700 rounded-3xl p-8 sm:p-14 text-white shadow-xl shadow-indigo-500/15 overflow-hidden">
+                {/* Obsidian Luxury Card with Terracotta Accents */}
+                <div className="relative bg-[#111111] border border-[#222222] rounded-2xl p-8 sm:p-14 text-white shadow-2xl shadow-[#111111]/15 overflow-hidden">
                     
-                    {/* Background glow circle */}
-                    <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-2xl -z-0 pointer-events-none" />
-
-                    <div className="relative z-10">
-                        {/* Flow Icons */}
-                        <div className="flex items-center justify-center mb-8 gap-4 sm:gap-6 text-sm">
-                            <div className="flex flex-col items-center">
-                                <div className="w-12 h-12 bg-white/15 backdrop-blur-md rounded-2xl flex items-center justify-center text-xl border border-white/20 shadow-sm">
-                                    🎓
-                                </div>
-                                <span className="text-[11px] text-indigo-100 font-semibold mt-2 tracking-wide uppercase">Candidate</span>
-                            </div>
-
-                            <span className="text-indigo-200 text-lg">→</span>
-
-                            <div className="flex flex-col items-center">
-                                <div className="w-12 h-12 bg-white/15 backdrop-blur-md rounded-2xl flex items-center justify-center text-xl border border-white/20 shadow-sm">
-                                    📄
-                                </div>
-                                <span className="text-[11px] text-indigo-100 font-semibold mt-2 tracking-wide uppercase">ATS Resume</span>
-                            </div>
-
-                            <span className="text-indigo-200 text-lg">→</span>
-
-                            <div className="flex flex-col items-center">
-                                <div className="w-12 h-12 bg-white/15 backdrop-blur-md rounded-2xl flex items-center justify-center text-xl border border-white/20 shadow-sm">
-                                    💼
-                                </div>
-                                <span className="text-[11px] text-indigo-100 font-semibold mt-2 tracking-wide uppercase">Shortlisted</span>
-                            </div>
+                    <div className="relative z-10 max-w-2xl mx-auto">
+                        {/* Process Steps (Quiet Monospace Pill) */}
+                        <div className="inline-flex items-center justify-center gap-2 sm:gap-3 text-xs font-mono text-[#A09A90] mb-8 bg-[#1A1A1A] border border-[#2A2A2A] px-4 py-1.5 rounded-full">
+                            <span>1. Select Template</span>
+                            <span className="text-[#444444]">→</span>
+                            <span>2. Add Experience</span>
+                            <span className="text-[#444444]">→</span>
+                            <span className="text-[#D9541E] font-semibold">3. Export Vector PDF</span>
                         </div>
 
-                        {/* Heading */}
-                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-                            From Application to Shortlist.
+                        {/* Heading: Sans with Editorial Cursive Accent */}
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#F3EEE3] tracking-tight leading-tight">
+                            From Application to{" "}
+                            <span className="font-cursive italic font-normal text-[#D9541E] text-[1.12em]">
+                                Shortlist.
+                            </span>
                         </h2>
 
                         {/* Subtext */}
-                        <p className="mt-4 text-indigo-100 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
-                            Stop getting filtered out by automated parsers. Build your clean, Harvard-standard developer resume in minutes.
+                        <p className="mt-4 text-[#A09A90] text-sm sm:text-base leading-relaxed">
+                            Stop getting filtered out by automated parsers. Build your clean, Harvard-standard developer resume in under 5 minutes.
                         </p>
 
-                        {/* CTA Button */}
-                        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                        {/* CTA Buttons */}
+                        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+                            <Link
+                                href="/builder/classic-ats"
+                                className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-[#D9541E] hover:bg-[#c04716] text-[#F3EEE3] font-medium text-sm transition-colors shadow-sm"
+                            >
+                                <span>Build Free Resume on Classic ATS</span>
+                                <FaArrowRight className="text-xs text-[#F3EEE3]/80 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:text-white" />
+                            </Link>
+
                             <Link
                                 href="/templates"
-                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-9 py-4 rounded-full bg-white text-slate-900 font-bold hover:bg-slate-50 transition shadow-xl shadow-indigo-950/20 hover:scale-[1.02] active:scale-[0.98] text-sm sm:text-base"
+                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-[#222222] hover:bg-[#2a2a2a] text-[#F3EEE3] border border-[#333333] text-sm font-medium transition-colors"
                             >
-                                <span>Start Building Free</span>
-                                <FaArrowRight className="text-xs ml-1 text-slate-500" />
+                                Browse All Templates
                             </Link>
                         </div>
 
-                        {/* Trust line */}
-                        <p className="mt-6 text-xs text-indigo-200 font-medium">
-                            100% Free Forever • Zero Paywalls • No Signup Required • Instant Vector PDF
+                        {/* Quiet Trust line */}
+                        <p className="mt-6 text-xs text-[#777169] font-medium">
+                            100% Free Forever · Zero Watermarks · No Signup Required · Client-Side In-Browser Privacy
                         </p>
                     </div>
 

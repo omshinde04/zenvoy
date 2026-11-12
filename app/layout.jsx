@@ -202,7 +202,7 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&family=Tinos:wght@400;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Inter:wght@300;400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500;1,6..72,600&family=Playfair+Display:ital,wght@1,400;1,600;1,700&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap"
           rel="stylesheet"
         />
         <script
@@ -216,7 +216,7 @@ export default function RootLayout({ children }) {
           crossOrigin="anonymous"
         />
       </head>
-      <body className="bg-white text-slate-900 antialiased selection:bg-indigo-500 selection:text-white">
+      <body className="bg-[#F3EEE3] text-[#111111] antialiased selection:bg-[#D9541E] selection:text-[#F3EEE3]">
         <ZapiyaTracker />
         <LayoutShell>{children}</LayoutShell>
       </body>

@@ -34,23 +34,23 @@ export default function Features() {
     return (
         <section
             id="features"
-            className="relative px-6 py-24 bg-white overflow-hidden border-t border-slate-200/60"
+            className="relative px-6 py-24 bg-[#F3EEE3] overflow-hidden border-t border-[#E5DFD3]"
         >
             <div className="relative max-w-6xl mx-auto">
 
                 {/* Header */}
-                <div className="text-center max-w-2xl mx-auto mb-16">
-                    <span className="inline-block text-xs font-semibold text-indigo-700 uppercase tracking-wider bg-indigo-50/80 border border-indigo-100 px-3.5 py-1.5 rounded-full mb-3.5">
+                <div className="text-center max-w-2xl mx-auto mb-14">
+                    <span className="inline-block text-xs font-medium text-[#66615B] bg-[#FAF7F2] border border-[#E5DFD3] px-3 py-1 rounded-md mb-3">
                         Engineering Precision
                     </span>
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
-                        Everything You Need to{" "}
-                        <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">
-                            Get Recruiter Callbacks
+                    <h2 className="text-3xl md:text-4xl font-extrabold text-[#111111] tracking-tight">
+                        Everything You Need to Get{" "}
+                        <span className="font-cursive italic font-normal text-[#D9541E] text-[1.12em]">
+                            Recruiter Callbacks
                         </span>
                     </h2>
 
-                    <p className="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
+                    <p className="text-[#66615B] text-sm sm:text-base mt-3 leading-relaxed">
                         No subscription paywalls. No confusing dashboards. Pure, distraction-free resume engineering.
                     </p>
                 </div>
@@ -64,22 +64,22 @@ export default function Features() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.08, duration: 0.4 }}
-                            className="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-6 hover:bg-white hover:shadow-hover hover:border-indigo-300 transition-all duration-200 flex flex-col justify-between"
+                            className="bg-[#FAF7F2] border border-[#E5DFD3] rounded-xl p-6 hover:bg-white hover:border-[#D9541E]/50 hover:shadow-md transition-all duration-200 flex flex-col justify-between"
                         >
                             <div>
-                                <div className="w-11 h-11 rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center text-lg mb-5 shadow-xs">
+                                <div className="w-10 h-10 rounded-lg bg-white border border-[#E5DFD3] text-[#111111] flex items-center justify-center text-base mb-4 shadow-xs">
                                     {f.icon}
                                 </div>
 
-                                <span className="inline-block text-[10px] font-semibold tracking-wider text-indigo-600 uppercase bg-indigo-50/80 px-2.5 py-0.5 rounded-full mb-2">
+                                <span className="inline-block text-[11px] font-medium text-[#D9541E] mb-1.5">
                                     {f.tag}
                                 </span>
 
-                                <h3 className="text-base font-bold text-slate-900 tracking-tight">
+                                <h3 className="text-base font-bold text-[#111111] tracking-tight">
                                     {f.title}
                                 </h3>
 
-                                <p className="text-slate-600 text-xs sm:text-sm mt-2 leading-relaxed">
+                                <p className="text-[#66615B] text-xs sm:text-sm mt-2 leading-relaxed">
                                     {f.desc}
                                 </p>
                             </div>

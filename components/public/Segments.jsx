@@ -33,22 +33,22 @@ const templates = [
 
 export default function Segments() {
     return (
-        <section className="relative px-6 py-24 bg-slate-50/50 overflow-hidden border-t border-slate-200/60">
+        <section className="relative px-6 py-24 bg-[#FAF7F2] overflow-hidden border-t border-[#E5DFD3]">
             <div className="relative max-w-6xl mx-auto">
 
                 {/* Heading */}
-                <div className="text-center max-w-2xl mx-auto mb-16">
-                    <span className="inline-block text-xs font-semibold text-indigo-700 uppercase tracking-wider bg-indigo-50/80 border border-indigo-100 px-3.5 py-1.5 rounded-full mb-3.5">
+                <div className="text-center max-w-2xl mx-auto mb-14">
+                    <span className="inline-block text-xs font-medium text-[#66615B] bg-[#F3EEE3] border border-[#E5DFD3] px-3 py-1 rounded-md mb-3">
                         Role-Specific Formats
                     </span>
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+                    <h2 className="text-3xl md:text-4xl font-extrabold text-[#111111] tracking-tight">
                         Templates Built for Your{" "}
-                        <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">
+                        <span className="font-cursive italic font-normal text-[#D9541E] text-[1.12em]">
                             Career Trajectory
                         </span>
                     </h2>
 
-                    <p className="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
+                    <p className="text-[#66615B] text-sm sm:text-base mt-3 leading-relaxed">
                         Every template follows proven recruiter reading patterns to highlight your greatest technical and leadership achievements.
                     </p>
                 </div>
@@ -62,27 +62,27 @@ export default function Segments() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1, duration: 0.4 }}
-                            whileHover={{ y: -4 }}
-                            className="bg-white border border-slate-200/80 rounded-2xl p-7 flex flex-col justify-between shadow-subtle hover:shadow-hover hover:border-indigo-300 transition-all duration-200"
+                            whileHover={{ y: -3 }}
+                            className="bg-white border border-[#E5DFD3] rounded-xl p-7 flex flex-col justify-between shadow-xs hover:shadow-md hover:border-[#D9541E]/50 transition-all duration-200"
                         >
                             <div>
-                                <div className={`w-12 h-12 rounded-2xl ${t.bg} border ${t.color} flex items-center justify-center text-xl mb-5 shadow-xs`}>
+                                <div className="w-11 h-11 rounded-lg bg-[#FAF7F2] border border-[#E5DFD3] text-[#111111] flex items-center justify-center text-lg mb-5 shadow-xs">
                                     {t.icon}
                                 </div>
 
-                                <h3 className="text-lg font-bold text-slate-900 tracking-tight">
+                                <h3 className="text-lg font-bold text-[#111111] tracking-tight">
                                     {t.label}
                                 </h3>
 
-                                <p className="text-slate-600 text-sm mt-2.5 leading-relaxed">
+                                <p className="text-[#66615B] text-sm mt-2.5 leading-relaxed">
                                     {t.desc}
                                 </p>
                             </div>
 
-                            <div className="mt-6 pt-5 border-t border-slate-100">
+                            <div className="mt-6 pt-5 border-t border-[#F3EEE3]">
                                 <Link
                                     href={`/builder/${t.templateId}`}
-                                    className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-indigo-600 hover:text-indigo-700"
+                                    className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#D9541E] hover:text-[#111111] transition-colors"
                                 >
                                     <span>Use Template Free</span>
                                     <FaArrowRight className="text-[10px]" />

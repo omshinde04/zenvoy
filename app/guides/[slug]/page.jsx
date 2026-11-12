@@ -117,7 +117,7 @@ export default async function GuideDetailPage({ params }) {
 
         if (trimmed.startsWith("## ")) {
           return (
-            <h2 key={i} className="text-2xl sm:text-3xl font-bold text-slate-900 mt-10 mb-4 font-comfortaa">
+            <h2 key={i} className="text-2xl sm:text-3xl font-bold text-[#111111] mt-10 mb-4 tracking-tight">
               {trimmed.replace(/^## /, "")}
             </h2>
           )
@@ -125,7 +125,7 @@ export default async function GuideDetailPage({ params }) {
 
         if (trimmed.startsWith("### ")) {
           return (
-            <h3 key={i} className="text-xl font-bold text-slate-900 mt-8 mb-3 font-comfortaa">
+            <h3 key={i} className="text-xl font-bold text-[#111111] mt-8 mb-3 tracking-tight">
               {trimmed.replace(/^### /, "")}
             </h3>
           )
@@ -133,7 +133,7 @@ export default async function GuideDetailPage({ params }) {
 
         if (trimmed.startsWith("> ")) {
           return (
-            <blockquote key={i} className="border-l-4 border-indigo-500 bg-indigo-50/60 p-4 rounded-r-xl my-6 text-slate-800 text-sm italic">
+            <blockquote key={i} className="border-l-4 border-[#D9541E] bg-[#FAF7F2] p-4 rounded-r-lg my-6 text-[#111111] text-sm italic">
               {trimmed.replace(/^> /, "")}
             </blockquote>
           )
@@ -142,7 +142,7 @@ export default async function GuideDetailPage({ params }) {
         if (trimmed.startsWith("* ") || trimmed.startsWith("- ")) {
           const items = trimmed.split("\n").map((line) => line.replace(/^[\*\-]\s+/, ""))
           return (
-            <ul key={i} className="space-y-2 my-4 list-disc list-inside text-slate-700 text-sm sm:text-base leading-relaxed">
+            <ul key={i} className="space-y-2 my-4 list-disc list-inside text-[#333333] text-sm sm:text-base leading-relaxed">
               {items.map((item, j) => (
                 <li key={j}>
                   <span dangerouslySetInnerHTML={{ __html: item.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
@@ -155,7 +155,7 @@ export default async function GuideDetailPage({ params }) {
         if (/^\d+\.\s/.test(trimmed)) {
           const items = trimmed.split("\n").map((line) => line.replace(/^\d+\.\s+/, ""))
           return (
-            <ol key={i} className="space-y-2 my-4 list-decimal list-inside text-slate-700 text-sm sm:text-base leading-relaxed">
+            <ol key={i} className="space-y-2 my-4 list-decimal list-inside text-[#333333] text-sm sm:text-base leading-relaxed">
               {items.map((item, j) => (
                 <li key={j}>
                   <span dangerouslySetInnerHTML={{ __html: item.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
@@ -168,7 +168,7 @@ export default async function GuideDetailPage({ params }) {
         return (
           <p
             key={i}
-            className="my-4 text-slate-700 text-sm sm:text-base leading-relaxed"
+            className="my-4 text-[#333333] text-sm sm:text-base leading-relaxed"
             dangerouslySetInnerHTML={{
               __html: trimmed.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'),
             }}
@@ -178,7 +178,7 @@ export default async function GuideDetailPage({ params }) {
   }
 
   return (
-    <article className="min-h-screen bg-slate-50/50 py-16 px-6">
+    <article className="min-h-screen bg-[#F3EEE3] py-16 px-4 sm:px-6">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
@@ -186,36 +186,36 @@ export default async function GuideDetailPage({ params }) {
       <div className="max-w-3xl mx-auto">
 
         {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-xs text-slate-500 mb-8">
-          <Link href="/" className="hover:text-indigo-600">Home</Link>
+        <nav className="flex items-center gap-2 text-xs text-[#66615B] mb-8 font-medium">
+          <Link href="/" className="hover:text-[#D9541E] transition-colors">Home</Link>
           <span>/</span>
-          <Link href="/guides" className="hover:text-indigo-600">Guides</Link>
+          <Link href="/guides" className="hover:text-[#D9541E] transition-colors">Guides</Link>
           <span>/</span>
-          <span className="text-slate-800 font-medium truncate">{guide.category}</span>
+          <span className="text-[#111111] truncate font-semibold">{guide.category}</span>
         </nav>
 
         {/* Article Header */}
         <header className="mb-10">
           <div className="flex items-center gap-3 text-xs mb-4">
-            <span className="bg-indigo-50 text-indigo-600 font-semibold px-2.5 py-1 rounded-md">
+            <span className="bg-[#FAF7F2] text-[#D9541E] border border-[#E5DFD3] font-medium px-2.5 py-1 rounded-md">
               {guide.category}
             </span>
-            <span className="text-slate-400">•</span>
-            <span className="text-slate-500">{guide.readTime}</span>
-            <span className="text-slate-400">•</span>
-            <span className="text-slate-500">{guide.date}</span>
+            <span className="text-[#DDD6C8]">•</span>
+            <span className="text-[#66615B]">{guide.readTime}</span>
+            <span className="text-[#DDD6C8]">•</span>
+            <span className="text-[#66615B]">{guide.date}</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 tracking-tight leading-tight font-comfortaa">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#111111] tracking-tight leading-tight">
             {guide.title}
           </h1>
 
-          <p className="mt-6 text-base sm:text-lg text-slate-600 leading-relaxed font-normal border-l-2 border-indigo-200 pl-4">
+          <p className="mt-6 text-base sm:text-lg text-[#66615B] leading-relaxed font-normal border-l-2 border-[#D9541E] pl-4">
             {guide.summary}
           </p>
 
           {guide.image && (
-            <div className="mt-8 overflow-hidden rounded-3xl border border-slate-200/90 shadow-lg shadow-slate-900/[0.04]">
+            <div className="mt-8 overflow-hidden rounded-2xl border border-[#E5DFD3] shadow-sm">
               <img
                 src={guide.image}
                 alt={guide.title}
@@ -227,22 +227,22 @@ export default async function GuideDetailPage({ params }) {
         </header>
 
         {/* Article Body */}
-        <div className="bg-white border border-slate-200/80 rounded-3xl p-6 sm:p-10 shadow-subtle">
+        <div className="bg-white border border-[#E5DFD3] rounded-2xl p-6 sm:p-10 shadow-xs">
           <div className="prose prose-slate max-w-none">
             {renderContent(guide.content)}
           </div>
 
           {/* Inline CTA */}
-          <div className="mt-12 pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-6 bg-slate-50/70 p-6 rounded-2xl">
+          <div className="mt-12 pt-8 border-t border-[#F3EEE3] flex flex-col sm:flex-row items-center justify-between gap-6 bg-[#111111] text-[#F3EEE3] p-6 sm:p-7 rounded-xl border border-[#222222]">
             <div>
-              <p className="text-xs uppercase tracking-wider font-semibold text-indigo-600">Take Action</p>
-              <p className="text-slate-900 font-bold text-sm sm:text-base mt-0.5">
+              <p className="text-xs uppercase tracking-wider font-semibold text-[#D9541E]">Take Action</p>
+              <p className="text-[#F3EEE3] font-bold text-sm sm:text-base mt-0.5">
                 Build this format right now in Zapiya
               </p>
             </div>
             <Link
-              href="/templates"
-              className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-semibold rounded-xl transition shadow-sm whitespace-nowrap"
+              href="/builder/classic-ats"
+              className="px-5 py-2.5 bg-[#D9541E] hover:bg-[#c04716] text-[#F3EEE3] text-xs sm:text-sm font-medium rounded-lg transition-colors shadow-xs whitespace-nowrap"
             >
               Start Free Resume →
             </Link>
@@ -258,11 +258,11 @@ export default async function GuideDetailPage({ params }) {
         />
 
         {/* Footer Navigation */}
-        <div className="mt-8 flex justify-between items-center text-sm font-semibold">
-          <Link href="/guides" className="text-indigo-600 hover:text-indigo-700">
+        <div className="mt-8 flex justify-between items-center text-sm font-medium">
+          <Link href="/guides" className="text-[#D9541E] hover:text-[#111111] transition-colors">
             ← Back to all guides
           </Link>
-          <Link href="/templates" className="text-slate-600 hover:text-indigo-600">
+          <Link href="/templates" className="text-[#66615B] hover:text-[#D9541E] transition-colors">
             Browse ATS Templates →
           </Link>
         </div>

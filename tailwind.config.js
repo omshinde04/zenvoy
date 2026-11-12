@@ -14,6 +14,12 @@ module.exports = {
     extend: {
       colors: {
         brand: {
+          bg: "#F3EEE3",
+          dark: "#111111",
+          orange: "#D9541E",
+          surface: "#FAF7F2",
+          border: "#E5DFD3",
+          muted: "#66615B",
           navy: "#0F172A",
           indigo: "#6366F1",
           violet: "#4F46E5",
@@ -22,12 +28,14 @@ module.exports = {
           gray: "#64748B",
           light: "#F8FAFC",
           card: "#FFFFFF",
-          border: "#E2E8F0",
         },
       },
       fontFamily: {
+        sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
         inter: ["Inter", "sans-serif"],
         comfortaa: ["Comfortaa", "sans-serif"],
+        cursive: ["'Playfair Display'", "Newsreader", "Georgia", "serif"],
+        script: ["Caveat", "cursive"],
       },
       boxShadow: {
         subtle: "0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03)",

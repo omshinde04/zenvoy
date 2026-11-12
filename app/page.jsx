@@ -111,7 +111,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-[#F3EEE3] min-h-screen">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homeSchemas) }}
