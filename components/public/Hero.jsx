@@ -8,13 +8,13 @@ export default function Hero() {
     return (
         <section
             id="home"
-            className="relative px-4 sm:px-6 lg:px-8 pt-4 pb-16 md:pb-24 bg-[#F3EEE3]"
+            className="relative px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-6 sm:pb-8 bg-[#F3EEE3]"
         >
             {/* The Master Framed Canvas (Luxury Editorial Stage) */}
-            <div className="max-w-6xl mx-auto rounded-[32px] sm:rounded-[44px] bg-[#FAF7F2] border border-[#E5DFD3] p-6 sm:p-10 lg:p-14 shadow-[0_24px_60px_-15px_rgba(17,17,17,0.05)] relative overflow-hidden">
+            <div className="max-w-6xl mx-auto rounded-[32px] sm:rounded-[44px] bg-[#FAF7F2] border border-[#E5DFD3] p-6 sm:p-10 lg:p-12 pb-8 sm:pb-10 shadow-[0_20px_50px_-15px_rgba(17,17,17,0.05)] relative overflow-hidden">
 
                 {/* Subtle Luxury Corner Decorative Curves */}
-                <div className="absolute right-8 top-8 w-28 h-28 pointer-events-none opacity-25">
+                <div className="absolute right-8 top-8 w-28 h-28 pointer-events-none opacity-20">
                     <svg viewBox="0 0 120 120" fill="none" stroke="#D9541E" strokeWidth="1">
                         <path d="M 120 20 C 75 20, 20 75, 20 120" />
                         <path d="M 120 45 C 85 45, 45 85, 45 120" />
@@ -22,7 +22,7 @@ export default function Hero() {
                     </svg>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
 
                     {/* LEFT COLUMN: Eyebrow + Two-Font Headline + Subtitle + CTAs + Trust Proof */}
                     <div className="lg:col-span-6 space-y-6 text-left relative z-10">
@@ -47,7 +47,7 @@ export default function Hero() {
                             initial={{ opacity: 0, y: 14 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.35 }}
-                            className="text-4xl sm:text-5xl lg:text-[58px] font-extrabold text-[#111111] tracking-[-0.035em] leading-[1.12]"
+                            className="text-4xl sm:text-5xl lg:text-[56px] font-extrabold text-[#111111] tracking-[-0.035em] leading-[1.12]"
                         >
                             We help your <br />
                             <span className="font-serif italic font-normal text-[#D9541E] pr-2">
@@ -116,14 +116,14 @@ export default function Hero() {
 
                     </div>
 
-                    {/* RIGHT COLUMN: Architectural Arch Stage + Seamless Candidate Girl + Integrated Floating Badges */}
-                    <div className="lg:col-span-6 relative flex items-center justify-center lg:justify-end min-h-[480px] sm:min-h-[520px]">
+                    {/* RIGHT COLUMN: Next-Level Broadcast Stage (No Clunky Box Cards) */}
+                    <div className="lg:col-span-6 relative flex items-center justify-center lg:justify-end min-h-[460px] sm:min-h-[500px]">
 
-                        {/* Ambient Terracotta Glow */}
+                        {/* Ambient Warm Glow */}
                         <div className="absolute w-80 h-80 rounded-full bg-[#D9541E]/12 blur-3xl pointer-events-none -z-0" />
 
-                        {/* The Architectural Arch Stage */}
-                        <div className="relative w-72 sm:w-80 lg:w-[360px] h-[480px] sm:h-[510px] flex items-center justify-center">
+                        {/* The Architectural Obsidian Stage */}
+                        <div className="relative w-72 sm:w-80 lg:w-[350px] h-[460px] sm:h-[490px] flex items-center justify-center">
 
                             {/* 1. Main Obsidian Arch with Warm Terracotta Gradient & Contour Lines */}
                             <div className="absolute inset-x-4 top-2 bottom-4 rounded-t-[140px] rounded-b-[40px] bg-[#121212] border border-[#262626] shadow-2xl overflow-hidden -z-0">
@@ -148,105 +148,100 @@ export default function Hero() {
                                     <path d="M 0 250 Q 100 290, 200 250" />
                                 </svg>
 
-                                {/* Terracotta Geometric Arc in Base */}
+                                {/* Terracotta Gradient at Base */}
                                 <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-[#D9541E]/40 to-transparent" />
                             </div>
 
-                            {/* 2. Girl Cutout with Megaphone & Yellow Sweater (Seamless Faded Base) */}
+                            {/* 2. Megaphone Acoustic Sound Waves Emitting Outward */}
+                            <div className="absolute -left-6 sm:-left-8 top-16 sm:top-20 pointer-events-none z-20">
+                                <svg width="90" height="90" viewBox="0 0 90 90" fill="none">
+                                    <motion.path
+                                        initial={{ opacity: 0.2, pathLength: 0.3 }}
+                                        animate={{ opacity: [0.3, 0.8, 0.3], pathLength: [0.3, 1, 0.3] }}
+                                        transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+                                        d="M 50 70 A 30 30 0 0 0 20 20"
+                                        stroke="#D9541E"
+                                        strokeWidth="2.5"
+                                        strokeLinecap="round"
+                                    />
+                                    <motion.path
+                                        initial={{ opacity: 0.2, pathLength: 0.3 }}
+                                        animate={{ opacity: [0.2, 0.6, 0.2], pathLength: [0.3, 1, 0.3] }}
+                                        transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+                                        d="M 65 80 A 50 50 0 0 0 10 10"
+                                        stroke="#D9541E"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        opacity="0.6"
+                                    />
+                                    <motion.path
+                                        initial={{ opacity: 0.1, pathLength: 0.3 }}
+                                        animate={{ opacity: [0.1, 0.4, 0.1], pathLength: [0.3, 1, 0.3] }}
+                                        transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+                                        d="M 80 90 A 70 70 0 0 0 0 0"
+                                        stroke="#D9541E"
+                                        strokeWidth="1.5"
+                                        strokeLinecap="round"
+                                        opacity="0.3"
+                                    />
+                                </svg>
+                            </div>
+
+                            {/* 3. Girl Cutout with Megaphone & Yellow Sweater (Seamless Faded Base) */}
                             <div className="relative z-10 w-full h-full flex items-end justify-center pointer-events-none select-none translate-x-3 sm:translate-x-5">
                                 <img
                                     src="/hero-girl.png"
                                     alt="Candidate Celebrating Career Growth"
-                                    className="h-[440px] sm:h-[480px] object-contain filter drop-shadow-xl"
+                                    className="h-[430px] sm:h-[470px] object-contain filter drop-shadow-xl"
                                 />
                             </div>
 
-                            {/* FLOATING CARD 1 (Top-Left): Elegant Glassmorphism Metric Card */}
+                            {/* NEXT-LEVEL HUD PILL 1 (Top-Left): Live Recruiter Match Status */}
                             <motion.div
-                                initial={{ opacity: 0, x: -16, y: -6 }}
+                                initial={{ opacity: 0, x: -20, y: -8 }}
                                 animate={{ opacity: 1, x: 0, y: 0 }}
                                 transition={{ delay: 0.2, duration: 0.45 }}
-                                className="absolute -left-10 sm:-left-12 lg:-left-16 top-4 sm:top-6 z-20 rounded-2xl bg-white/95 backdrop-blur-md border border-[#E5DFD3] p-4 shadow-[0_16px_36px_-6px_rgba(0,0,0,0.08)] w-44 sm:w-48 text-left"
+                                className="absolute -left-12 sm:-left-16 lg:-left-20 top-6 sm:top-8 z-20"
                             >
-                                <div className="flex items-center justify-between mb-1">
-                                    <span className="text-2xl sm:text-[28px] font-extrabold text-[#111111] tracking-tight leading-none">
-                                        20k+
+                                <div className="inline-flex items-center gap-2.5 rounded-full bg-white/95 backdrop-blur-md border border-[#E5DFD3] px-4 py-2 shadow-[0_12px_30px_rgba(0,0,0,0.08)]">
+                                    <span className="relative flex h-2 w-2">
+                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
                                     </span>
-                                    <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700 border border-emerald-200/60">
-                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                                        Active
+                                    <span className="text-xs font-bold text-[#111111] tracking-tight">
+                                        ATS Score: 100/100
                                     </span>
-                                </div>
-                                <span className="text-xs text-[#66615B] font-medium block mb-2.5">
-                                    Happy candidates
-                                </span>
-
-                                {/* Overlapping Avatar Stack */}
-                                <div className="flex items-center -space-x-2">
-                                    <img
-                                        src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80"
-                                        alt="User 1"
-                                        className="w-7 h-7 rounded-full border-2 border-white object-cover"
-                                    />
-                                    <img
-                                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80"
-                                        alt="User 2"
-                                        className="w-7 h-7 rounded-full border-2 border-white object-cover"
-                                    />
-                                    <img
-                                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80"
-                                        alt="User 3"
-                                        className="w-7 h-7 rounded-full border-2 border-white object-cover"
-                                    />
-                                    <img
-                                        src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80"
-                                        alt="User 4"
-                                        className="w-7 h-7 rounded-full border-2 border-white object-cover"
-                                    />
-                                    <span className="w-7 h-7 rounded-full border-2 border-white bg-[#D9541E] text-white text-[10px] font-bold flex items-center justify-center shadow-xs">
-                                        +
+                                    <span className="text-[11px] font-semibold text-[#D9541E] bg-[#D9541E]/10 px-2 py-0.5 rounded-full">
+                                        Harvard Spec
                                     </span>
                                 </div>
                             </motion.div>
 
-                            {/* FLOATING CARD 2 (Bottom-Left): Obsidian Glass Metric with Circular Ring */}
+                            {/* NEXT-LEVEL HUD PILL 2 (Docked Bottom): Recruiter Interview Broadcast Bar */}
                             <motion.div
-                                initial={{ opacity: 0, y: 16 }}
+                                initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3, duration: 0.45 }}
-                                className="absolute -left-6 sm:-left-4 lg:-left-6 bottom-3 sm:bottom-4 z-20 rounded-2xl bg-[#111111]/95 backdrop-blur-md p-4 sm:p-5 shadow-[0_20px_45px_-8px_rgba(0,0,0,0.45)] w-40 sm:w-44 text-center border border-[#2D2D2D]"
+                                className="absolute -left-6 sm:-left-4 lg:-left-8 bottom-3 sm:bottom-4 z-20"
                             >
-                                {/* Circular Progress Ring in Terracotta */}
-                                <div className="relative w-16 h-16 mx-auto mb-2 flex items-center justify-center">
-                                    <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
-                                        <path
-                                            className="text-[#262626]"
-                                            strokeWidth="3.5"
-                                            stroke="currentColor"
-                                            fill="none"
-                                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                                        />
-                                        <path
-                                            className="text-[#D9541E]"
-                                            strokeDasharray="99, 100"
-                                            strokeWidth="3.5"
-                                            strokeLinecap="round"
-                                            stroke="currentColor"
-                                            fill="none"
-                                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                                        />
-                                    </svg>
-                                    <span className="absolute text-sm font-black text-[#FAF7F2]">
-                                        99%
-                                    </span>
-                                </div>
+                                <div className="inline-flex items-center gap-3 rounded-full bg-[#111111]/95 backdrop-blur-md border border-[#2D2D2D] px-4 sm:px-5 py-2.5 shadow-[0_18px_40px_rgba(0,0,0,0.4)] text-white">
+                                    {/* Equalizer Sound Waves */}
+                                    <div className="flex items-center gap-0.5 h-3.5">
+                                        <span className="w-0.5 h-2 bg-[#D9541E] rounded-full animate-pulse" />
+                                        <span className="w-0.5 h-3.5 bg-[#D9541E] rounded-full" />
+                                        <span className="w-0.5 h-1.5 bg-[#D9541E] rounded-full animate-pulse" />
+                                        <span className="w-0.5 h-3 bg-[#D9541E] rounded-full" />
+                                    </div>
 
-                                <span className="text-xs font-semibold text-[#FAF7F2] block">
-                                    ATS Pass Rate
-                                </span>
-                                <span className="text-[10px] text-[#8C867D] block mt-0.5">
-                                    Workday & Greenhouse
-                                </span>
+                                    <div className="text-left">
+                                        <span className="text-xs font-semibold text-[#FAF7F2] block leading-tight">
+                                            99.4% Interview Shortlist Rate
+                                        </span>
+                                        <span className="text-[10px] text-[#A09A90] block leading-tight mt-0.5">
+                                            Workday • Greenhouse • Lever
+                                        </span>
+                                    </div>
+                                </div>
                             </motion.div>
 
                         </div>
