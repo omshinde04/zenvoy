@@ -76,9 +76,11 @@ export default async function GuideDetailPage({ params }) {
           "logo": {
             "@type": "ImageObject",
             "url": "https://www.zapiya.com/logo.png",
+            "width": 1024,
+            "height": 1024
           },
         },
-        "image": "https://www.zapiya.com/logo.png",
+        "image": "https://www.zapiya.com/og-image.png",
       },
       {
         "@type": "BreadcrumbList",

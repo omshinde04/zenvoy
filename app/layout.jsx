@@ -75,7 +75,7 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: "/logo.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Zapiya – 100% Free ATS Resume Builder",
@@ -87,7 +87,7 @@ export const metadata = {
     title: "Zapiya – 100% Free ATS Resume Builder | No Signup, Zero Paywall",
     description:
       "Build high-scoring ATS resumes 100% free. Zero paywalls, no signup, no watermarks, instant vector PDF.",
-    images: ["/logo.png"],
+    images: ["/og-image.png"],
     creator: "@zapiya",
   },
   robots: {
@@ -169,8 +169,8 @@ const jsonLdData = {
       "logo": {
         "@type": "ImageObject",
         "url": "https://www.zapiya.com/logo.png",
-        "width": 512,
-        "height": 512
+        "width": 1024,
+        "height": 1024
       },
       "sameAs": [
         "https://github.com/omshinde04/zenvoy"

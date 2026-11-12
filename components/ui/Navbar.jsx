@@ -86,20 +86,28 @@ export default function Navbar() {
                 <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
 
                     {/* Logo & Brand Identity */}
-                    <Link href="/" className="flex items-center gap-3 group">
-                        <div className="w-8 h-8 rounded-xl bg-[#111111] flex items-center justify-center p-1.5 transition-transform duration-200 group-hover:scale-105 shadow-xs">
+                    <Link href="/" className="flex items-center gap-2.5 group">
+                        <div className="w-9 h-9 relative transition-transform duration-200 group-hover:scale-105 filter drop-shadow-2xs">
                             <Image
                                 src="/logo.png"
-                                alt="Zapiya Logo"
-                                width={22}
-                                height={22}
-                                className="object-contain filter invert brightness-0"
+                                alt="Zapiya ATS Resume Builder Logo"
+                                width={36}
+                                height={36}
+                                className="object-contain w-full h-full"
+                                priority
                             />
                         </div>
                         <div className="flex items-center gap-2">
-                            <span className="text-[#111111] text-lg font-bold tracking-tight font-sans">
-                                Zapiya
-                            </span>
+                            <div className="h-6 w-20 sm:h-7 sm:w-24 relative">
+                                <Image
+                                    src="/zapiya-wordmark.png"
+                                    alt="Zapiya"
+                                    width={96}
+                                    height={30}
+                                    className="object-contain object-left w-full h-full"
+                                    priority
+                                />
+                            </div>
                             <span className="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-medium text-[#D9541E] bg-[#D9541E]/10 border border-[#D9541E]/25 px-2.5 py-0.5 rounded-md">
                                 <span className="h-1.5 w-1.5 rounded-full bg-[#D9541E]" />
                                 100% Free
@@ -179,19 +187,27 @@ export default function Navbar() {
                                         onClick={() => setMenuOpen(false)}
                                         className="flex items-center gap-2.5"
                                     >
-                                        <div className="w-8 h-8 rounded-xl bg-[#111111] flex items-center justify-center p-1.5 shadow-xs">
+                                        <div className="w-9 h-9 relative filter drop-shadow-2xs">
                                             <Image
                                                 src="/logo.png"
-                                                alt="Zapiya Logo"
-                                                width={20}
-                                                height={20}
-                                                className="object-contain filter invert brightness-0"
+                                                alt="Zapiya ATS Resume Builder Logo"
+                                                width={36}
+                                                height={36}
+                                                className="object-contain w-full h-full"
+                                                priority
                                             />
                                         </div>
                                         <div className="flex items-center gap-2">
-                                            <span className="text-[#111111] text-base font-bold tracking-tight">
-                                                Zapiya
-                                            </span>
+                                            <div className="h-6 w-20 relative">
+                                                <Image
+                                                    src="/zapiya-wordmark.png"
+                                                    alt="Zapiya"
+                                                    width={80}
+                                                    height={25}
+                                                    className="object-contain object-left w-full h-full"
+                                                    priority
+                                                />
+                                            </div>
                                             <span className="text-[10px] font-semibold text-[#D9541E] bg-[#D9541E]/10 border border-[#D9541E]/20 px-2 py-0.5 rounded-md">
                                                 100% Free
                                             </span>

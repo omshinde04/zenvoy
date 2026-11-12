@@ -14,19 +14,25 @@ export default function Footer() {
 
                     {/* Brand */}
                     <div className="col-span-2 md:col-span-1">
-                        <Link href="/" className="flex items-center gap-2.5">
-                            <div className="w-8 h-8 rounded-lg bg-[#111111] flex items-center justify-center p-1.5 shadow-xs">
+                        <Link href="/" className="inline-flex items-center gap-2.5 group">
+                            <div className="w-9 h-9 relative filter drop-shadow-2xs transition-transform duration-200 group-hover:scale-105">
                                 <Image
                                     src="/logo.png"
-                                    alt="Zapiya Logo"
-                                    width={28}
-                                    height={28}
-                                    className="object-contain filter invert brightness-0"
+                                    alt="Zapiya ATS Resume Builder Logo"
+                                    width={36}
+                                    height={36}
+                                    className="object-contain w-full h-full"
                                 />
                             </div>
-                            <span className="text-[#111111] text-xl font-bold tracking-tight font-sans">
-                                Zapiya
-                            </span>
+                            <div className="h-7 w-24 relative transition-transform duration-200 group-hover:translate-x-0.5">
+                                <Image
+                                    src="/zapiya-wordmark.png"
+                                    alt="Zapiya"
+                                    width={96}
+                                    height={30}
+                                    className="object-contain object-left w-full h-full"
+                                />
+                            </div>
                         </Link>
 
                         <p className="text-[#66615B] text-xs sm:text-sm mt-3 leading-relaxed">
@@ -103,6 +109,22 @@ export default function Footer() {
                         </div>
                     </div>
 
+                </div>
+
+                {/* Signature Brand Wordmark Display */}
+                <div className="my-10 sm:my-14 pt-10 border-t border-[#E5DFD3] flex flex-col items-center justify-center text-center">
+                    <Link href="/" className="group block w-full max-w-[280px] sm:max-w-sm md:max-w-md transition-transform duration-300 hover:scale-[1.02]">
+                        <Image
+                            src="/zapiya-wordmark.png"
+                            alt="Zapiya – 100% Free Harvard ATS Resume Builder"
+                            width={885}
+                            height={273}
+                            className="w-full h-auto object-contain filter drop-shadow-2xs opacity-95 group-hover:opacity-100 transition-opacity"
+                        />
+                    </Link>
+                    <p className="mt-3.5 text-xs sm:text-sm text-[#66615B] font-medium tracking-wide">
+                        Bura <span className="text-[#111111] font-bold">SAMAY</span> nahi chal raha, bas <span className="font-serif italic text-[#D9541E] font-semibold">Resume</span> barabar nahi hai.
+                    </p>
                 </div>
 
                 {/* Bottom Bar */}

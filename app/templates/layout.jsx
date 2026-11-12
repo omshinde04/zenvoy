@@ -14,14 +14,21 @@ export const metadata = {
     url: "https://www.zapiya.com/templates",
     siteName: "Zapiya",
     type: "website",
-    images: ["/logo.png"],
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Zapiya ATS Resume Templates Gallery",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "100% Free ATS Resume Templates – Zapiya",
     description:
       "Harvard single-column and developer resume templates. 100% free with instant vector PDF download.",
-    images: ["/logo.png"],
+    images: ["/og-image.png"],
   },
 }
 

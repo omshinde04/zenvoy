@@ -15,14 +15,21 @@ export const metadata = {
     url: "https://www.zapiya.com/guides",
     siteName: "Zapiya",
     type: "website",
-    images: ["/logo.png"],
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Zapiya ATS Resume Guides & Career Hub",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "ATS Resume Guides & Developer Career Advice | Zapiya",
     description:
       "Expert technical guides on creating ATS-compliant resumes, Harvard formats, and action verbs for developers.",
-    images: ["/logo.png"],
+    images: ["/og-image.png"],
   },
 }
 

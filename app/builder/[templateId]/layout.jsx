@@ -40,13 +40,20 @@ export async function generateMetadata({ params }) {
       url: canonicalUrl,
       siteName: "Zapiya",
       type: "website",
-      images: ["/logo.png"],
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: `${meta.title} – Zapiya ATS Resume Builder`,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: `${meta.title} | Zapiya`,
       description: meta.desc,
-      images: ["/logo.png"],
+      images: ["/og-image.png"],
     },
   }
 }
