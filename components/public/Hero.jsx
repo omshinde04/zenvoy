@@ -31,7 +31,7 @@ export default function Hero() {
     return (
         <section
             id="home"
-            className="relative px-4 sm:px-6 lg:px-8 pt-[72px] sm:pt-[78px] pb-6 sm:pb-8 bg-[#F3EEE3]"
+            className="scroll-mt-24 relative px-4 sm:px-6 lg:px-8 pt-3 sm:pt-5 pb-6 sm:pb-8 bg-[#F3EEE3]"
         >
             {/* The Master Framed Canvas (Luxury Editorial Stage) */}
             <div className="max-w-6xl mx-auto rounded-[28px] sm:rounded-[36px] bg-[#FAF7F2] border border-[#E5DFD3] p-6 sm:p-8 lg:p-10 shadow-[0_16px_40px_-15px_rgba(17,17,17,0.05)] relative overflow-hidden">

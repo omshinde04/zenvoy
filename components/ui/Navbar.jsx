@@ -13,7 +13,7 @@ export default function Navbar() {
     const [scrolled, setScrolled] = useState(false)
 
     const navLinks = [
-        { name: "Home", href: "/#home" },
+        { name: "Home", href: "/" },
         { name: "Templates", href: "/templates" },
         { name: "Guides", href: "/guides" },
         { name: "Pricing", href: "/#pricing" },
@@ -22,6 +22,13 @@ export default function Navbar() {
     ]
 
     const handleNavClick = (e, href) => {
+        if (href === "/" || href === "/#home") {
+            if (window.location.pathname === "/") {
+                e.preventDefault()
+                window.scrollTo({ top: 0, behavior: "smooth" })
+                return
+            }
+        }
         if (!href.startsWith("/#")) return
         const anchor = href.replace("/", "")
 
@@ -42,7 +49,9 @@ export default function Navbar() {
 
     useEffect(() => {
         const hash = window.location.hash
-        if (hash) {
+        if (hash === "#home") {
+            window.scrollTo({ top: 0 })
+        } else if (hash) {
             setTimeout(() => {
                 const el = document.querySelector(hash)
                 if (el) el.scrollIntoView({ behavior: "smooth" })
