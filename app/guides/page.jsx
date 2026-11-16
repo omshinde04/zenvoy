@@ -115,10 +115,14 @@ export default function GuidesPage() {
                             {/* Left Image (5 cols) */}
                             <div className="lg:col-span-5 relative overflow-hidden rounded-xl h-64 sm:h-72 lg:h-80 w-full bg-[#FAF7F2]">
                                 <img
-                                    src={featuredGuide.image}
+                                    src={featuredGuide.image || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80"}
                                     alt={featuredGuide.title}
                                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                                     loading="eager"
+                                    onError={(e) => {
+                                        e.currentTarget.onerror = null
+                                        e.currentTarget.src = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80"
+                                    }}
                                 />
                                 <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-md bg-[#111111]/90 backdrop-blur-md px-3 py-1 text-[11px] font-semibold text-[#F3EEE3]">
                                     <FaFire className="text-[#D9541E] text-xs" />
@@ -237,6 +241,10 @@ export default function GuidesPage() {
                                     alt={guide.title}
                                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                                     loading="lazy"
+                                    onError={(e) => {
+                                        e.currentTarget.onerror = null
+                                        e.currentTarget.src = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80"
+                                    }}
                                 />
                                 <div className="absolute top-3 left-3 inline-flex items-center rounded-md bg-white/95 backdrop-blur-md px-2.5 py-1 text-[10px] font-semibold text-[#D9541E] shadow-xs">
                                     {guide.category}

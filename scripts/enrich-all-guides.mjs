@@ -453,3 +453,4 @@ guides.forEach((g, i) => {
   console.log(`  ${i + 1}. ${g.slug} (${g.category}) -> ${count} words`);
 });
 console.log(`\n🎉 Total library word count: ${totalWords.toLocaleString()} words across ${guides.length} comprehensive guides!\n`);
+
