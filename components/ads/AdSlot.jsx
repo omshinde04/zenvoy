@@ -22,7 +22,7 @@ export default function AdSlot({
   const clientId =
     process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID ||
     process.env.ADSENSE_PUB_ID ||
-    "";
+    "ca-pub-7778964423995383";
 
   useEffect(() => {
     // Only attempt to push when a valid publisher ID is configured

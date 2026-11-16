@@ -6,7 +6,7 @@ import { FaArrowRight, FaBookOpen, FaClock } from "react-icons/fa"
 import { guides } from "@/lib/guidesData"
 
 export default function GuidesPreview() {
-  const featured = guides.slice(0, 4)
+  const featured = guides.slice(0, 6)
 
   return (
     <section className="relative px-6 py-24 bg-[#F3EEE3] border-t border-[#E5DFD3] overflow-hidden">
@@ -16,7 +16,7 @@ export default function GuidesPreview() {
         <div className="text-center max-w-2xl mx-auto mb-14">
           <span className="inline-flex items-center gap-1.5 text-xs font-medium text-[#66615B] bg-[#FAF7F2] border border-[#E5DFD3] px-3 py-1 rounded-md mb-3">
             <FaBookOpen className="text-[#D9541E]" />
-            Engineering Career Knowledge Hub
+            Engineering Career Knowledge Hub · 18 In-Depth Guides
           </span>
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#111111] tracking-tight">
             Master the ATS: Proven{" "}
@@ -25,12 +25,12 @@ export default function GuidesPreview() {
             </span>
           </h2>
           <p className="text-[#66615B] text-base mt-3 leading-relaxed">
-            Technical breakdowns on bypassing Workday &amp; Greenhouse automated filters, implementing Harvard-standard formatting, and quantifying engineering impact.
+            Technical breakdowns on bypassing Workday &amp; Greenhouse automated filters, implementing Harvard-standard formatting, and quantifying engineering impact with Google&apos;s XYZ formula.
           </p>
         </div>
 
-        {/* 4 Featured Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+        {/* 6 Featured Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {featured.map((guide, idx) => (
             <motion.div
               key={guide.slug}
