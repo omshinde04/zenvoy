@@ -71,18 +71,20 @@ Submission / Presentation Deadline: ${formData.deadline || "Within 2-3 weeks"}
     `.trim()
 
     try {
-      const response = await fetch("https://formspree.io/f/xqpqkgab", {
+      const response = await fetch("/api/project-inquiry", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json",
         },
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
-          _replyto: formData.email,
-          subject,
-          message,
+          college: formData.college,
+          branch: formData.branch,
+          teamSize: formData.teamSize,
+          topicStatus: formData.topicStatus,
+          idea: formData.idea,
+          deadline: formData.deadline,
         }),
       })
 
@@ -803,3 +805,4 @@ Submission / Presentation Deadline: ${formData.deadline || "Within 2-3 weeks"}
     </div>
   )
 }
+

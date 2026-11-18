@@ -33,3 +33,4 @@ export const metadata = {
 export default function CollegeProjectsLayout({ children }) {
   return children
 }
+

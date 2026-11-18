@@ -19,16 +19,14 @@ export default function ContactPage() {
     setStatus({ submitting: true, submitted: false, error: null })
 
     try {
-      const response = await fetch("https://formspree.io/f/xqpqkgab", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json",
         },
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
-          _replyto: formData.email,
           subject: formData.subject || "Zapiya In-App Contact Request",
           message: formData.message,
         }),
@@ -131,7 +129,7 @@ export default function ContactPage() {
                 </div>
                 <h3 className="text-2xl font-bold text-[#111111] tracking-tight">Message Delivered</h3>
                 <p className="text-[#66615B] text-sm mt-2 max-w-sm mx-auto leading-relaxed">
-                  Thank you! Your message has been sent directly to Om Shinde via Formspree. We will review your message and respond shortly.
+                  Thank you! Your message has been sent directly to Om Shinde. We will review your message and respond shortly.
                 </p>
                 <button
                   type="button"
@@ -147,7 +145,7 @@ export default function ContactPage() {
                 <div className="border-b border-[#F3EEE3] pb-4 mb-2">
                   <h2 className="text-xl font-bold text-[#111111] tracking-tight">Send a Direct Message</h2>
                   <p className="text-xs text-[#66615B] mt-1">
-                    Powered by Formspree · Connected to omshinde0484@gmail.com
+                    Direct SMTP Delivery · Connected to omshinde0484@gmail.com
                   </p>
                 </div>
 
@@ -236,7 +234,7 @@ export default function ContactPage() {
                       </>
                     ) : (
                       <>
-                        <span>Send Message via Formspree</span>
+                        <span>Send Message</span>
                         <FaArrowRight className="text-xs text-[#F3EEE3]/80" />
                       </>
                     )}
