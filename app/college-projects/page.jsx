@@ -19,10 +19,13 @@ import {
   FaArrowRight,
   FaSpinner,
   FaEnvelope,
-  FaQuestionCircle,
   FaTerminal,
-  FaLayerGroup,
-  FaCalendarAlt,
+  FaShieldAlt,
+  FaBolt,
+  FaStar,
+  FaServer,
+  FaDatabase,
+  FaTimesCircle,
 } from "react-icons/fa"
 
 export default function CollegeProjectsPage() {
@@ -57,18 +60,6 @@ export default function CollegeProjectsPage() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setFormStatus({ submitting: true, submitted: false, error: null })
-
-    const subject = `[College Project Inquiry] ${formData.teamSize} • ${formData.branch || "CS/IT"} • ${formData.college || "University"}`
-    const message = `
-Full Name: ${formData.name}
-Email Address: ${formData.email}
-College / University: ${formData.college}
-Branch / Degree: ${formData.branch}
-Team Size: ${formData.teamSize}
-Topic Status: ${formData.topicStatus}
-Project Idea / Topic Details: ${formData.idea}
-Submission / Presentation Deadline: ${formData.deadline || "Within 2-3 weeks"}
-    `.trim()
 
     try {
       const response = await fetch("/api/project-inquiry", {
@@ -114,123 +105,348 @@ Submission / Presentation Deadline: ${formData.deadline || "Within 2-3 weeks"}
 
   return (
     <div className="min-h-screen bg-[#F3EEE3] text-[#111111] overflow-x-hidden selection:bg-[#D9541E] selection:text-white">
+
       {/* =========================================================================
-          HERO SECTION
+          HIGH-CONVERTING HERO SECTION (MASTER FRAMED CANVAS)
          ========================================================================= */}
-      <section className="relative pt-24 pb-16 md:pt-32 md:pb-24 px-4 sm:px-6 border-b border-[#E5DFD3] overflow-hidden">
-        {/* Subtle decorative glow */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#D9541E]/5 rounded-full blur-3xl pointer-events-none" />
+      <section className="relative px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-8 sm:pb-12 bg-[#F3EEE3]">
+        <div className="max-w-6xl mx-auto rounded-[28px] sm:rounded-[36px] bg-[#FAF7F2] border border-[#E5DFD3] p-6 sm:p-8 lg:p-10 shadow-[0_16px_40px_-15px_rgba(17,17,17,0.06)] relative overflow-hidden">
 
-        <div className="relative max-w-5xl mx-auto text-center space-y-6">
-          {/* Top Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35 }}
-            className="inline-flex items-center gap-2 rounded-full border border-[#E5DFD3] bg-[#FAF7F2] px-4 py-1.5 text-xs font-semibold text-[#66615B] shadow-xs"
-          >
-            <span className="flex h-2 w-2 rounded-full bg-[#D9541E] animate-pulse" />
-            <span>Final Year &amp; Capstone Projects • 2026 Batch</span>
-          </motion.div>
+          {/* Decorative Corner SVG curves */}
+          <div className="absolute right-6 top-6 w-24 h-24 pointer-events-none opacity-20">
+            <svg viewBox="0 0 120 120" fill="none" stroke="#D9541E" strokeWidth="1">
+              <path d="M 120 20 C 75 20, 20 75, 20 120" />
+              <path d="M 120 45 C 85 45, 45 85, 45 120" />
+              <path d="M 120 70 C 95 70, 70 95, 70 120" />
+            </svg>
+          </div>
 
-          {/* Headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 0.08 }}
-            className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#111111] leading-[1.12]"
-          >
-            Your Project Idea.{" "}
-            <span className="font-cursive italic font-normal text-[#D9541E] text-[1.12em] block sm:inline">
-              Our Working Code.
-            </span>
-          </motion.h1>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
 
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 0.16 }}
-            className="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-[#66615B] leading-relaxed"
-          >
-            Skip the stress of non-working databases, broken tutorial repos, and
-            strict college examiners. We build production-ready code with live demos
-            and provide <strong className="text-[#111111] font-semibold">1-on-1 Google Meet guidance</strong> until
-            your college presentation is completed.
-          </motion.p>
+            {/* LEFT COLUMN: Viral Indian Student Hook + Subtitle + CTAs + Trust Proofs */}
+            <div className="lg:col-span-7 space-y-5 text-left relative z-10">
 
-          {/* Action Row */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 0.24 }}
-            className="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-4"
-          >
-            <a
-              href="#project-form"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#111111] hover:bg-[#D9541E] text-[#F3EEE3] px-6 py-3.5 text-sm font-semibold transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5"
-            >
-              <FaEnvelope className="text-xs" />
-              <span>Send Your Project Brief</span>
-              <FaArrowRight className="text-xs" />
-            </a>
+              {/* Eyebrow Pill Badge */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="inline-flex items-center gap-2 rounded-full bg-white border border-[#E5DFD3] px-3.5 py-1.5 text-xs font-semibold text-[#111111] shadow-2xs"
+              >
+                <span className="flex h-2 w-2 rounded-full bg-[#D9541E] animate-pulse" />
+                <span className="text-[#D9541E] font-bold">2026 Batch Major &amp; Capstone Reviews</span>
+                <span className="w-1 h-1 rounded-full bg-[#DDD6C8]" />
+                <span className="text-[#66615B] font-normal hidden sm:inline">Stage-1 &amp; Final Viva</span>
+              </motion.div>
 
-            <a
-              href={mailtoUrl}
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-white hover:bg-[#FAF7F2] border border-[#E5DFD3] text-[#111111] hover:border-[#D9541E]/40 px-6 py-3.5 text-sm font-semibold transition-all duration-200 shadow-xs"
-            >
-              <span>Direct Email</span>
-              <span className="text-xs text-[#66615B] font-normal">(omshinde0484@gmail.com)</span>
-            </a>
+              {/* Viral Punch Headline with Two-Font Brand Structure */}
+              <motion.h1
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.35 }}
+                className="text-3xl sm:text-5xl lg:text-[48px] font-extrabold text-[#111111] tracking-[-0.03em] leading-[1.12]"
+              >
+                College viva me code crash hone ka dar? <br />
+                <span className="inline-block bg-[#111111] text-[#FAF7F2] px-4 sm:px-5 py-0.5 rounded-full shadow-md text-2xl sm:text-4xl lg:text-[38px] font-bold align-middle my-1">
+                  HUM BANAYENGE
+                </span>{" "}
+                working code, <br />
+                saath me{" "}
+                <span className="font-cursive italic font-normal text-[#D9541E] text-[1.14em]">
+                  Google Meet Guidance.
+                </span>
+              </motion.h1>
 
-            <button
-              onClick={copyEmail}
-              type="button"
-              className="inline-flex items-center gap-1.5 rounded-xl border border-[#E5DFD3] bg-[#FAF7F2] hover:bg-white px-4 py-3.5 text-xs font-semibold text-[#66615B] hover:text-[#111111] transition-colors"
-              title="Copy email to clipboard"
-            >
-              {copied ? (
-                <>
-                  <FaCheck className="text-[#D9541E]" />
-                  <span className="text-[#D9541E]">Email Copied!</span>
-                </>
-              ) : (
-                <>
-                  <FaCopy />
-                  <span>Copy Email</span>
-                </>
-              )}
-            </button>
-          </motion.div>
+              {/* Subtitle */}
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.08, duration: 0.35 }}
+                className="text-[#66615B] text-sm sm:text-base leading-relaxed max-w-[530px]"
+              >
+                Stop struggling with outdated tutorial repositories that fail during evaluation.
+                We engineer production-grade <strong className="text-[#111111] font-semibold">Full-Stack &amp; AI projects</strong> (Next.js, Python, MERN) tailored to your college guidelines — with <strong className="text-[#111111] font-semibold">1-on-1 Google Meet walkthroughs</strong> until your presentation is complete.
+              </motion.p>
 
-          {/* Meet Guarantee Highlight Bar */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, delay: 0.3 }}
-            className="pt-4 max-w-2xl mx-auto"
-          >
-            <div className="rounded-xl border border-[#D9541E]/30 bg-[#FAF7F2] p-4 flex items-center justify-center gap-3 shadow-xs text-xs sm:text-sm font-medium text-[#111111]">
-              <div className="w-8 h-8 rounded-lg bg-[#D9541E]/10 border border-[#D9541E]/20 text-[#D9541E] flex items-center justify-center shrink-0">
-                <FaVideo className="text-sm" />
-              </div>
-              <span>
-                <strong className="text-[#D9541E] font-semibold">Google Meet Guarantee:</strong> 1-on-1 walkthrough calls &amp; setup support until your college presentation is completely done.
-              </span>
+              {/* Trust Matrix (4 Quick Badges) */}
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.14, duration: 0.3 }}
+                className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1"
+              >
+                <div className="bg-white border border-[#E5DFD3] rounded-lg p-2.5 text-center shadow-2xs">
+                  <span className="block text-[11px] font-bold text-[#111111]">100% Working</span>
+                  <span className="block text-[10px] text-[#66615B]">Zero broken bugs</span>
+                </div>
+                <div className="bg-white border border-[#E5DFD3] rounded-lg p-2.5 text-center shadow-2xs">
+                  <span className="block text-[11px] font-bold text-[#D9541E]">Google Meet</span>
+                  <span className="block text-[10px] text-[#66615B]">1-on-1 calls</span>
+                </div>
+                <div className="bg-white border border-[#E5DFD3] rounded-lg p-2.5 text-center shadow-2xs">
+                  <span className="block text-[11px] font-bold text-[#111111]">Live Cloud URL</span>
+                  <span className="block text-[10px] text-[#66615B]">Instant browser demo</span>
+                </div>
+                <div className="bg-white border border-[#E5DFD3] rounded-lg p-2.5 text-center shadow-2xs">
+                  <span className="block text-[11px] font-bold text-[#111111]">Fast Turnaround</span>
+                  <span className="block text-[10px] text-[#66615B]">Urgent reviews ok</span>
+                </div>
+              </motion.div>
+
+              {/* Action Buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.18, duration: 0.35 }}
+                className="pt-2 flex flex-wrap items-center gap-3 sm:gap-4"
+              >
+                <a
+                  href="#project-form"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#111111] hover:bg-[#D9541E] text-[#F3EEE3] px-6 py-3.5 text-sm font-semibold transition-all duration-200 shadow-md hover:-translate-y-0.5"
+                >
+                  <FaBolt className="text-xs text-[#D9541E]" />
+                  <span>Submit Project Brief &amp; Get Started</span>
+                  <FaArrowRight className="text-xs" />
+                </a>
+
+                <button
+                  onClick={copyEmail}
+                  type="button"
+                  className="inline-flex items-center gap-1.5 rounded-xl border border-[#E5DFD3] bg-white hover:bg-[#FAF7F2] px-4 py-3.5 text-xs font-semibold text-[#66615B] hover:text-[#111111] transition-colors shadow-2xs"
+                >
+                  {copied ? (
+                    <>
+                      <FaCheck className="text-[#D9541E]" />
+                      <span className="text-[#D9541E] font-bold">Email Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <FaCopy />
+                      <span>omshinde0484@gmail.com</span>
+                    </>
+                  )}
+                </button>
+              </motion.div>
+
+              {/* Urgency Micro Proof */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.25 }}
+                className="flex items-center gap-2 text-xs text-[#66615B] pt-1"
+              >
+                <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>Only accepting <strong>8 more project groups</strong> for November reviews to guarantee 1-on-1 attention.</span>
+              </motion.div>
+
             </div>
-          </motion.div>
+
+            {/* RIGHT COLUMN: Visual Live Terminal & Deliverables Dashboard Widget */}
+            <div className="lg:col-span-5 relative">
+
+              {/* Ambient Glow */}
+              <div className="absolute w-72 h-72 rounded-full bg-[#D9541E]/15 blur-3xl pointer-events-none -z-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+
+              {/* Floating Top Student Review Pill */}
+              <motion.div
+                initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ delay: 0.2, duration: 0.4 }}
+                className="absolute -top-3 sm:-top-5 -left-2 sm:left-4 z-20 bg-white/95 backdrop-blur-md border border-[#E5DFD3] rounded-full px-3 py-1.5 shadow-md flex items-center gap-2 text-[11px] font-semibold text-[#111111]"
+              >
+                <span className="flex text-amber-500 text-[10px]">★★★★★</span>
+                <span>SPPU Pune: <em>&ldquo;Cleared viva with 96/100!&rdquo;</em></span>
+              </motion.div>
+
+              {/* macOS Style Code & Deliverables Card */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.45 }}
+                className="bg-[#111111] text-[#F3EEE3] rounded-2xl border border-[#2A2A2A] shadow-2xl overflow-hidden relative z-10"
+              >
+                {/* Window Chrome Header */}
+                <div className="px-4 py-3 bg-[#1A1A1A] border-b border-[#2A2A2A] flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F]" />
+                    <span className="text-[11px] font-mono text-[#888888] ml-2">
+                      zapiya-project-engine • 2026
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950/80 border border-emerald-800/60 px-2 py-0.5 rounded-full">
+                    ● Ready for Viva
+                  </span>
+                </div>
+
+                {/* Simulated Terminal Commands */}
+                <div className="p-4 font-mono text-[11px] space-y-2 border-b border-[#222222] bg-[#0D0D0D]">
+                  <p className="text-[#888888]">
+                    $ git clone https://github.com/zapiya/college-project.git
+                  </p>
+                  <p className="text-[#888888]">
+                    $ npm install &amp;&amp; npm run dev
+                  </p>
+                  <p className="text-emerald-400 font-semibold">
+                    ✔ Next.js 16.2 &amp; Node.js API compiled in 1.1s
+                  </p>
+                  <p className="text-emerald-400">
+                    ✔ Database schemas verified &amp; connected
+                  </p>
+                  <p className="text-cyan-400">
+                    ✔ Vercel Live: https://your-group-project.vercel.app
+                  </p>
+                </div>
+
+                {/* Visual Deliverables Inside Card */}
+                <div className="p-4 bg-[#141414] space-y-2.5">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#D9541E] block">
+                    What You Get in Your Deliverable Package:
+                  </span>
+
+                  <div className="space-y-2 text-xs">
+                    <div className="flex items-center gap-2.5 bg-[#1C1C1C] border border-[#2D2D2D] p-2.5 rounded-xl">
+                      <FaCode className="text-[#D9541E] text-sm shrink-0" />
+                      <div className="overflow-hidden">
+                        <p className="font-semibold text-white truncate">1. Full Working Source Code</p>
+                        <p className="text-[10px] text-[#888888] truncate">Clean GitHub repo with commit history</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2.5 bg-[#1C1C1C] border border-[#2D2D2D] p-2.5 rounded-xl">
+                      <FaRocket className="text-emerald-400 text-sm shrink-0" />
+                      <div className="overflow-hidden">
+                        <p className="font-semibold text-white truncate">2. Live Cloud Deployment</p>
+                        <p className="text-[10px] text-[#888888] truncate">Demo from your phone/laptop without localhost issues</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2.5 bg-[#1C1C1C] border border-[#2D2D2D] p-2.5 rounded-xl">
+                      <FaVideo className="text-[#D9541E] text-sm shrink-0" />
+                      <div className="overflow-hidden">
+                        <p className="font-semibold text-white truncate">3. Google Meet 1-on-1 Walkthrough</p>
+                        <p className="text-[10px] text-[#888888] truncate">We explain every line until your presentation is done</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2.5 bg-[#1C1C1C] border border-[#2D2D2D] p-2.5 rounded-xl">
+                      <FaDatabase className="text-cyan-400 text-sm shrink-0" />
+                      <div className="overflow-hidden">
+                        <p className="font-semibold text-white truncate">4. Architecture &amp; Database Flow</p>
+                        <p className="text-[10px] text-[#888888] truncate">Ready to copy into your Black Book &amp; PPT slides</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Card Footer Banner */}
+                <div className="px-4 py-2.5 bg-[#1A1A1A] border-t border-[#2A2A2A] flex items-center justify-between text-[11px]">
+                  <span className="text-[#888888] flex items-center gap-1.5">
+                    <FaShieldAlt className="text-emerald-400 text-xs" /> Clean, Modern Code
+                  </span>
+                  <a
+                    href="#project-form"
+                    className="text-[#D9541E] hover:text-white font-semibold transition-colors flex items-center gap-1"
+                  >
+                    <span>Get Yours</span>
+                    <FaArrowRight className="text-[9px]" />
+                  </a>
+                </div>
+              </motion.div>
+
+              {/* Floating Bottom Meet Call Pill */}
+              <motion.div
+                initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ delay: 0.35, duration: 0.4 }}
+                className="absolute -bottom-4 right-2 sm:right-6 z-20 bg-white/95 backdrop-blur-md border border-[#D9541E]/40 rounded-full px-3.5 py-1.5 shadow-md flex items-center gap-2 text-[11px] font-semibold text-[#111111]"
+              >
+                <div className="w-5 h-5 rounded-full bg-[#D9541E]/10 text-[#D9541E] flex items-center justify-center text-[10px]">
+                  <FaVideo />
+                </div>
+                <span>Google Meet Calls Included</span>
+              </motion.div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* =========================================================================
+          BEFORE VS AFTER: WHY STUDENTS FAIL VS HOW WE HELP THEM WIN
+         ========================================================================= */}
+      <section className="py-12 md:py-16 px-4 sm:px-6 max-w-6xl mx-auto">
+        <div className="text-center max-w-xl mx-auto mb-10 space-y-2">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#D9541E]">
+            The Reality of College Reviews
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#111111]">
+            Copying Random GitHub Clones vs.{" "}
+            <span className="font-cursive italic font-normal text-[#D9541E] text-[1.12em]">
+              Zapiya Working Code
+            </span>
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* THE WRONG WAY */}
+          <div className="bg-rose-50/60 border border-rose-200 rounded-2xl p-6 sm:p-7 space-y-4 shadow-xs">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-rose-100 text-rose-800 text-xs font-bold">
+              <FaTimesCircle />
+              <span>Copying Tutorial Repos (The Nightmare)</span>
+            </div>
+            <ul className="space-y-3 text-xs sm:text-sm text-rose-950/80">
+              <li className="flex items-start gap-2.5">
+                <span className="text-rose-500 font-bold shrink-0 mt-0.5">✕</span>
+                <span>Code uses 5-year-old deprecated packages that fail during <code>npm install</code> on your laptop.</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <span className="text-rose-500 font-bold shrink-0 mt-0.5">✕</span>
+                <span>Examiner asks: <em>&ldquo;Explain what this middleware does&rdquo;</em> and you freeze because you didn&apos;t write it.</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <span className="text-rose-500 font-bold shrink-0 mt-0.5">✕</span>
+                <span>No live demo link — if college Wi-Fi is slow or localhost fails, you get marked down or rejected.</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* THE ZAPIYA WAY */}
+          <div className="bg-emerald-50/60 border border-emerald-200 rounded-2xl p-6 sm:p-7 space-y-4 shadow-xs">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-emerald-100 text-emerald-800 text-xs font-bold">
+              <FaCheckCircle />
+              <span>With Zapiya Engineering (100% Viva Ready)</span>
+            </div>
+            <ul className="space-y-3 text-xs sm:text-sm text-emerald-950/80">
+              <li className="flex items-start gap-2.5">
+                <span className="text-emerald-600 font-bold shrink-0 mt-0.5">✓</span>
+                <span>Modern, rock-solid stack (Next.js 16, MERN, Python) configured cleanly for your specific college requirements.</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <span className="text-emerald-600 font-bold shrink-0 mt-0.5">✓</span>
+                <span><strong>1-on-1 Google Meet calls</strong> where we explain how every API, database table, and component functions.</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <span className="text-emerald-600 font-bold shrink-0 mt-0.5">✓</span>
+                <span>Live Vercel link + offline local setup so your demonstration works flawlessly under any condition.</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
 
       {/* =========================================================================
           SECTION 1: ANY TEAM SIZE (SOLO / DUO / GROUP)
          ========================================================================= */}
-      <section className="py-16 md:py-24 px-4 sm:px-6 max-w-6xl mx-auto">
-        <div className="text-center max-w-2xl mx-auto mb-12 space-y-2">
+      <section className="py-12 md:py-16 px-4 sm:px-6 max-w-6xl mx-auto border-t border-[#E5DFD3]">
+        <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
           <span className="text-xs font-bold uppercase tracking-wider text-[#D9541E]">
             Flexible Team Formats
           </span>
-          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-[#111111]">
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#111111]">
             Solo, Duo, or Full Group —{" "}
             <span className="font-cursive italic font-normal text-[#D9541E] text-[1.1em]">
               We Cover Every Format
@@ -355,13 +571,13 @@ Submission / Presentation Deadline: ${formData.deadline || "Within 2-3 weeks"}
       {/* =========================================================================
           SECTION 2: ANY IDEA & ANY TECH STACK
          ========================================================================= */}
-      <section className="py-16 md:py-24 px-4 sm:px-6 bg-[#FAF7F2] border-y border-[#E5DFD3]">
-        <div className="max-w-6xl mx-auto space-y-12">
+      <section className="py-12 md:py-16 px-4 sm:px-6 bg-[#FAF7F2] border-y border-[#E5DFD3]">
+        <div className="max-w-6xl mx-auto space-y-10">
           <div className="text-center max-w-2xl mx-auto space-y-2">
             <span className="text-xs font-bold uppercase tracking-wider text-[#D9541E]">
               Technology &amp; Topics
             </span>
-            <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-[#111111]">
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#111111]">
               Any Tech Stack.{" "}
               <span className="font-cursive italic font-normal text-[#D9541E] text-[1.1em]">
                 Your Idea or Ours.
@@ -441,86 +657,11 @@ Submission / Presentation Deadline: ${formData.deadline || "Within 2-3 weeks"}
       </section>
 
       {/* =========================================================================
-          SECTION 3: WHAT YOU GET FROM US (CLEAR DELIVERABLES)
-         ========================================================================= */}
-      <section className="py-16 md:py-24 px-4 sm:px-6 max-w-6xl mx-auto">
-        <div className="text-center max-w-2xl mx-auto mb-12 space-y-2">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#D9541E]">
-            Everything Included
-          </span>
-          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-[#111111]">
-            What You Receive —{" "}
-            <span className="font-cursive italic font-normal text-[#D9541E] text-[1.1em]">
-              Zero Incomplete Code
-            </span>
-          </h2>
-          <p className="text-xs sm:text-sm text-[#66615B] leading-relaxed">
-            We provide clean, working engineering deliverables and direct guidance so you present with 100% confidence.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="bg-white border border-[#E5DFD3] rounded-2xl p-6 shadow-xs space-y-3">
-            <div className="w-10 h-10 rounded-lg bg-[#FAF7F2] border border-[#E5DFD3] text-[#D9541E] flex items-center justify-center text-lg">
-              <FaCode />
-            </div>
-            <h3 className="font-bold text-[#111111] text-base">
-              100% Working Code
-            </h3>
-            <p className="text-xs text-[#66615B] leading-relaxed">
-              Clean, modular, well-commented repository. No broken dependencies or outdated packages.
-            </p>
-          </div>
-
-          <div className="bg-white border border-[#E5DFD3] rounded-2xl p-6 shadow-xs space-y-3">
-            <div className="w-10 h-10 rounded-lg bg-[#FAF7F2] border border-[#E5DFD3] text-[#D9541E] flex items-center justify-center text-lg">
-              <FaRocket />
-            </div>
-            <h3 className="font-bold text-[#111111] text-base">
-              Live Cloud Demo
-            </h3>
-            <p className="text-xs text-[#66615B] leading-relaxed">
-              Hosted on Vercel or Cloud. You can open and demo the project live on your mobile or laptop anywhere.
-            </p>
-          </div>
-
-          <div className="bg-white border border-[#E5DFD3] rounded-2xl p-6 shadow-xs space-y-3">
-            <div className="w-10 h-10 rounded-lg bg-[#FAF7F2] border border-[#E5DFD3] text-[#D9541E] flex items-center justify-center text-lg">
-              <FaTerminal />
-            </div>
-            <h3 className="font-bold text-[#111111] text-base">
-              3-Step Local Setup
-            </h3>
-            <p className="text-xs text-[#66615B] leading-relaxed">
-              Simple README with exact commands so anyone in your team can run it locally in under 2 minutes.
-            </p>
-          </div>
-
-          <div className="bg-white border border-[#E5DFD3] rounded-2xl p-6 shadow-xs space-y-3">
-            <div className="w-10 h-10 rounded-lg bg-[#FAF7F2] border border-[#E5DFD3] text-[#D9541E] flex items-center justify-center text-lg">
-              <FaVideo />
-            </div>
-            <h3 className="font-bold text-[#111111] text-base">
-              Google Meet Guidance
-            </h3>
-            <p className="text-xs text-[#66615B] leading-relaxed">
-              1-on-1 video calls to walk you through the code &amp; answer questions <strong className="text-[#111111]">until your presentation is completed</strong>.
-            </p>
-          </div>
-        </div>
-
-        {/* Clear Disclaimer Note */}
-        <div className="mt-8 rounded-xl bg-[#FAF7F2] border border-[#E5DFD3] p-4 text-center text-xs text-[#66615B]">
-          <strong className="text-[#111111] font-semibold">Please Note:</strong> We provide the complete technical engine, working source code, live demo, and Meet explanation. Writing your college report, PPT slides, and attending your viva is your task as students.
-        </div>
-      </section>
-
-      {/* =========================================================================
-          SECTION 4: INQUIRY FORM & DIRECT EMAIL
+          SECTION 3: INQUIRY FORM & DIRECT EMAIL
          ========================================================================= */}
       <section
         id="project-form"
-        className="py-16 md:py-24 px-4 sm:px-6 bg-[#FAF7F2] border-t border-[#E5DFD3]"
+        className="py-16 md:py-20 px-4 sm:px-6 bg-[#FAF7F2] border-t border-[#E5DFD3]"
       >
         <div className="max-w-4xl mx-auto space-y-8">
           <div className="text-center max-w-xl mx-auto space-y-2">
@@ -534,7 +675,7 @@ Submission / Presentation Deadline: ${formData.deadline || "Within 2-3 weeks"}
               </span>
             </h2>
             <p className="text-xs sm:text-sm text-[#66615B] leading-relaxed">
-              Fill out this quick form or email us directly. We will review your topic and get back to you within 24 hours.
+              Fill out this quick form. We review your requirements and reply with delivery timelines and schedule your first Google Meet discussion.
             </p>
           </div>
 
@@ -548,7 +689,7 @@ Submission / Presentation Deadline: ${formData.deadline || "Within 2-3 weeks"}
                   Project Brief Received!
                 </h3>
                 <p className="text-xs sm:text-sm text-[#66615B] max-w-md mx-auto leading-relaxed">
-                  Thank you! We will review your college requirements and reply via email to schedule your first Google Meet discussion.
+                  Thank you! We have received your college project brief. Check your email inbox — we will reply shortly to set up your Google Meet call.
                 </p>
                 <div className="pt-2">
                   <button
@@ -737,9 +878,9 @@ Submission / Presentation Deadline: ${formData.deadline || "Within 2-3 weeks"}
       </section>
 
       {/* =========================================================================
-          SECTION 5: FAQ & REASSURANCE
+          SECTION 4: FAQ & REASSURANCE
          ========================================================================= */}
-      <section className="py-16 md:py-24 px-4 sm:px-6 max-w-4xl mx-auto space-y-8">
+      <section className="py-16 md:py-20 px-4 sm:px-6 max-w-4xl mx-auto space-y-8">
         <div className="text-center max-w-xl mx-auto space-y-2">
           <span className="text-xs font-bold uppercase tracking-wider text-[#D9541E]">
             Common Questions
@@ -805,4 +946,3 @@ Submission / Presentation Deadline: ${formData.deadline || "Within 2-3 weeks"}
     </div>
   )
 }
-
