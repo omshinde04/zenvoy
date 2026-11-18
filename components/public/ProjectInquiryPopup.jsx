@@ -146,34 +146,36 @@ export default function ProjectInquiryPopup() {
         )}
 
         {/* =====================================================================
-            STATE 2: COLLAPSED FLOATING LAUNCHER PILL (OPTION A)
+            STATE 2: CIRCULAR FLOATING LAUNCHER BUTTON (FAB - WHATSAPP STYLE)
            ===================================================================== */}
         {popupState === "collapsed" && (
           <motion.div
-            key="collapsed-pill"
-            initial={{ opacity: 0, scale: 0.8, y: 15 }}
+            key="collapsed-circle"
+            initial={{ opacity: 0, scale: 0.7, y: 15 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 15 }}
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            exit={{ opacity: 0, scale: 0.7, y: 15 }}
+            transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
           >
             <button
               onClick={handleExpand}
               type="button"
-              className="group flex items-center gap-2.5 rounded-full bg-[#111111] hover:bg-[#D9541E] text-[#F3EEE3] pl-3.5 pr-4 py-2.5 shadow-[0_10px_25px_-5px_rgba(17,17,17,0.3)] border border-[#2D2D2D] hover:border-[#D9541E] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
-              title="Click to view College Project details"
+              className="group relative flex items-center justify-center w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-[#D9541E] hover:bg-[#111111] text-white shadow-[0_10px_25px_rgba(217,84,30,0.35)] hover:shadow-black/25 border-2 border-white transition-all duration-200 hover:scale-105 active:scale-95"
+              aria-label="Open College Projects Assistance"
             >
-              <div className="w-6 h-6 rounded-full bg-[#D9541E] group-hover:bg-white text-white group-hover:text-[#D9541E] flex items-center justify-center text-xs transition-colors shrink-0">
-                <FaGraduationCap />
-              </div>
-              <div className="text-left">
-                <span className="block text-xs font-bold leading-tight">
-                  Need a College Project?
-                </span>
-                <span className="block text-[10px] text-[#A09A90] group-hover:text-white/90 leading-tight">
-                  Any Stack • 1-on-1 Meet Guidance
-                </span>
-              </div>
-              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse ml-1 shrink-0" />
+              {/* Student Graduation Cap Icon */}
+              <FaGraduationCap className="text-xl sm:text-2xl transition-transform duration-200 group-hover:scale-110" />
+
+              {/* Pulsing Live Notification Badge */}
+              <span className="absolute -top-0.5 -right-0.5 flex h-3.5 w-3.5 pointer-events-none">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-white" />
+              </span>
+
+              {/* Clean Tooltip on Hover */}
+              <span className="pointer-events-none absolute right-full mr-3 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-xl bg-[#111111] px-3 py-1.5 text-xs font-semibold text-white shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-150 scale-95 group-hover:scale-100 hidden sm:block">
+                🎓 Need a College Project?
+                <span className="absolute left-full top-1/2 -translate-y-1/2 border-4 border-transparent border-l-[#111111]" />
+              </span>
             </button>
           </motion.div>
         )}
