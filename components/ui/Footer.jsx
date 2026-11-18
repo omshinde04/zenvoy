@@ -78,6 +78,7 @@ export default function Footer() {
                     <div>
                         <p className="text-[#111111] text-xs font-bold uppercase tracking-wider mb-4">Guides & Career</p>
                         <div className="flex flex-col gap-2.5 text-sm">
+                            <Link href="/college-projects" className="font-semibold text-[#D9541E] hover:text-[#111111] transition-colors">College Projects (2026) →</Link>
                             <Link href="/guides/ats-resume-guide-2026" className="text-[#66615B] hover:text-[#D9541E] transition-colors">ATS Resume Guide 2026</Link>
                             <Link href="/guides/harvard-resume-format-breakdown" className="text-[#66615B] hover:text-[#D9541E] transition-colors">Harvard Format Breakdown</Link>
                             <Link href="/guides/action-verbs-for-software-engineers" className="text-[#66615B] hover:text-[#D9541E] transition-colors">150+ Action Verbs</Link>

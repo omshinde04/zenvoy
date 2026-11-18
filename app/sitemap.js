@@ -25,6 +25,12 @@ export default async function sitemap() {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/college-projects`,
+      lastModified: now,
+      changeFrequency: "daily",
+      priority: 0.95,
+    },
+    {
       url: `${baseUrl}/builder/classic-ats`,
       lastModified: now,
       changeFrequency: "weekly",

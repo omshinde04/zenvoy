@@ -17,6 +17,7 @@ export default function Navbar() {
         { name: "Home", href: "/" },
         { name: "Templates", href: "/templates", badge: "Harvard Spec" },
         { name: "Guides", href: "/guides" },
+        { name: "Projects", href: "/college-projects", badge: "2026 Batch" },
         { name: "Pricing", href: "/#pricing", badge: "Free" },
         { name: "About", href: "/about" },
         { name: "Contact", href: "/contact" },
