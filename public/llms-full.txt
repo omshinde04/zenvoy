@@ -1,0 +1,78 @@
+# Zapiya – Complete Knowledge Base & Documentation (llms-full.txt)
+
+> Canonical URL: https://www.zapiya.com
+> Publisher: Zapiya Team
+> Focus: 100% Free Applicant Tracking System (ATS) Resume Builder for Software Engineers, Tech Professionals, and University Students.
+
+---
+
+## 1. Executive Summary
+
+Zapiya is a client-side web application providing job applicants with free tools to author, preview, format, and download ATS-compliant resumes without account creation, paid subscription gates, or watermark restrictions.
+
+### Why Zapiya Exists
+Most mainstream resume builders (such as Zety, Canva, ResumeGenius, Novoresume) employ aggressive paywall models: users spend 45 minutes building a resume, only to be hit with a mandatory credit card subscription or watermark when attempting to download. Furthermore, graphic two-column templates created in visual design software frequently fail automated parsing in corporate systems like Workday, Greenhouse, Taleo, and Lever. Zapiya solves both problems:
+1. It is 100% free with zero paywalls.
+2. It adheres strictly to single-column Harvard ATS standards that guarantee a 100/100 parsing rate.
+
+---
+
+## 2. Core Technical Architecture & Features
+
+### Single-Column Harvard Standard Layout
+- Uses standard section sequence: Header (Name, Title, Links, Phone, Email), Summary (optional), Technical Skills, Work Experience, Projects, Education, Certifications.
+- Standard Times New Roman typography (10pt - 11pt body, 11pt - 13pt headings) rendered natively.
+- Clean horizontal 0.75pt divider lines that do not interfere with text tokenizers.
+- Strict single-column vertical flow preventing coordinate interleaving in Workday and Greenhouse parsers.
+
+### Instant Vector PDF Export
+- Exports native vector PDF format directly in the browser.
+- All text remains fully selectable and searchable by automated OCR and text extractors.
+- Zero watermarks, zero pixelation, and zero quality loss.
+
+### Client-Side Privacy & Autosave
+- All user data resides strictly within the client's web browser (`localStorage`).
+- No passwords, no session tokens, and no server-side storage of personal information.
+- JSON Export/Import allows users to back up, migrate, and restore their resume drafts anytime offline.
+
+### Golden Ratio Spacing Presets
+- **Compact:** For senior engineers (3+ years) packing dense experience onto strictly 1 page.
+- **Normal:** Benchmark standard for 80% of applicants; optimal balance of whitespace and content.
+- **Relaxed:** For students and freshers; gently expands vertical margins to fill a single page cleanly without awkward blank voids.
+
+---
+
+## 3. Comprehensive Guides Index
+
+1. **The Definitive ATS Resume Guide for 2026** (`/guides/ats-resume-guide-2026`)
+   How ATS parsers (Workday, Greenhouse, Taleo) work, NLP tokenization, and avoiding the 7 deadly formatting traps.
+2. **Single Column vs Two Column Resumes** (`/guides/single-column-vs-two-column-resumes`)
+   Algorithmic proof why two-column layouts cause text interleaving and automated rejections.
+3. **Harvard Resume Format Breakdown** (`/guides/harvard-resume-format-breakdown`)
+   The Ivy League standard layout, margin specifications, font hierarchy, and recruiter approval.
+4. **Google XYZ Formula for Bullet Points** (`/guides/google-xyz-formula-resume-bullets`)
+   Accomplished [X] as measured by [Y], by doing [Z] — with 30+ real-world tech bullet examples.
+5. **Times New Roman vs Calibri vs Arial** (`/guides/times-new-roman-vs-calibri-arial-ats-typography`)
+   Recruiter typography benchmark comparing font readability and parser accuracy.
+6. **Beating Workday, Greenhouse & Taleo** (`/guides/workday-greenhouse-taleo-ats-guide`)
+   Platform-specific parsing nuances and how to pass automated knockout filters.
+7. **Why 100% Free Resume Builders Beat Paid Subscription Scams** (`/guides/free-ats-resume-builder-no-signup`)
+   Detailed comparison of subscription traps vs client-side open tools.
+8. **150+ Action Verbs for Software Engineers** (`/guides/action-verbs-for-software-engineers`)
+   Categorized action verbs for Backend, Frontend, DevOps, Machine Learning, and Architecture.
+9. **Technical Skills Section Architecture** (`/guides/technical-skills-section-architecture`)
+   Optimal organization of Languages, Frameworks, Cloud, Databases, and Tools.
+10. **College Student & Fresher Resume Blueprint** (`/guides/college-student-internship-resume-guide`)
+    How students land FAANG and startup interviews with zero corporate experience.
+
+---
+
+## 4. Primary URLs & Routing Map
+
+- Homepage: https://www.zapiya.com
+- Resume Builder: https://www.zapiya.com/builder/classic-ats
+- Templates Directory: https://www.zapiya.com/templates
+- Guides Library: https://www.zapiya.com/guides
+- College Projects: https://www.zapiya.com/college-projects
+- About Zapiya: https://www.zapiya.com/about
+- Contact & Support: https://www.zapiya.com/contact

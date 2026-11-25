@@ -920,7 +920,7 @@ export function AutosaveToast({ saved }) {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
                     style={{
-                        position: "fixed", bottom: "88px", left: "20px",
+                        position: "fixed", bottom: "24px", left: "20px",
                         backgroundColor: "#0F172A",
                         border: `1px solid #334155`,
                         borderRadius: "20px", padding: "6px 14px",

@@ -12,6 +12,7 @@ import TechMinimal from "@/components/templates/tech/TechMinimal"
 import TechTwoColumn from "@/components/templates/tech/TechTwoColumn"
 import TechBoldHeader from "@/components/templates/tech/TechBoldHeader"
 import { generateAndDownloadPdf } from "@/lib/pdf-generator"
+import { FaWhatsapp, FaCopy, FaCheck } from "react-icons/fa"
 
 const TEMPLATE_MAP = {
     "classic-ats": ClassicATS,
@@ -54,6 +55,8 @@ export default function BuilderPage() {
     const [activeTemplateId, setActiveTemplateId] = useState(templateId || "classic-ats")
     const [downloading, setDownloading] = useState(false)
     const [downloadToast, setDownloadToast] = useState(null)
+    const [showShareModal, setShowShareModal] = useState(false)
+    const [copiedLink, setCopiedLink] = useState(false)
     const [zoom, setZoom] = useState(0.72)
     const [isSaved, setIsSaved] = useState(true)
     const [isMobile, setIsMobile] = useState(false)
@@ -175,6 +178,7 @@ export default function BuilderPage() {
             if (success) {
                 setDownloadToast("✓ PDF downloaded successfully!")
                 setTimeout(() => setDownloadToast(null), 3500)
+                setTimeout(() => setShowShareModal(true), 700)
             } else {
                 window.print()
             }
@@ -821,6 +825,95 @@ export default function BuilderPage() {
                     gap: "8px",
                 }}>
                     <span>{downloadToast}</span>
+                </div>
+            )}
+
+            {/* Post-Download Viral Delight / Share Card */}
+            {showShareModal && (
+                <div
+                    className="fixed inset-0 z-[10000] flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs"
+                    onClick={() => setShowShareModal(false)}
+                >
+                    <div
+                        className="relative w-full max-w-md bg-[#FAF7F2] border border-[#E5DFD3] rounded-2xl p-6 sm:p-7 shadow-2xl text-center space-y-4"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <button
+                            onClick={() => setShowShareModal(false)}
+                            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white border border-[#E5DFD3] flex items-center justify-center text-[#66615B] hover:text-[#111111] hover:bg-[#F3EEE3] transition-colors"
+                            aria-label="Close"
+                        >
+                            ✕
+                        </button>
+
+                        <div className="w-12 h-12 rounded-full bg-[#059669]/10 border border-[#059669]/20 text-[#059669] flex items-center justify-center mx-auto text-xl font-bold">
+                            ✓
+                        </div>
+
+                        <div>
+                            <span className="text-[11px] font-bold uppercase tracking-wider text-[#D9541E] bg-[#D9541E]/10 px-2.5 py-0.5 rounded-md">
+                                100% Free · Vector PDF Exported
+                            </span>
+                            <h3 className="text-xl font-extrabold text-[#111111] mt-2">
+                                Your ATS Resume is Ready!
+                            </h3>
+                            <p className="text-xs sm:text-sm text-[#66615B] mt-1 leading-relaxed">
+                                Zero watermarks, zero paywalls, 100% recruiter-approved. Loved that Zapiya is truly free? Help classmates and friends skip paid resume traps:
+                            </p>
+                        </div>
+
+                        <div className="space-y-2 pt-1">
+                            <a
+                                href="https://api.whatsapp.com/send?text=Hey!%20I%20just%20built%20my%20Harvard%20ATS-friendly%20resume%20for%20free%20with%20zero%20signup%20and%20no%20watermark%20on%20Zapiya.%20Check%20it%20out:%20https://www.zapiya.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full inline-flex items-center justify-center gap-2.5 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white px-4 py-3 text-sm font-semibold shadow-sm transition-colors"
+                            >
+                                <FaWhatsapp className="text-lg" />
+                                <span>Share with Friends on WhatsApp</span>
+                            </a>
+
+                            <button
+                                onClick={() => {
+                                    if (navigator?.clipboard?.writeText) {
+                                        navigator.clipboard.writeText("https://www.zapiya.com")
+                                        setCopiedLink(true)
+                                        setTimeout(() => setCopiedLink(false), 2500)
+                                    }
+                                }}
+                                className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-white hover:bg-[#F3EEE3] border border-[#E5DFD3] text-[#111111] px-4 py-2.5 text-xs font-semibold transition-colors shadow-2xs"
+                            >
+                                {copiedLink ? (
+                                    <>
+                                        <FaCheck className="text-[#059669]" />
+                                        <span className="text-[#059669]">Link Copied to Clipboard!</span>
+                                    </>
+                                ) : (
+                                    <>
+                                        <FaCopy className="text-[#66615B]" />
+                                        <span>Copy Free Zapiya Link</span>
+                                    </>
+                                )}
+                            </button>
+                        </div>
+
+                        <div className="pt-2 border-t border-[#E5DFD3] flex items-center justify-between text-[11px] text-[#66615B]">
+                            <button
+                                onClick={() => {
+                                    handleExportJSON()
+                                }}
+                                className="hover:text-[#D9541E] font-medium transition-colors"
+                            >
+                                💾 Save Backup JSON
+                            </button>
+                            <button
+                                onClick={() => setShowShareModal(false)}
+                                className="text-[#111111] font-semibold hover:underline"
+                            >
+                                Continue Editing →
+                            </button>
+                        </div>
+                    </div>
                 </div>
             )}
         </div>

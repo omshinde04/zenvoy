@@ -9,7 +9,7 @@ import GuidesPreview from "@/components/public/GuidesPreview"
 import { faqs } from "@/lib/faqData"
 
 export const metadata = {
-  title: "Zapiya – #1 Free ATS Resume Builder | Zero Signup, 100% Free Forever",
+  title: "Zapiya – #1 Free ATS Resume Builder | Harvard Format, Zero Paywalls",
   description:
     "Build high-scoring ATS resumes 100% free with Zapiya. Zero paywalls, no signup required, no watermarks. Harvard single-column & tech standard formats with instant vector PDF download.",
   alternates: {

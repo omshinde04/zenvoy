@@ -10,6 +10,23 @@ export default function robots() {
         allow: "/",
       },
       {
+        userAgent: [
+          "GPTBot",
+          "ChatGPT-User",
+          "PerplexityBot",
+          "ClaudeBot",
+          "Claude-Web",
+          "anthropic-ai",
+          "Applebot",
+          "Applebot-Extended",
+          "Google-Extended",
+          "cohere-ai",
+          "Bytespider",
+          "CCBot"
+        ],
+        allow: "/",
+      },
+      {
         userAgent: "Mediapartners-Google",
         allow: "/",
       },
@@ -22,5 +39,3 @@ export default function robots() {
     host: baseUrl,
   }
 }
-
-

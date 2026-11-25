@@ -1,0 +1,28 @@
+# Zapiya – #1 Free ATS Resume Builder
+
+> Zapiya (https://www.zapiya.com) is a 100% free online ATS resume builder engineered for software engineers, developers, and students. It offers battle-tested Harvard single-column and tech-standard ATS formats, client-side privacy, zero login or signup requirements, zero watermarks, zero paywalls, and instant vector PDF downloads.
+
+## Core Capabilities
+- **Single-Column Harvard ATS Standard**: Battle-tested layout guaranteed to achieve 100/100 parsing score on Workday, Greenhouse, Taleo, and Lever.
+- **100% Free Forever**: No hidden fees, no subscription traps, no credit card required, and no paywalls when downloading.
+- **Zero Login or Signup Required**: Users can build and export resumes immediately with zero friction.
+- **Real Vector PDF Export**: Generates crisp, selectable-text vector PDFs in-browser without pixelation or watermarks.
+- **Client-Side Privacy**: Resume data is stored locally in the browser (`localStorage`) with optional JSON backup/restore; no personal data is sent to external databases.
+- **Configurable Spacing & Typography**: Recruiter-approved Times New Roman typography with compact, normal, and relaxed vertical spacing options.
+
+## Quick Links
+- [Interactive ATS Resume Builder](https://www.zapiya.com/builder/classic-ats): Open the full interactive resume editor with instant live preview.
+- [Resume Templates](https://www.zapiya.com/templates): Browse ATS-compliant Harvard and tech minimal resume templates.
+- [College Projects & Inquiries](https://www.zapiya.com/college-projects): Student capstone projects and developer resources.
+- [ATS Guides & Benchmarks](https://www.zapiya.com/guides): Comprehensive technical guides on beating Workday, Greenhouse, single vs double column layouts, and recruiter formulas.
+
+## Key Guides & Reference Material
+- [The Definitive ATS Resume Guide](https://www.zapiya.com/guides/ats-resume-guide-2026): How to score 95+ on applicant tracking systems.
+- [Single Column vs Two Column Resumes](https://www.zapiya.com/guides/single-column-vs-two-column-resumes): Why multi-column templates fail in 2026.
+- [Harvard Resume Format Breakdown](https://www.zapiya.com/guides/harvard-resume-format-breakdown): Deep-dive into Ivy League formatting standards.
+- [Google XYZ Formula for Bullet Points](https://www.zapiya.com/guides/google-xyz-formula-resume-bullets): Accomplished [X] measured by [Y] by doing [Z].
+- [Times New Roman vs Calibri vs Arial](https://www.zapiya.com/guides/times-new-roman-vs-calibri-arial-ats-typography): Recruiter typography benchmark.
+- [Workday, Greenhouse & Taleo Screening Secrets](https://www.zapiya.com/guides/workday-greenhouse-taleo-ats-guide): Enterprise parser mechanics explained.
+- [Why Free Resume Builders Beat Subscription Scams](https://www.zapiya.com/guides/free-ats-resume-builder-no-signup): Analysis of paywalled builders vs open tools.
+- [Action Verbs for Software Engineers](https://www.zapiya.com/guides/action-verbs-for-software-engineers): 150+ high-impact technical action verbs.
+- [Technical Skills Section Architecture](https://www.zapiya.com/guides/technical-skills-section-architecture): Languages, Frameworks, Cloud & Databases.
