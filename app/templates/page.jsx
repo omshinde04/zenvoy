@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
+import AdsterraBanner728 from "@/components/ads/AdsterraBanner728"
 import {
     FaArrowRight,
     FaCheckCircle,
@@ -422,6 +423,9 @@ export default function TemplatesPage() {
                         </div>
                     </div>
                 </div>
+
+                {/* Sponsored Banner */}
+                <AdsterraBanner728 />
 
             </div>
         </div>
