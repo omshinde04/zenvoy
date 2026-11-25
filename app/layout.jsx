@@ -80,6 +80,7 @@ export const metadata = {
   manifest: "/site.webmanifest",
   other: {
     "google-adsense-account": "ca-pub-7778964423995383",
+    monetag: "5ba32d2535666d1be3d2c19fb2629777",
   },
   openGraph: {
     title: "Zapiya – 100% Free ATS Resume Builder | Zero Signup, Zero Watermark",
@@ -233,6 +234,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
         />
         <meta name="google-adsense-account" content="ca-pub-7778964423995383" />
+        <meta name="monetag" content="5ba32d2535666d1be3d2c19fb2629777" />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7778964423995383"
