@@ -3,8 +3,6 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { guides } from "@/lib/guidesData"
 import AdSlot from "@/components/ads/AdSlot"
-import AdsterraNativeBanner from "@/components/ads/AdsterraNativeBanner"
-import AdsterraBanner728 from "@/components/ads/AdsterraBanner728"
 
 export async function generateStaticParams() {
   return guides.map((g) => ({
@@ -259,13 +257,7 @@ export default async function GuideDetailPage({ params }) {
             responsive="true"
             className="my-8"
           />
-
-          {/* Adsterra Native Sponsored Resources */}
-          <AdsterraNativeBanner />
         </div>
-
-        {/* Adsterra 728x90 Desktop Leaderboard Banner */}
-        <AdsterraBanner728 />
 
         {/* Footer Navigation */}
         <div className="mt-8 flex justify-between items-center text-sm font-medium">
