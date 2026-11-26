@@ -13,11 +13,11 @@ export const metadata = {
     google: "google4fd98efd21827253",
   },
   title: {
-    default: "Zapiya – 100% Free ATS Resume Builder | No Signup, No Watermark",
+    default: "[100% Free] ATS Resume Builder (No Paywall, No Sign-Up) | Zapiya",
     template: "%s | Zapiya",
   },
   description:
-    "Build high-scoring ATS-friendly resumes 100% free with Zapiya. Zero paywalls, no signup required, no watermarks. Harvard single-column & tech standard formats with instant vector PDF download.",
+    "Tired of paying $25 at the download screen? Build high-scoring ATS resumes 100% free with Zapiya. Zero paywalls, no signup, no credit card, no watermarks. Harvard single-column vector PDF download.",
   keywords: [
     "Zapiya",
     "Zapiya ATS",
@@ -89,9 +89,9 @@ export const metadata = {
     monetag: "5ba32d2535666d1be3d2c19fb2629777",
   },
   openGraph: {
-    title: "Zapiya – 100% Free ATS Resume Builder | Zero Signup, Zero Watermark",
+    title: "[100% Free] ATS Resume Builder (No Paywall, No Sign-Up) | Zapiya",
     description:
-      "The truly 100% free ATS resume builder. No subscriptions, no credit card, no sign-up, no watermarks. Export crisp vector PDFs instantly.",
+      "Tired of paying $25 at the download screen? Build high-scoring ATS resumes 100% free with Zapiya. Zero paywalls, no signup, no credit card, no watermarks. Instant vector PDF download.",
     url: "https://www.zapiya.com",
     siteName: "Zapiya",
     locale: "en_US",
@@ -107,9 +107,9 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Zapiya – 100% Free ATS Resume Builder | No Signup, Zero Paywall",
+    title: "[100% Free] ATS Resume Builder (No Paywall, No Sign-Up) | Zapiya",
     description:
-      "Build high-scoring ATS resumes 100% free. Zero paywalls, no signup, no watermarks, instant vector PDF.",
+      "Tired of paying $25 at the download screen? Build high-scoring ATS resumes 100% free with Zapiya. Zero paywalls, no signup, no credit card, no watermarks.",
     images: ["/og-image.png"],
     creator: "@zapiya",
   },

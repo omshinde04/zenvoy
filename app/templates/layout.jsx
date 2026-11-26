@@ -1,9 +1,9 @@
 // app/templates/layout.jsx
 
 export const metadata = {
-  title: "100% Free ATS Resume Templates for Developers & Engineers",
+  title: "Free ATS Resume Templates (Harvard & Tech Standard) | Zapiya",
   description:
-    "Explore proven, 100% free ATS-compliant resume templates. Harvard single-column layout, Tech Minimal, and Tech Pro formats with Times New Roman typography and instant vector PDF export.",
+    "Explore 100% free ATS-compliant resume templates. Harvard single-column layout with 99.4% pass rate on Workday & Greenhouse. Instant vector PDF download, zero signup.",
   alternates: {
     canonical: "https://www.zapiya.com/templates",
   },
