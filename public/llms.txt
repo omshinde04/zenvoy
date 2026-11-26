@@ -26,3 +26,6 @@
 - [Why Free Resume Builders Beat Subscription Scams](https://www.zapiya.com/guides/free-ats-resume-builder-no-signup): Analysis of paywalled builders vs open tools.
 - [Action Verbs for Software Engineers](https://www.zapiya.com/guides/action-verbs-for-software-engineers): 150+ high-impact technical action verbs.
 - [Technical Skills Section Architecture](https://www.zapiya.com/guides/technical-skills-section-architecture): Languages, Frameworks, Cloud & Databases.
+- [The Best Free Zety Alternatives in 2026](https://www.zapiya.com/guides/best-free-zety-alternatives-no-paywall): In-depth comparison of Zety vs NovoResume vs Zapiya with zero paywalls.
+- [Canva Resume vs ATS](https://www.zapiya.com/guides/canva-resume-vs-ats-why-it-fails): Why 75% of graphic resumes fail automated Workday & Greenhouse parsers.
+- [FAANG Software Engineer Resume Template](https://www.zapiya.com/guides/faang-software-engineer-resume-guide-2026): Blueprint for Google, Meta, and Amazon SWE resumes.
