@@ -3,6 +3,7 @@ import Hero from "@/components/public/Hero"
 import Segments from "@/components/public/Segments"
 import Features from "@/components/public/Features"
 import Pricing from "@/components/public/Pricing"
+import CompetitorComparison from "@/components/public/CompetitorComparison"
 import FAQ from "@/components/public/FAQ"
 import CTA from "@/components/public/CTA"
 import GuidesPreview from "@/components/public/GuidesPreview"
@@ -121,6 +122,7 @@ export default function HomePage() {
       <Features />
       <GuidesPreview />
       <Pricing />
+      <CompetitorComparison />
       <FAQ />
       <CTA />
     </div>
