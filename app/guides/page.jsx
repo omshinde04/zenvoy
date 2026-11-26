@@ -4,7 +4,6 @@ import { useState, useMemo } from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { guides } from "@/lib/guidesData"
-import AdsterraBanner728 from "@/components/ads/AdsterraBanner728"
 import {
     FaSearch,
     FaArrowRight,
@@ -313,9 +312,6 @@ export default function GuidesPage() {
                         </button>
                     </div>
                 )}
-
-                {/* Sponsored Leaderboard */}
-                <AdsterraBanner728 />
 
                 {/* BOTTOM ACTION CTA BANNER */}
                 <div className="relative overflow-hidden rounded-2xl bg-[#111111] border border-[#222222] p-8 sm:p-12 text-[#F3EEE3] shadow-xl">
